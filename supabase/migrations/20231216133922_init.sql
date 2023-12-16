@@ -39,7 +39,7 @@ CREATE TABLE "pricing__tier__billing_cycle_option" (
     UNIQUE ("billing_option_id", "tier_id", "pricing_id")
 );
 
-CREATE TABLE "term_summary" (
+CREATE TABLE "terms_summary" (
     "id" SERIAL PRIMARY KEY,
     "terms" JSONB[] NOT NULL
 );
@@ -72,7 +72,7 @@ ALTER TABLE "pricing__tier__billing_cycle_option"
 
 ALTER TABLE "pricing__tier__billing_cycle_option" 
     ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_tsi" 
-    FOREIGN KEY ("terms_summary_id") REFERENCES "term_summary"("id");
+    FOREIGN KEY ("terms_summary_id") REFERENCES "terms_summary"("id");
 
 ALTER TABLE "tier__feature" 
     ADD CONSTRAINT "tier__feature_fk_ti" 

@@ -163,12 +163,12 @@ export interface Database {
             foreignKeyName: "pricing__tier__billing_cycle_option_fk_tsi"
             columns: ["terms_summary_id"]
             isOneToOne: false
-            referencedRelation: "term_summary"
+            referencedRelation: "terms_summary"
             referencedColumns: ["id"]
           }
         ]
       }
-      term_summary: {
+      terms_summary: {
         Row: {
           id: number
           terms: Json[]
