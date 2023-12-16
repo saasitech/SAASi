@@ -8,7 +8,9 @@
 
 ## Motivation
 
-Wondering if your SAAS offer is optimal and still competitive? Saasi is a tool that integrates with Stripe payments, enabling you to create and manage flexible pricing pages effortlessly. With Saasi, you can conduct live pricing trials to find the optimal pricing strategy for your SAAS startup.
+In the competitive SAAS sector, determining the optimal pricing strategy is crucial yet challenging, often leading to high development and marketing costs.
+
+Saasi addresses this challenge by facilitating the easy creation and management of adaptable pricing pages. This tool allows you to conduct real-time pricing experiments, efficiently pinpointing the most effective pricing strategy for your SAAS startup.
 
 <p align="center">
   <a href="#features"><strong>Features</strong></a> ·
@@ -39,7 +41,7 @@ This is a work in progress and is not yet ready for production use.
   - Manage coupons
 - AI ChatGPT integration (coming soon):
   - Pricing strategy recommendations
-  - Pricing A/B testing summaries
+  - Pricing testing summaries
 
 ## Demo
 
