@@ -6,8 +6,7 @@ CREATE TABLE "tier" (
     "auto_payment" BOOLEAN NOT NULL DEFAULT false,
     "trial" INTEGER,
     "trial_text" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
-    "features" JSONB
+    "description" TEXT NOT NULL
 );
 
 CREATE TABLE "pricing" (
