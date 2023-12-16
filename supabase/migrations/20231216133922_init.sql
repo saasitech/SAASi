@@ -1,64 +1,63 @@
 CREATE TABLE "tier" (
-    "id" uuid NOT NULL UNIQUE,
+    "id" SERIAL PRIMARY KEY,
     "slug" TEXT NOT NULL,
     "price" DECIMAL NOT NULL,
     "name" TEXT NOT NULL,
-    "auto_payment" BOOLEAN NOT NULL DEFAULT 'false',
-    "trial" integer,
+    "auto_payment" BOOLEAN NOT NULL DEFAULT false,
+    "trial" INTEGER,
     "trial_text" TEXT NOT NULL,
     "description" TEXT NOT NULL,
-    "features" jsonb,
-    CONSTRAINT "tier_pk" PRIMARY KEY ("id")
+    "features" JSONB
 );
 
 CREATE TABLE "pricing" (
-    "id" uuid NOT NULL UNIQUE,
+    "id" SERIAL PRIMARY KEY,
     "slug" TEXT NOT NULL,
-    "default_billing" integer,
+    "default_billing" INTEGER,
     "discount_type" TEXT,
     "title" TEXT,
-    "show_billing_options" BOOLEAN NOT NULL DEFAULT 'false',
+    "show_billing_options" BOOLEAN NOT NULL DEFAULT false,
     "style_id" TEXT NOT NULL,
-    "allow_trial" BOOLEAN NOT NULL DEFAULT 'false',
-    CONSTRAINT "pricing_pk" PRIMARY KEY ("id")
+    "allow_trial" BOOLEAN NOT NULL DEFAULT false
 );
 
 CREATE TABLE "billing_cycle_option" (
-    "id" uuid NOT NULL UNIQUE,
-    "cycle" integer NOT NULL,
+    "id" SERIAL PRIMARY KEY,
+    "cycle" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "discount" DECIMAL,
     "discount_type" TEXT NOT NULL,
-    "discount_text" TEXT,
-    CONSTRAINT "billing_cycle_option_pk" PRIMARY KEY ("id")
+    "discount_text" TEXT
 );
 
 CREATE TABLE "pricing__tier__billing_cycle_option" (
-    "billing_option_id" uuid NOT NULL,
-    "tier_id" uuid NOT NULL,
-    "pricing_id" uuid NOT NULL,
-    "terms_summary_id" uuid NOT NULL,
-    "applicable_discount" BOOLEAN NOT NULL DEFAULT 'false',
-    CONSTRAINT "unique_pricing_tier_billing" UNIQUE ("billing_option_id", "tier_id", "pricing_id")
+    "id" SERIAL PRIMARY KEY,
+    "billing_option_id" INTEGER NOT NULL,
+    "tier_id" INTEGER NOT NULL,
+    "pricing_id" INTEGER NOT NULL,
+    "terms_summary_id" INTEGER NOT NULL,
+    "applicable_discount" BOOLEAN NOT NULL DEFAULT false,
+    UNIQUE ("billing_option_id", "tier_id", "pricing_id")
 );
 
 CREATE TABLE "term_summary" (
-    "id" uuid NOT NULL,
-    "terms" jsonb NOT NULL,
-    CONSTRAINT "term_summary_pk" PRIMARY KEY ("id")
+    "id" SERIAL PRIMARY KEY,
+    "terms" JSONB[] NOT NULL
 );
 
 CREATE TABLE "feature" (
-    "id" uuid NOT NULL,
+    "id" SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL,
-    "display_name" TEXT NOT NULL,
-    CONSTRAINT "feature_pk" PRIMARY KEY ("id")
+    "display_name" TEXT NOT NULL
 );
 
 CREATE TABLE "tier__feature" (
-    "tier_id" uuid NOT NULL,
-    "feature_id" uuid NOT NULL
+    "id" SERIAL PRIMARY KEY,
+    "tier_id" INTEGER NOT NULL,
+    "feature_id" INTEGER NOT NULL
 );
+
+
 
 ALTER TABLE "pricing__tier__billing_cycle_option" 
     ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_boi" 
