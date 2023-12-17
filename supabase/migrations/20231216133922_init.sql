@@ -43,6 +43,7 @@ CREATE TABLE "pricing__tier__billing_cycle_option" (
 
 CREATE TABLE "terms_summary" (
     "id" SERIAL PRIMARY KEY,
+    "name" TEXT NOT NUll,
     "terms" JSONB[] NOT NULL
 );
 
