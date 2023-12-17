@@ -49,7 +49,7 @@ const prepareServerActions = (client: DbClientType) => {
           .delete()
           .eq("pricing_id", pricingId)
           .eq("tier_id", tierId)
-          .eq("billing_option_id", billingOptionId)
+          .eq("billing_cycle_option_id", billingOptionId)
           .select();
 
         if (error) throw error;

@@ -19,6 +19,7 @@ CREATE TABLE "pricing" (
     "title" TEXT,
     "show_billing_options" BOOLEAN NOT NULL DEFAULT false,
     "style_id" TEXT NOT NULL,
+    "settings" JSONB,
     "allow_trial" BOOLEAN NOT NULL DEFAULT false
 );
 
@@ -32,12 +33,12 @@ CREATE TABLE "billing_cycle_option" (
 );
 
 CREATE TABLE "pricing__tier__billing_cycle_option" (
-    "billing_option_id" INTEGER NOT NULL,
+    "billing_cycle_option_id" INTEGER NOT NULL,
     "tier_id" INTEGER NOT NULL,
     "pricing_id" INTEGER NOT NULL,
     "terms_summary_id" INTEGER NOT NULL,
     "applicable_discount" BOOLEAN NOT NULL DEFAULT false,
-    primary key ("billing_option_id", "tier_id", "pricing_id")
+    primary key ("billing_cycle_option_id", "tier_id", "pricing_id")
 );
 
 CREATE TABLE "terms_summary" (
@@ -61,7 +62,7 @@ CREATE TABLE "tier__feature" (
 
 ALTER TABLE "pricing__tier__billing_cycle_option" 
     ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_boi" 
-    FOREIGN KEY ("billing_option_id") REFERENCES "billing_cycle_option"("id");
+    FOREIGN KEY ("billing_cycle_option_id") REFERENCES "billing_cycle_option"("id");
 
 ALTER TABLE "pricing__tier__billing_cycle_option" 
     ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_ti" 
