@@ -39,7 +39,7 @@ export interface Database {
           cycle: number
           discount: number | null
           discount_text: string | null
-          discount_type: string
+          discount_type: Database["public"]["Enums"]["discounttype"] | null
           id: number
           name: string
         }
@@ -47,7 +47,7 @@ export interface Database {
           cycle: number
           discount?: number | null
           discount_text?: string | null
-          discount_type: string
+          discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
           name: string
         }
@@ -55,7 +55,7 @@ export interface Database {
           cycle?: number
           discount?: number | null
           discount_text?: string | null
-          discount_type?: string
+          discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
           name?: string
         }
@@ -83,7 +83,7 @@ export interface Database {
         Row: {
           allow_trial: boolean
           default_billing: number | null
-          discount_type: string | null
+          discount_type: Database["public"]["Enums"]["discounttype"] | null
           id: number
           show_billing_options: boolean
           slug: string
@@ -93,7 +93,7 @@ export interface Database {
         Insert: {
           allow_trial?: boolean
           default_billing?: number | null
-          discount_type?: string | null
+          discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
           show_billing_options?: boolean
           slug: string
@@ -103,7 +103,7 @@ export interface Database {
         Update: {
           allow_trial?: boolean
           default_billing?: number | null
-          discount_type?: string | null
+          discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
           show_billing_options?: boolean
           slug?: string
@@ -116,7 +116,6 @@ export interface Database {
         Row: {
           applicable_discount: boolean
           billing_option_id: number
-          id: number
           pricing_id: number
           terms_summary_id: number
           tier_id: number
@@ -124,7 +123,6 @@ export interface Database {
         Insert: {
           applicable_discount?: boolean
           billing_option_id: number
-          id?: number
           pricing_id: number
           terms_summary_id: number
           tier_id: number
@@ -132,7 +130,6 @@ export interface Database {
         Update: {
           applicable_discount?: boolean
           billing_option_id?: number
-          id?: number
           pricing_id?: number
           terms_summary_id?: number
           tier_id?: number
@@ -192,7 +189,7 @@ export interface Database {
           price: number
           slug: string
           trial: number | null
-          trial_text: string
+          trial_text: string | null
         }
         Insert: {
           auto_payment?: boolean
@@ -202,7 +199,7 @@ export interface Database {
           price: number
           slug: string
           trial?: number | null
-          trial_text: string
+          trial_text?: string | null
         }
         Update: {
           auto_payment?: boolean
@@ -212,36 +209,33 @@ export interface Database {
           price?: number
           slug?: string
           trial?: number | null
-          trial_text?: string
+          trial_text?: string | null
         }
         Relationships: []
       }
       tier__feature: {
         Row: {
           feature_id: number
-          id: number
           tier_id: number
         }
         Insert: {
           feature_id: number
-          id?: number
           tier_id: number
         }
         Update: {
           feature_id?: number
-          id?: number
           tier_id?: number
         }
         Relationships: [
           {
-            foreignKeyName: "tier__feature_fk_fi"
+            foreignKeyName: "tier__feature_feature_id_fkey"
             columns: ["feature_id"]
             isOneToOne: false
             referencedRelation: "feature"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "tier__feature_fk_ti"
+            foreignKeyName: "tier__feature_tier_id_fkey"
             columns: ["tier_id"]
             isOneToOne: false
             referencedRelation: "tier"
@@ -257,7 +251,7 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      discounttype: "percent" | "extraCycles" | "none"
     }
     CompositeTypes: {
       [_ in never]: never

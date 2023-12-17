@@ -3,34 +3,31 @@ import { DbClientType } from "@/utils/supabase/server";
 import { getErrorHandler } from "./common";
 
 const prepareServerActions = (client: DbClientType) => {
-  const defaultErrorHandler = getErrorHandler("terms_summary");
+  const defaultErrorHandler = getErrorHandler("pricing");
 
   return {
     read: async () => {
       try {
-        const result = await client.from("terms_summary").select();
+        const result = await client.from("pricing").select();
         if (result.error) throw result.error;
         return result.data;
       } catch (err) {
         defaultErrorHandler(err, "read");
       }
     },
-    create: async (input: TablesInsert<"terms_summary">) => {
+    create: async (input: TablesInsert<"pricing">) => {
       try {
-        const result = await client
-          .from("terms_summary")
-          .insert(input)
-          .select();
+        const result = await client.from("pricing").insert(input).select();
         if (result.error) throw result.error;
         return result.data;
       } catch (err) {
         defaultErrorHandler(err, "create");
       }
     },
-    update: async (id: number, input: TablesUpdate<"terms_summary">) => {
+    update: async (id: number, input: TablesUpdate<"pricing">) => {
       try {
         const result = await client
-          .from("terms_summary")
+          .from("pricing")
           .update(input)
           .eq("id", id)
           .select();
@@ -43,12 +40,12 @@ const prepareServerActions = (client: DbClientType) => {
     delete: async (id: number) => {
       try {
         const result = await client
-          .from("terms_summary")
+          .from("pricing")
           .delete()
           .eq("id", id)
           .select();
         if (result.error) throw result.error;
-        return !result.error;
+        return result.data;
       } catch (err) {
         defaultErrorHandler(err, "delete");
       }

@@ -1,24 +1,24 @@
 import { TablesInsert, TablesUpdate } from "@/supabase/types";
 import { DbClientType } from "@/utils/supabase/server";
-import { getErrorHandler } from "./common";
+import { getErrorHandler } from "./common"; // Ensure correct import path
 
 const prepareServerActions = (client: DbClientType) => {
-  const defaultErrorHandler = getErrorHandler("terms_summary");
+  const defaultErrorHandler = getErrorHandler("billing_cycle_option");
 
   return {
     read: async () => {
       try {
-        const result = await client.from("terms_summary").select();
+        const result = await client.from("billing_cycle_option").select();
         if (result.error) throw result.error;
         return result.data;
       } catch (err) {
         defaultErrorHandler(err, "read");
       }
     },
-    create: async (input: TablesInsert<"terms_summary">) => {
+    create: async (input: TablesInsert<"billing_cycle_option">) => {
       try {
         const result = await client
-          .from("terms_summary")
+          .from("billing_cycle_option")
           .insert(input)
           .select();
         if (result.error) throw result.error;
@@ -27,10 +27,10 @@ const prepareServerActions = (client: DbClientType) => {
         defaultErrorHandler(err, "create");
       }
     },
-    update: async (id: number, input: TablesUpdate<"terms_summary">) => {
+    update: async (id: number, input: TablesUpdate<"billing_cycle_option">) => {
       try {
         const result = await client
-          .from("terms_summary")
+          .from("billing_cycle_option")
           .update(input)
           .eq("id", id)
           .select();
@@ -43,12 +43,12 @@ const prepareServerActions = (client: DbClientType) => {
     delete: async (id: number) => {
       try {
         const result = await client
-          .from("terms_summary")
+          .from("billing_cycle_option")
           .delete()
           .eq("id", id)
           .select();
         if (result.error) throw result.error;
-        return !result.error;
+        return result.data;
       } catch (err) {
         defaultErrorHandler(err, "delete");
       }
