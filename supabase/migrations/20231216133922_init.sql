@@ -5,7 +5,7 @@ CREATE TABLE "tier" (
     "name" TEXT NOT NULL,
     "auto_payment" BOOLEAN NOT NULL DEFAULT false,
     "trial" INTEGER,
-    "trial_text" TEXT NOT NULL,
+    "trial_text" TEXT,
     "description" TEXT NOT NULL
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE "billing_cycle_option" (
     "cycle" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "discount" DECIMAL,
-    "discount_type" TEXT NOT NULL,
+    "discount_type" TEXT,
     "discount_text" TEXT
 );
 
@@ -51,9 +51,9 @@ CREATE TABLE "feature" (
 );
 
 CREATE TABLE "tier__feature" (
-    "id" SERIAL PRIMARY KEY,
-    "tier_id" INTEGER NOT NULL,
-    "feature_id" INTEGER NOT NULL
+    "tier_id" int references tier,
+    "feature_id" int references feature,
+    primary key (tier_id, feature_id)
 );
 
 
@@ -74,10 +74,10 @@ ALTER TABLE "pricing__tier__billing_cycle_option"
     ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_tsi" 
     FOREIGN KEY ("terms_summary_id") REFERENCES "terms_summary"("id");
 
-ALTER TABLE "tier__feature" 
-    ADD CONSTRAINT "tier__feature_fk_ti" 
-    FOREIGN KEY ("tier_id") REFERENCES "tier"("id") ON DELETE CASCADE;
+-- ALTER TABLE "tier__feature" 
+--     ADD CONSTRAINT "tier__feature_fk_ti" 
+--     FOREIGN KEY ("tier_id") REFERENCES "tier"("id") ON DELETE CASCADE;
 
-ALTER TABLE "tier__feature" 
-    ADD CONSTRAINT "tier__feature_fk_fi" 
-    FOREIGN KEY ("feature_id") REFERENCES "feature"("id") ON DELETE CASCADE;
+-- ALTER TABLE "tier__feature" 
+--     ADD CONSTRAINT "tier__feature_fk_fi" 
+--     FOREIGN KEY ("feature_id") REFERENCES "feature"("id") ON DELETE CASCADE;
