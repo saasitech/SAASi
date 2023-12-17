@@ -1,12 +1,12 @@
 "use server";
-import { SupabaseClient } from "@supabase/supabase-js";
+
 import featuresClient from "./features";
 import tierClient from "./tier";
 import termsSummaryClient from "./termsSummary";
-import { Database } from "@/supabase/types";
-import { DbClientType } from "@/utils/supabase/server";
+import { createServerClient } from "../supabaseServer";
 
-const prepareServerActions = (client: DbClientType) => {
+const client = createServerClient();
+const prepareServerActions = () => {
   return {
     features: featuresClient(client),
     termsSummary: termsSummaryClient(client),

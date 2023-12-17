@@ -25,11 +25,22 @@ const prepareServerActions = (client: DbClientType) => {
       const result = await client.from("tier").delete().eq("id", id).select();
       return result.data;
     },
-    getTierFeatures: async (id: number) => {
+    getTierFeatures: async (tierId: number) => {
       const result = await client
         .from("tier__feature")
         .select("feature(*)")
-        .eq("tier_id", id);
+        .eq("tier_id", tierId);
+      return result.data?.map((item) => {
+        return item.feature;
+      });
+    },
+    deleteTierFeatures: async (id: number, featureId: number) => {
+      const result = await client
+        .from("tier__feature")
+        .delete()
+        .eq("tier_id", id)
+        .eq("feature_id", featureId);
+
       return result;
     },
   };

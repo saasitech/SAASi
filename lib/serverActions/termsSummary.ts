@@ -26,7 +26,7 @@ const prepareServerActions = (client: DbClientType) => {
         .delete()
         .eq("id", id)
         .select();
-      return result.data;
+      return !result.error;
     },
   };
 };
