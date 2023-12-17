@@ -8,7 +8,8 @@ CREATE TABLE "tier" (
     "auto_payment" BOOLEAN NOT NULL DEFAULT false,
     "trial" INTEGER,
     "trial_text" TEXT,
-    "description" TEXT NOT NULL
+    "description" TEXT NOT NULL,
+    "meta" JSONB
 );
 
 CREATE TABLE "pricing" (
@@ -20,7 +21,8 @@ CREATE TABLE "pricing" (
     "show_billing_options" BOOLEAN NOT NULL DEFAULT false,
     "style_id" TEXT NOT NULL,
     "settings" JSONB,
-    "allow_trial" BOOLEAN NOT NULL DEFAULT false
+    "allow_trial" BOOLEAN NOT NULL DEFAULT false,
+    "meta" JSONB
 );
 
 CREATE TABLE "billing_cycle_option" (
@@ -54,8 +56,9 @@ CREATE TABLE "feature" (
 );
 
 CREATE TABLE "tier__feature" (
-    "tier_id" int references tier,
-    "feature_id" int references feature,
+    "tier_id" INTEGER NOT NULL,
+    "feature_id" INTEGER NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT true,
     primary key (tier_id, feature_id)
 );
 

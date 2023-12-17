@@ -58,7 +58,27 @@ const prepareServerActions = (client: DbClientType) => {
         defaultErrorHandler(err, "getTierFeatures");
       }
     },
-    deleteTierFeatures: async (id: number, featureId: number) => {
+    upsertTierFeature: async (data: {
+      tierId: number;
+      featureId: number;
+      active: boolean;
+    }) => {
+      try {
+        const result = await client
+          .from("tier__feature")
+          .upsert({
+            tier_id: data.tierId,
+            feature_id: data.featureId,
+            active: data.active,
+          })
+          .select();
+        if (result.error) throw result.error;
+        return result.data;
+      } catch (err) {
+        defaultErrorHandler(err, "upsertTierFeature");
+      }
+    },
+    deleteTierFeature: async (id: number, featureId: number) => {
       try {
         const result = await client
           .from("tier__feature")

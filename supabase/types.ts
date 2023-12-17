@@ -85,6 +85,7 @@ export interface Database {
           default_billing: number | null
           discount_type: Database["public"]["Enums"]["discounttype"] | null
           id: number
+          meta: Json | null
           settings: Json | null
           show_billing_options: boolean
           slug: string
@@ -96,6 +97,7 @@ export interface Database {
           default_billing?: number | null
           discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
+          meta?: Json | null
           settings?: Json | null
           show_billing_options?: boolean
           slug: string
@@ -107,6 +109,7 @@ export interface Database {
           default_billing?: number | null
           discount_type?: Database["public"]["Enums"]["discounttype"] | null
           id?: number
+          meta?: Json | null
           settings?: Json | null
           show_billing_options?: boolean
           slug?: string
@@ -191,6 +194,7 @@ export interface Database {
           auto_payment: boolean
           description: string
           id: number
+          meta: Json | null
           name: string
           price: number
           slug: string
@@ -201,6 +205,7 @@ export interface Database {
           auto_payment?: boolean
           description: string
           id?: number
+          meta?: Json | null
           name: string
           price: number
           slug: string
@@ -211,6 +216,7 @@ export interface Database {
           auto_payment?: boolean
           description?: string
           id?: number
+          meta?: Json | null
           name?: string
           price?: number
           slug?: string
@@ -221,33 +227,21 @@ export interface Database {
       }
       tier__feature: {
         Row: {
+          active: boolean
           feature_id: number
           tier_id: number
         }
         Insert: {
+          active?: boolean
           feature_id: number
           tier_id: number
         }
         Update: {
+          active?: boolean
           feature_id?: number
           tier_id?: number
         }
-        Relationships: [
-          {
-            foreignKeyName: "tier__feature_feature_id_fkey"
-            columns: ["feature_id"]
-            isOneToOne: false
-            referencedRelation: "feature"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "tier__feature_tier_id_fkey"
-            columns: ["tier_id"]
-            isOneToOne: false
-            referencedRelation: "tier"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
     }
     Views: {

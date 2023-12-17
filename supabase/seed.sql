@@ -18,14 +18,20 @@ INSERT INTO tier (slug,price,"name",auto_payment,trial,trial_text,description) V
 	 ('pro',25,'Professional',false,NULL,NULL,'Best for professionals'),
 	 ('team',89,'Team',false,NULL,NULL,'For professional teams');
     
-INSERT INTO tier__feature (tier_id,feature_id) VALUES
-	 (1,1),
-	 (1,2),
-	 (2,4),
-	 (2,5),
-	 (3,4),
-	 (3,5),
-	 (3,3);
+INSERT INTO tier__feature (tier_id,feature_id, active) VALUES
+	 (1,1,true),
+	 (1,2,true),
+     (1,7,false),
+     (1,8,false),
+	 (2,4,true),
+	 (2,5,true),
+     (2,7,false),
+     (2,8,false),
+	 (3,4,true),
+	 (3,5,true),
+	 (3,3,true),
+     (3,7,true),
+     (3,8,true);
 
 INSERT INTO billing_cycle_option (id, "cycle","name",discount,discount_type,discount_text) VALUES
 	 (1, 1,'1 month',NULL,NULL,NULL),
