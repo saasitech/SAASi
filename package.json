@@ -7,6 +7,7 @@
     "generateDBTypes": "supabase gen types typescript --local > ./supabase/types.ts"
   },
   "dependencies": {
+    "@heroicons/react": "^2.0.18",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "@tailwindcss/forms": "0.5.6",
