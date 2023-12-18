@@ -26,11 +26,15 @@ Saasi addresses this challenge by facilitating the easy creation and management 
 This is a work in progress and is not yet ready for production use.
 
 - Pricing configuration:
-  - Manage tiers & features 🟢
-  - Create pricing strategies 🟢
-  - Set branding colors and logo 🟢
-  - Choose pricing style presets 🟢
-  - Attach terms summary 🟢
+  - Add supabase backend 🟢
+  - Add DB schema and migration 🟢
+  - Add authentication 🟢
+  - Add server actions 🟢
+  - Choose a pricing theme 🟢
+  - Set branding colors and logo
+  - Attach terms summary
+  - Manage tiers & features
+  - Create pricing strategies
 - Stripe integration (coming soon):
   - Connect your stripe account
   - Create products & plans
