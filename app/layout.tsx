@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
@@ -18,7 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={cn(GeistSans.className, "dark")}
+      data-theme="halloween"
+      suppressHydrationWarning
+    >
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />

@@ -1,5 +1,7 @@
+import MainMenu from "@/components/DrawerMenu";
 import Header from "@/components/Header";
 import PricingList from "@/components/pricing/PricingList";
+import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default async function Index() {
@@ -14,12 +16,13 @@ export default async function Index() {
   return (
     <div className="flex-1 w-full flex flex-col gap-20 items-center">
       <nav className="w-full flex justify-center h-16">
-        <div className="w-full max-w-6xl flex justify-start items-center p-3 text-sm">
+        <div className="w-full max-w-6xl flex justify-between items-center p-3 text-sm">
           <div className="flex">
-            <Link href={`/demo`} className="btn btn-outline btn-sm">
-              Back to Preview
+            <Link href={`/`} className="btn btn-outline btn-sm">
+              <ArrowLongLeftIcon className="w-5 h-5" /> Back
             </Link>
           </div>
+          <MainMenu />
         </div>
       </nav>
 
@@ -32,7 +35,7 @@ export default async function Index() {
           </div>
         </main>
       </div>
-      <footer className="w-full"></footer>
+      <footer></footer>
     </div>
   );
 }

@@ -6,9 +6,9 @@ export default function ThemeSwitch() {
     setTheme(theme);
   };
   return (
-    <div className=" rounded-box grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+    <div className=" h-[400px] overflow-y-auto flex flex-col gap-2 scrollbar scrollbar-thin scrollbar-thumb-primary scrollbar-track-white pr-2">
       {Object.entries(themes).map(([theme]) => (
-        <button onClick={() => changeTheme(theme)}>
+        <button onClick={() => changeTheme(theme)} className="" key={theme}>
           <div
             className="border-base-content/20 hover:border-base-content/40 overflow-hidden rounded-lg border outline outline-2 outline-offset-2 outline-transparent"
             data-act-className="!outline-base-content"

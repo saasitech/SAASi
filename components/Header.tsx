@@ -9,7 +9,7 @@ export default function Header() {
           target="_blank"
           rel="noreferrer"
         >
-          <Logo className="w-[100px] h-[50px] text-black dark:text-white" />
+          <Logo className="w-[100px] h-[50px] light:text-black dark:text-white" />
         </a>
       </div>
       <h1 className="text-2xl lg:text-3xl !leading-tight mx-auto max-w-xl text-center font-extralight">
