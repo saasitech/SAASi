@@ -26,15 +26,17 @@ export const Marker = (props: MarkerProps) => (
   />
 );
 
-export default function PriceCardSimple() {
+export default function PriceCardSimple({ item }) {
   return (
     <div className="w-full max-w-sm p-4 bg-gray-50 border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
       <h5 className="mb-4 text-xl font-medium text-black dark:text-gray-400">
-        Standard plan
+        {item.title}
       </h5>
       <div className="flex items-baseline text-gray-900 dark:text-white">
         <span className="text-3xl font-semibold">$</span>
-        <span className="text-5xl font-extrabold tracking-tight">49</span>
+        <span className="text-5xl font-extrabold tracking-tight">
+          {item.price}
+        </span>
         <span className="ms-1 text-xl font-normal text-gray-500 dark:text-gray-400">
           /month
         </span>

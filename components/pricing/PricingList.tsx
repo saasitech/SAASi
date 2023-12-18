@@ -2,7 +2,23 @@ import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
 export default function PricingList({ style }: { style: string }) {
-  const pricingItems = [1, 2, 3];
+  const pricingItems = [
+    {
+      id: "basic",
+      title: "Basic",
+      price: "19",
+    },
+    {
+      id: "pro",
+      title: "Pro",
+      price: "39",
+    },
+    {
+      id: "enterprise",
+      title: "Enterprise",
+      price: "99",
+    },
+  ];
   const Pricing = dynamic(() => import(`@/components/pricing/${style}`));
   return (
     <div>
@@ -18,7 +34,7 @@ export default function PricingList({ style }: { style: string }) {
         )}
       >
         {pricingItems.map((item) => (
-          <Pricing key={item} />
+          <Pricing key={item.id} item={item} />
         ))}
       </div>
     </div>
