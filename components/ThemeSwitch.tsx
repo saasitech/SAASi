@@ -9,10 +9,7 @@ export default function ThemeSwitch() {
     <div className=" h-[400px] overflow-y-auto flex flex-col gap-2 scrollbar scrollbar-thin scrollbar-thumb-primary scrollbar-track-white pr-2">
       {Object.entries(themes).map(([theme]) => (
         <button onClick={() => changeTheme(theme)} className="" key={theme}>
-          <div
-            className="border-base-content/20 hover:border-base-content/40 overflow-hidden rounded-lg border outline outline-2 outline-offset-2 outline-transparent"
-            data-act-className="!outline-base-content"
-          >
+          <div className="border-base-content/20 hover:border-base-content/40 overflow-hidden rounded-lg border outline outline-2 outline-offset-2 outline-transparent">
             <div
               data-theme={theme}
               className="bg-base-100 text-base-content w-full font-sans"
