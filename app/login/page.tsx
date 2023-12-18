@@ -37,11 +37,15 @@ export default function Login({
     const cookieStore = cookies();
     const supabase = createClient(cookieStore);
 
+    const defaultUrl = process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000";
+
     const { error } = await supabase.auth.signUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${origin}/auth/callback`,
+        emailRedirectTo: `${defaultUrl}/auth/callback`,
       },
     });
 
