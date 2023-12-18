@@ -17,8 +17,8 @@ export default function PricingList({ style }: { style: string }) {
           ""
         )}
       >
-        {pricingItems.map(() => (
-          <Pricing />
+        {pricingItems.map((item) => (
+          <Pricing key={item} />
         ))}
       </div>
     </div>

@@ -1,9 +1,19 @@
 import { cn } from "@/lib/utils";
-import { CheckCircledIcon } from "@radix-ui/react-icons";
+import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
 interface MarkerProps extends React.ComponentPropsWithoutRef<"div"> {
   muted?: boolean;
 }
+
+const mockFeatures = [
+  { name: "2 team members", included: true },
+  { name: "20GB Cloud storage", included: true },
+  { name: "Integration help", included: true },
+  { name: "Sketch Files", included: false },
+  { name: "API Access", included: false },
+  { name: "Complete documentation", included: false },
+  { name: "24×7 phone & email support", included: false },
+];
 
 export const Marker = (props: MarkerProps) => (
   <div
@@ -30,56 +40,22 @@ export default function PriceCardSimple() {
         </span>
       </div>
       <ul role="list" className="space-y-5 my-7">
-        <li className="flex items-center">
-          <Marker>
-            <CheckCircledIcon className="w-5 h-5" />
-          </Marker>
+        {mockFeatures.map((feature) => (
+          <li className="flex items-center">
+            <Marker muted={!feature.included}>
+              <CheckCircleIcon className="w-5 h-5" />
+            </Marker>
 
-          <span className="text-base font-normal leading-tight text-primary-500 dark:text-primary-400 ms-3">
-            2 team members
-          </span>
-        </li>
-        <li className="flex">
-          <Marker muted>
-            <CheckCircledIcon className="w-4 h-4 text-blue-600 dark:text-blue-500" />
-          </Marker>
-          <span className="text-base font-normal leading-tight text-primary-500 dark:text-primary-400 ms-3">
-            20GB Cloud storage
-          </span>
-        </li>
-        <li className="flex">
-          <CheckCircledIcon className="w-4 h-4 text-blue-600 dark:text-blue-500" />
-          <span className="text-base font-normal leading-tight text-primary-500 dark:text-primary-400 ms-3">
-            Integration help
-          </span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <CheckCircledIcon
-            className="w-12 h-12 text-red-600 dark:text-slate-500"
-            style={{ color: "var(--accent-11)" }}
-          />
-          <span className="text-base font-light leading-tight text-gray-500 ms-3">
-            Sketch Files
-          </span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <CheckCircledIcon className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-          <span className="text-base font-light leading-tight text-gray-500 ms-3">
-            API Access
-          </span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <CheckCircledIcon className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-          <span className="text-base font-light leading-tight text-gray-500 ms-3">
-            Complete documentation
-          </span>
-        </li>
-        <li className="flex line-through decoration-gray-500">
-          <CheckCircledIcon className="w-4 h-4 text-slate-600 dark:text-slate-500" />
-          <span className="text-base font-light leading-tight text-gray-500 ms-3">
-            24×7 phone & email support
-          </span>
-        </li>
+            <span
+              className={cn(
+                "text-base font-normal leading-tight text-primary-500 dark:text-primary-400 ms-3",
+                !feature.included && "decoration-gray-500"
+              )}
+            >
+              {feature.name}
+            </span>
+          </li>
+        ))}
       </ul>
       <button
         className="btn btn-primary w-full"
