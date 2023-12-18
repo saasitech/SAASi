@@ -40,13 +40,17 @@ CREATE TABLE "pricing__tier__billing_cycle_option" (
     "pricing_id" INTEGER NOT NULL,
     "terms_summary_id" INTEGER NOT NULL,
     "applicable_discount" BOOLEAN NOT NULL DEFAULT false,
-    primary key ("billing_cycle_option_id", "tier_id", "pricing_id")
+    primary key (
+        "billing_cycle_option_id",
+        "tier_id",
+        "pricing_id"
+    )
 );
 
 CREATE TABLE "terms_summary" (
     "id" SERIAL PRIMARY KEY,
     "name" TEXT NOT NUll,
-    "terms" JSONB[] NOT NULL
+    "terms" JSONB [] NOT NULL
 );
 
 CREATE TABLE "feature" (
@@ -59,23 +63,35 @@ CREATE TABLE "tier__feature" (
     "tier_id" INTEGER NOT NULL,
     "feature_id" INTEGER NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT true,
-    primary key (tier_id, feature_id)
+    primary key ("tier_id", "feature_id")
 );
 
+ALTER TABLE
+    "pricing__tier__billing_cycle_option"
+ADD
+    CONSTRAINT "pricing__tier__billing_cycle_option_fk_boi" FOREIGN KEY ("billing_cycle_option_id") REFERENCES "billing_cycle_option"("id");
 
+ALTER TABLE
+    "pricing__tier__billing_cycle_option"
+ADD
+    CONSTRAINT "pricing__tier__billing_cycle_option_fk_ti" FOREIGN KEY ("tier_id") REFERENCES "tier"("id") ON DELETE CASCADE;
 
-ALTER TABLE "pricing__tier__billing_cycle_option" 
-    ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_boi" 
-    FOREIGN KEY ("billing_cycle_option_id") REFERENCES "billing_cycle_option"("id");
+ALTER TABLE
+    "pricing__tier__billing_cycle_option"
+ADD
+    CONSTRAINT "pricing__tier__billing_cycle_option_fk_pi" FOREIGN KEY ("pricing_id") REFERENCES "pricing"("id") ON DELETE CASCADE;
 
-ALTER TABLE "pricing__tier__billing_cycle_option" 
-    ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_ti" 
-    FOREIGN KEY ("tier_id") REFERENCES "tier"("id") ON DELETE CASCADE;
+ALTER TABLE
+    "pricing__tier__billing_cycle_option"
+ADD
+    CONSTRAINT "pricing__tier__billing_cycle_option_fk_tsi" FOREIGN KEY ("terms_summary_id") REFERENCES "terms_summary"("id");
 
-ALTER TABLE "pricing__tier__billing_cycle_option" 
-    ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_pi" 
-    FOREIGN KEY ("pricing_id") REFERENCES "pricing"("id") ON DELETE CASCADE;
+ALTER TABLE
+    "tier__feature"
+ADD
+    CONSTRAINT "tier__feature_fk_tft" FOREIGN KEY ("tier_id") REFERENCES "tier"("id");
 
-ALTER TABLE "pricing__tier__billing_cycle_option" 
-    ADD CONSTRAINT "pricing__tier__billing_cycle_option_fk_tsi" 
-    FOREIGN KEY ("terms_summary_id") REFERENCES "terms_summary"("id");
+ALTER TABLE
+    "tier__feature"
+ADD
+    CONSTRAINT "tier__feature_fk_tff" FOREIGN KEY ("feature_id") REFERENCES "feature"("id");
