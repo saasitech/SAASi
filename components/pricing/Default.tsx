@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { PricingItem } from "./PricingList";
 
 interface MarkerProps extends React.ComponentPropsWithoutRef<"div"> {
   muted?: boolean;
@@ -26,7 +27,7 @@ export const Marker = (props: MarkerProps) => (
   />
 );
 
-export default function PriceCardSimple({ item }) {
+export default function PriceCardSimple({ item }: { item: PricingItem }) {
   return (
     <div className="w-full max-w-sm p-4 bg-gray-50 border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
       <h5 className="mb-4 text-xl font-medium text-black dark:text-gray-400">

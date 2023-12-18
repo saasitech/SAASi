@@ -1,6 +1,12 @@
 import { cn } from "@/lib/utils";
 import dynamic from "next/dynamic";
 
+export interface PricingItem {
+  id: string;
+  title: string;
+  price: string;
+}
+
 export default function PricingList({ style }: { style: string }) {
   const pricingItems = [
     {
@@ -19,7 +25,9 @@ export default function PricingList({ style }: { style: string }) {
       price: "99",
     },
   ];
-  const Pricing = dynamic(() => import(`@/components/pricing/${style}`));
+  const Pricing = dynamic<{ item: PricingItem }>(
+    () => import(`@/components/pricing/${style}`)
+  );
   return (
     <div>
       <div
