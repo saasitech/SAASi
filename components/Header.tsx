@@ -13,8 +13,8 @@ export default function Header() {
         </a>
       </div>
       <h1 className="text-2xl lg:text-3xl !leading-tight mx-auto max-w-xl text-center font-extralight">
-        <span className="font-bold hover:underline">Create</span> and test a
-        multiple strategies to discover the most{" "}
+        <span className="font-bold hover:underline">Create</span> and test
+        multiple strategies to unlock the most{" "}
         <span className="font-bold hover:underline">optimal pricing</span> for
         your SaaS startup
       </h1>
