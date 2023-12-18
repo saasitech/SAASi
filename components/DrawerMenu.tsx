@@ -37,7 +37,7 @@ export default async function MainMenu() {
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-sm">
               Theme
-              <ChevronDownIcon className="w-4 h-4 ms-2" />
+              <ChevronDownIcon className="w-4 h-4" />
             </div>
             <div
               tabIndex={0}

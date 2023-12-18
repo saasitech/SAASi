@@ -44,7 +44,7 @@ export default function PriceCardSimple({ item }: { item: PricingItem }) {
       </div>
       <ul role="list" className="space-y-5 my-7">
         {mockFeatures.map((feature) => (
-          <li className="flex items-center">
+          <li className="flex items-center" key={feature.name}>
             <Marker muted={!feature.included}>
               <CheckCircleIcon className="w-5 h-5" />
             </Marker>
