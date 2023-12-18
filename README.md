@@ -91,4 +91,5 @@ Please file feedback and issues over on the [Saasi GitHub](https://github.com/sa
 - [Next.js](https://nextjs.org/)
 - [Supabase](https://supabase.io/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Daisy UI](https://daisyui.com/)
 - [Stripe](https://stripe.com/)
