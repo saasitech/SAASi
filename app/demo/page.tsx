@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function Index() {
   const pricingList = [
     {
-      style: "Default",
+      style: "default",
     },
   ];
   const selectedPricing = pricingList[0];

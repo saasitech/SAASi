@@ -1,5 +1,9 @@
 import { cn } from "@/lib/utils";
-import dynamic from "next/dynamic";
+import Default from "./Default";
+
+const pricingItemStyles = {
+  default: Default,
+};
 
 export interface PricingItem {
   id: string;
@@ -25,11 +29,8 @@ export default function PricingList({ style }: { style: string }) {
       price: "99",
     },
   ];
-  const Pricing = dynamic<{ item: PricingItem }>(
-    () => import(`@/components/pricing/${style}`),
-    { ssr: false }
-  );
 
+  const Pricing = pricingItemStyles[style] || pricingItemStyles.default;
   return (
     <div>
       <div
