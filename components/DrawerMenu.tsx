@@ -41,7 +41,7 @@ export default async function MainMenu() {
             </div>
             <div
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[200px]"
+              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[160px]"
             >
               <ThemeSwitch />
             </div>

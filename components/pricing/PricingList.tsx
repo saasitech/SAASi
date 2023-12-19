@@ -26,8 +26,10 @@ export default function PricingList({ style }: { style: string }) {
     },
   ];
   const Pricing = dynamic<{ item: PricingItem }>(
-    () => import(`@/components/pricing/${style}`)
+    () => import(`@/components/pricing/${style}`),
+    { ssr: false }
   );
+
   return (
     <div>
       <div

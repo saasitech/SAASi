@@ -47,8 +47,7 @@ const colorUtils = {
   },
 };
 
-export const setTheme = (theme) => {
-  const root = document.documentElement;
+export const getTheme = (theme) => {
   const input = themes[theme];
   let resultObj = {};
 
@@ -189,15 +188,7 @@ export const setTheme = (theme) => {
     }
   });
 
-  Object.entries(resultObj).forEach(([key, value]: any) => {
-    root.style.setProperty(key, value);
-  });
-
-  // set data-theme on html tag
-  // also set classList on html tag
-  root.dataset.theme = theme;
-  root.classList.remove(...Object.keys(themes));
-  root.classList.add(input["color-scheme"]);
+  return resultObj;
 };
 
 export const colorNames = {
@@ -237,7 +228,7 @@ export const themeDefaults = {
 
 export const themes = {
   aqua: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#09ecf3",
     "primary-content": "#005355",
     "secondary": "#966fb3",
@@ -250,7 +241,7 @@ export const themes = {
     "error": "oklch(73.95% 0.19 27.33)",
   },
   black: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#373737",
     "secondary": "#373737",
     "accent": "#373737",
@@ -272,7 +263,7 @@ export const themes = {
     "--tab-radius": "0",
   },
   bumblebee: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(89.51% 0.2132 96.61)",
     "primary-content": "oklch(38.92% 0.046 96.61)",
     "secondary": "oklch(80.39% 0.194 70.76)",
@@ -282,7 +273,7 @@ export const themes = {
     "base-100": "oklch(100% 0 0)",
   },
   cmyk: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#45AEEE",
     "secondary": "#E8488A",
     "accent": "#FFF232",
@@ -294,7 +285,7 @@ export const themes = {
     "error": "#E93F33",
   },
   corporate: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(60.39% 0.228 269.1)",
     "secondary": "#7b92b2",
     "accent": "#67cba0",
@@ -311,7 +302,7 @@ export const themes = {
     "--btn-focus-scale": "1",
   },
   cupcake: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#65c3c8",
     "secondary": "#ef9fbc",
     "accent": "#eeaf3a",
@@ -325,7 +316,7 @@ export const themes = {
     "--tab-radius": "0.7rem",
   },
   cyberpunk: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "fontFamily":
       "ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace",
     "primary": "oklch(74.22% 0.209 6.35)",
@@ -340,7 +331,7 @@ export const themes = {
     "--tab-radius": "0",
   },
   dark: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "oklch(65.69% 0.196 275.75)",
     "secondary": "oklch(74.8% 0.26 342.55)",
     "accent": "oklch(74.51% 0.167 183.61)",
@@ -352,7 +343,7 @@ export const themes = {
     "base-content": "#A6ADBB",
   },
   dracula: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#ff79c6",
     "secondary": "#bd93f9",
     "accent": "#ffb86c",
@@ -365,7 +356,7 @@ export const themes = {
     "error": "#ff5555",
   },
   emerald: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#66cc8a",
     "primary-content": "#223D30",
     "secondary": "#377cfb",
@@ -381,7 +372,7 @@ export const themes = {
     "--btn-focus-scale": "1",
   },
   fantasy: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(37.45% 0.189 325.02)",
     "secondary": "oklch(53.92% 0.162 241.36)",
     "accent": "oklch(75.98% 0.204 56.72)",
@@ -390,7 +381,7 @@ export const themes = {
     "base-content": "#1f2937",
   },
   forest: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#1eb854",
     "primary-content": "#000000",
     "secondary": "#1DB88E",
@@ -400,7 +391,7 @@ export const themes = {
     "--rounded-btn": "1.9rem",
   },
   garden: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(62.45% 0.278 3.8363600743192197)",
     "primary-content": "#fff",
     "secondary": "#8E4162",
@@ -411,7 +402,7 @@ export const themes = {
     "base-content": "#100f0f",
   },
   halloween: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "oklch(77.48% 0.204 60.62)",
     "primary-content": "#131616",
     "secondary": "oklch(45.98% 0.248 305.03)",
@@ -425,7 +416,7 @@ export const themes = {
     "error": "oklch(65.72% 0.199 27.33)",
   },
   light: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(49.12% 0.3096 275.75)",
     "secondary": "oklch(69.71% 0.329 342.55)",
     "secondary-content": "oklch(98.71% 0.0106 342.55)",
@@ -438,7 +429,7 @@ export const themes = {
     "base-content": "#1f2937",
   },
   lofi: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#0D0D0D",
     "primary-content": "oklch(100% 0 0)",
     "secondary": "#1A1919",
@@ -464,7 +455,7 @@ export const themes = {
     "--btn-focus-scale": "1",
   },
   luxury: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "oklch(100% 0 0)",
     "secondary": "#152747",
     "accent": "#513448",
@@ -480,7 +471,7 @@ export const themes = {
     "error": "#ff6f6f",
   },
   pastel: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#d1c1d7",
     "secondary": "#f6cbd1",
     "accent": "#b4e9d6",
@@ -492,7 +483,7 @@ export const themes = {
     "--tab-radius": "0.7rem",
   },
   retro: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#ef9995",
     "primary-content": "#282425",
     "secondary": "#a4cbb4",
@@ -515,7 +506,7 @@ export const themes = {
     "--tab-radius": "0.4rem",
   },
   synthwave: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#e779c1",
     "secondary": "#58c7f3",
     "accent": "oklch(88.04% 0.206 93.72)",
@@ -533,7 +524,7 @@ export const themes = {
     "error-content": "#201047",
   },
   valentine: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#e96d7b",
     "secondary": "#a991f7",
     "accent": "#66b1b3",
@@ -549,7 +540,7 @@ export const themes = {
     "--tab-radius": "0.7rem",
   },
   wireframe: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "fontFamily": "Chalkboard,comic sans ms,'sans-serif'",
     "primary": "#b8b8b8",
     "secondary": "#b8b8b8",
@@ -568,7 +559,7 @@ export const themes = {
     "--tab-radius": "0.2rem",
   },
   autumn: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#8C0327",
     "secondary": "#D85251",
     "accent": "#D59B6A",
@@ -580,7 +571,7 @@ export const themes = {
     "error": "oklch(53.07% 0.241 24.16)",
   },
   business: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#1C4E80",
     "secondary": "#7C909A",
     "accent": "#EA6947",
@@ -595,7 +586,7 @@ export const themes = {
     "--rounded-badge": ".125rem",
   },
   acid: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(71.9% 0.357 330.7595734057481)",
     "secondary": "oklch(73.37% 0.224 48.25087840015526)",
     "accent": "oklch(92.78% 0.264 122.96295065960891)",
@@ -611,7 +602,7 @@ export const themes = {
     "--tab-radius": "0.7rem",
   },
   lemonade: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(58.92% 0.199 134.6)",
     "secondary": "oklch(77.75% 0.196 111.09)",
     "accent": "oklch(85.39% 0.201 100.73)",
@@ -623,7 +614,7 @@ export const themes = {
     "error": "oklch(86.19% 0.047 25.85)",
   },
   night: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#38bdf8",
     "secondary": "#818CF8",
     "accent": "#F471B5",
@@ -636,7 +627,7 @@ export const themes = {
     "error": "#FB7085",
   },
   coffee: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#DB924B",
     "secondary": "#263E3F",
     "accent": "#10576D",
@@ -649,7 +640,7 @@ export const themes = {
     "error": "#FC9581",
   },
   winter: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "oklch(56.86% 0.255 257.57)",
     "secondary": "#463AA2",
     "accent": "#C148AC",
@@ -664,7 +655,7 @@ export const themes = {
     "error": "#E58B8B",
   },
   dim: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#9FE88D",
     "secondary": "#FF7D5C",
     "accent": "#C792E9",
@@ -680,7 +671,7 @@ export const themes = {
     "error": "#ffae9b",
   },
   nord: {
-    "color-scheme": "light",
+    "colorScheme": "light",
     "primary": "#5E81AC",
     "secondary": "#81A1C1",
     "accent": "#88C0D0",
@@ -700,7 +691,7 @@ export const themes = {
     "--tab-radius": "0.2rem",
   },
   sunset: {
-    "color-scheme": "dark",
+    "colorScheme": "dark",
     "primary": "#FF865B",
     "secondary": "#FD6F9C",
     "accent": "#B387FA",

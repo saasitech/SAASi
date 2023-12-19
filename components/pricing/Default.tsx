@@ -1,10 +1,7 @@
 import { cn } from "@/lib/utils";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { Marker } from "../Marker";
 import { PricingItem } from "./PricingList";
-
-interface MarkerProps extends React.ComponentPropsWithoutRef<"div"> {
-  muted?: boolean;
-}
 
 const mockFeatures = [
   { name: "2 team members", included: true },
@@ -16,18 +13,8 @@ const mockFeatures = [
   { name: "24×7 phone & email support", included: false },
 ];
 
-export const Marker = (props: MarkerProps) => (
-  <div
-    className={cn(
-      "rounded-full",
-      props.muted ? "" : "bg-primary/10 text-primary",
-      props.className
-    )}
-    {...props}
-  />
-);
-
 export default function PriceCardSimple({ item }: { item: PricingItem }) {
+  if (!item) return null;
   return (
     <div className="w-full max-w-sm p-4 bg-gray-50 border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
       <h5 className="mb-4 text-xl font-medium text-black dark:text-gray-400">

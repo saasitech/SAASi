@@ -1,4 +1,4 @@
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { getTheme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
@@ -12,6 +12,7 @@ export const metadata = {
   description: "Flexible pricing for your SaaS",
   title: "Pricing | SAASi",
 };
+const styleProps = getTheme("sunset");
 
 export default function RootLayout({
   children,
@@ -21,8 +22,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(GeistSans.className, "dark")}
-      data-theme="halloween"
+      className={cn(GeistSans.className, styleProps["colorScheme"])}
+      style={styleProps}
       suppressHydrationWarning
     >
       <head>
@@ -33,16 +34,9 @@ export default function RootLayout({
         <title>{metadata.title}</title>
       </head>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem={false}
-          disableTransitionOnChange={false}
-        >
-          <main className="min-h-screen flex flex-col items-center">
-            {children}
-          </main>
-        </ThemeProvider>
+        <main className="min-h-screen flex flex-col items-center">
+          {children}
+        </main>
       </body>
     </html>
   );
