@@ -46,7 +46,7 @@ export default async function MainMenu() {
               <ThemeSwitch />
             </div>
           </div>
-          <AuthButton />
+          <AuthButton className="btn btn-ghost btn-sm" />
         </nav>
       </div>
     </div>

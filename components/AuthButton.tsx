@@ -1,9 +1,14 @@
+import { cn } from "@/lib/utils";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
-export default async function AuthButton() {
+export default async function AuthButton({
+  className,
+}: {
+  className?: string;
+}) {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
 
@@ -23,7 +28,7 @@ export default async function AuthButton() {
   return user ? (
     <div className="flex items-center gap-4">
       <form action={signOut}>
-        <button className="py-2 px-4 rounded-md no-underline btn btn-ghost btn-sm">
+        <button className={cn("py-2 px-4 no-underline", className)}>
           Logout
         </button>
       </form>
@@ -31,7 +36,7 @@ export default async function AuthButton() {
   ) : (
     <Link
       href="/login"
-      className="py-2 px-3 flex rounded-md no-underline btn btn-ghost"
+      className={cn("py-2 px-4 no-underline flex", className)}
     >
       Login
     </Link>
