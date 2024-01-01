@@ -1,12 +1,7 @@
-"use server";
-
-import pricing from "./pricing";
 import { createServerClient } from "../supabaseServer";
+import pricingServerActions from "./pricing";
 
 const client = createServerClient();
-const prepareServerActions = () => {
-  return {
-    features: pricing(client),
-  };
+export const serverActions = {
+  pricing: pricingServerActions(client),
 };
-export default prepareServerActions;

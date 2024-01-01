@@ -2,7 +2,7 @@ import { TablesInsert, TablesUpdate } from "@/supabase/types";
 import { DbClientType } from "@/utils/supabase/server";
 import { errorHandler } from "./common";
 
-const prepareServerActions = (client: DbClientType) => {
+const pricingServerActions = (client: DbClientType) => {
   return {
     read: errorHandler("Pricing Read", async () => {
       const result = await client.from("pricing").select();
@@ -14,6 +14,15 @@ const prepareServerActions = (client: DbClientType) => {
         .from("pricing")
         .select()
         .eq("slug", slug)
+        .single();
+      if (result.error) throw result.error;
+      return result.data;
+    }),
+    readById: errorHandler("Pricing ReadById", async (id: string) => {
+      const result = await client
+        .from("pricing")
+        .select()
+        .eq("id", id)
         .single();
       if (result.error) throw result.error;
       return result.data;
@@ -50,4 +59,4 @@ const prepareServerActions = (client: DbClientType) => {
   };
 };
 
-export default prepareServerActions;
+export default pricingServerActions;

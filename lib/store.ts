@@ -1,16 +1,6 @@
 import { create } from "zustand";
 import { defaultTheme } from "./themes";
 
-const mockFeatures = [
-  { name: "2 team members", included: true },
-  { name: "20GB Cloud storage", included: true },
-  { name: "Integration help", included: true },
-  { name: "Sketch Files", included: false },
-  { name: "API Access", included: false },
-  { name: "Complete documentation", included: false },
-  { name: "24×7 phone & email support", included: false },
-];
-
 export type TierFeature = {
   name: string;
   included: boolean;
@@ -45,6 +35,7 @@ export interface TierItem {
 export interface Pricing {
   title: string;
   description: string;
+  slug?: string;
   showBillingCycle: boolean;
   currency: string;
   theme: string;
@@ -106,7 +97,7 @@ const tiers: TierItem[] = [
       { name: "API Access", included: false },
       { name: "Complete documentation", included: false },
       { name: "24×7 phone & email support", included: false },
-    ], // clone array
+    ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
@@ -123,7 +114,15 @@ const tiers: TierItem[] = [
       { value: 199, billingCycle: 1, billingPeriod: "year" },
     ],
     priceType: "recurring",
-    features: Array.from(mockFeatures),
+    features: [
+      { name: "2 team members", included: true },
+      { name: "20GB Cloud storage", included: true },
+      { name: "Integration help", included: true },
+      { name: "Sketch Files", included: true },
+      { name: "API Access", included: true },
+      { name: "Complete documentation", included: false },
+      { name: "24×7 phone & email support", included: false },
+    ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
@@ -134,7 +133,15 @@ const tiers: TierItem[] = [
     price: "Contact us",
     priceType: "plain text",
     showPriceAsText: true,
-    features: Array.from(mockFeatures),
+    features: [
+      { name: "2 team members", included: true },
+      { name: "20GB Cloud storage", included: true },
+      { name: "Integration help", included: true },
+      { name: "Sketch Files", included: true },
+      { name: "API Access", included: true },
+      { name: "Complete documentation", included: true },
+      { name: "24×7 phone & email support", included: true },
+    ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
 ];
