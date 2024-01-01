@@ -8,7 +8,6 @@ interface TierItemWithIndex extends TierFeature {
 export default function Features({ tier }: { tier: TierItem }) {
   const tiers = usePricingStore((state) => state.tiers);
   const setTiers = usePricingStore((state) => state.setTiers);
-  const setTier = usePricingStore((state) => state.setTier);
   const features = tier.features.map((feature, index) => {
     const item = { ...feature, index, id: index };
     return item;

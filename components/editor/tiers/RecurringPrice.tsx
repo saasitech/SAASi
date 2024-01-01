@@ -1,4 +1,4 @@
-import { TierItem, usePricingStore } from "@/lib/store";
+import { BillingPeriod, TierItem, usePricingStore } from "@/lib/store";
 
 export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
   const pricingStore = usePricingStore((state) => state);
