@@ -4,9 +4,24 @@
 
 html {
   font-size: 12px;
+  height: 100%;
+}
+body {
+  height: 100%;
 }
 @media screen and (min-height: 980px) {
   html {
     font-size: 16px;
   }
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+.input-saasi {
+  @apply w-full focus:outline-1 focus:outline-offset-0 text-sm p-2 text-white border-base-300 bg-base-300/50;
+}
+.collapse-arrow:not(.collapse-close) > input[type="radio"]:checked ~ .collapse-title {
+  @apply text-primary;
 }

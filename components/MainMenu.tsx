@@ -1,8 +1,7 @@
 import { createServerClient } from "@/lib/supabaseServer";
 import { cn } from "@/lib/utils";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import AuthButton from "./AuthButton";
-import ThemeSwitch from "./ThemeSwitch";
 
 interface Tab {
   name: string;
@@ -12,40 +11,26 @@ interface Tab {
 
 export default async function MainMenu() {
   const supabase = createServerClient();
-
   const {
     data: { user },
   } = await supabase.auth.getUser();
   let tabs = [] as Tab[];
-  if (user) {
-    tabs = [{ name: "My Pricing", href: "/my-pricing", current: false }];
-  }
+  tabs = [{ name: "Edit", href: "/edit", current: false }];
   return (
     <div>
       <div className="sm:block">
         <nav className="flex space-x-2 items-center" aria-label="Tabs">
           {tabs.map((tab) => (
-            <a
+            <Link
               key={tab.name}
               href={tab.href}
-              className={cn("btn btn-ghost btn-sm")}
+              className={cn("btn btn-ghost btn-sm btn-outline")}
               aria-current={tab.current ? "page" : undefined}
             >
               {tab.name}
-            </a>
+            </Link>
           ))}
-          <div className="dropdown dropdown-end">
-            <div tabIndex={0} role="button" className="btn btn-ghost btn-sm">
-              Theme
-              <ChevronDownIcon className="w-4 h-4" />
-            </div>
-            <div
-              tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-[160px]"
-            >
-              <ThemeSwitch />
-            </div>
-          </div>
+
           <AuthButton className="btn btn-ghost btn-sm" />
         </nav>
       </div>

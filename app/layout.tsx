@@ -1,4 +1,3 @@
-import { getTheme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
@@ -12,7 +11,6 @@ export const metadata = {
   description: "Flexible pricing for your SaaS",
   title: "Pricing | SAASi",
 };
-const styleProps = getTheme("sunset");
 
 export default function RootLayout({
   children,
@@ -20,12 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="en"
-      className={cn(GeistSans.className, styleProps["colorScheme"])}
-      style={styleProps}
-      suppressHydrationWarning
-    >
+    <html lang="en" className={cn(GeistSans.className)}>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width" />
@@ -33,11 +26,7 @@ export default function RootLayout({
         <meta name="description" content={metadata.description} />
         <title>{metadata.title}</title>
       </head>
-      <body>
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

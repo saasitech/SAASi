@@ -1,4 +1,4 @@
-import MainMenu from "@/components/DrawerMenu";
+import MainMenu from "@/components/MainMenu";
 import { ArrowLongLeftIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
