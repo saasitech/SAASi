@@ -6,6 +6,7 @@ CREATE TABLE "pricing" (
     "currency" TEXT,
     "theme" TEXT,
     "show_billing_cycle" BOOLEAN DEFAULT false,
+    "is_default" BOOLEAN DEFAULT false,
     "settings" JSONB,
     "tiers" JSONB []
 );

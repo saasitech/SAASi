@@ -27,6 +27,15 @@ const pricingServerActions = (client: DbClientType) => {
       if (result.error) throw result.error;
       return result.data;
     }),
+    readDefault: errorHandler("Pricing ReadDefault", async () => {
+      const result = await client
+        .from("pricing")
+        .select()
+        .eq("is_default", true)
+        .single();
+      if (result.error) throw result.error;
+      return result.data;
+    }),
     create: errorHandler(
       "Pricing Create",
       async (input: TablesInsert<"pricing">) => {
