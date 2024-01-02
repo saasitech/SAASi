@@ -1,5 +1,6 @@
-import { createServerClient } from "@/lib/supabaseServer";
+import { createServerClient } from "@/lib/supabaseClient";
 import { cn } from "@/lib/utils";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import AuthButton from "./AuthButton";
 
@@ -10,7 +11,7 @@ interface Tab {
 }
 
 export default async function MainMenu() {
-  const supabase = createServerClient();
+  const supabase = createServerClient(cookies());
   const {
     data: { user },
   } = await supabase.auth.getUser();

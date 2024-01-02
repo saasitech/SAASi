@@ -1,10 +1,13 @@
+import { PricingPage } from "@/components/PricingPage";
 import { PriceEditor } from "@/components/editor/PriceEditor";
 import SyncStore from "@/components/pricing/SyncStore";
-import { PricingPage } from "@/components/PricingPage";
-import { serverActions } from "@/lib/serverActions";
+import pricingActions from "@/lib/serverActions/pricing";
+import { createServerClient } from "@/lib/supabaseClient";
+import { cookies } from "next/headers";
 
 export default async function Index() {
-  const defaultPricing: any = await serverActions.pricing.readDefault();
+  const supabase = createServerClient(cookies());
+  const defaultPricing = await pricingActions(supabase).readDefault();
 
   return (
     <div className="flex">
