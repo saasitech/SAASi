@@ -1,24 +1,19 @@
-import { TierFeature, TierItem, usePricingStore } from "@/lib/store";
-import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
+import { TierItem, usePricingStore } from "@/lib/store";
+import { MinusCircleIcon } from "@heroicons/react/24/outline";
 import { ReactSortable } from "react-sortablejs";
 
-interface TierItemWithIndex extends TierFeature {
-  id: number;
-}
 export default function Features({ tier }: { tier: TierItem }) {
   const tiers = usePricingStore((state) => state.tiers);
   const setTiers = usePricingStore((state) => state.setTiers);
-  const features = tier.features.map((feature, index) => {
-    const item = { ...feature, index, id: index };
-    return item;
-  });
+  const features = tier.features.filter((i) => i !== undefined);
 
   const setList = (newFeatures) => {
-    tier.features = newFeatures.map((i) => ({
+    tier.features = newFeatures.map((i, index) => ({
+      id: index,
       name: i.name,
       included: i.included,
     }));
-    setTiers(tiers);
+    setTiers([...tiers]);
   };
 
   return (
@@ -42,7 +37,6 @@ export default function Features({ tier }: { tier: TierItem }) {
                   value={feature.name}
                   onChange={(e) => {
                     feature.name = e.target.value;
-                    tier.features = [...features];
                     setTiers([...tiers]);
                   }}
                   autoFocus={feature.name === ""}
@@ -57,7 +51,6 @@ export default function Features({ tier }: { tier: TierItem }) {
                       className="toggle toggle-sm"
                       onChange={(e) => {
                         feature.included = e.target.checked;
-                        tier.features = [...features];
                         setTiers(tiers);
                       }}
                       checked={feature.included}
@@ -65,33 +58,15 @@ export default function Features({ tier }: { tier: TierItem }) {
                   </div>
                 </div>
               </div>
-              {feature.id === tier.features.length - 1 ? (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    tier.features = [
-                      ...tier.features,
-                      {
-                        name: "",
-                        included: false,
-                      },
-                    ];
-                    setTiers([...tiers]);
-                  }}
-                >
-                  <PlusCircleIcon className="h-6 w-6 text-primary" />
-                </button>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    tier.features.splice(feature.id, 1);
-                    setTiers([...tiers]);
-                  }}
-                >
-                  <MinusCircleIcon className="h-6 w-6 " />
-                </button>
-              )}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  tier.features.splice(feature.id, 1);
+                  setTiers([...tiers]);
+                }}
+              >
+                <MinusCircleIcon className="h-6 w-6 " />
+              </button>
             </div>
           );
         })}

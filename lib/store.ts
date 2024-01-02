@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { defaultTheme } from "./themes";
 
 export type TierFeature = {
+  id: number;
   name: string;
   included: boolean;
 };
@@ -55,8 +56,8 @@ interface PricingState extends Pricing {
 }
 
 export const featuresDefault: TierFeature[] = [
-  { name: "feature 1", included: true },
-  { name: "feature 2", included: false },
+  { id: 0, name: "feature 1", included: true },
+  { id: 1, name: "feature 2", included: false },
 ];
 export const priceDefault: PriceRecurring = {
   value: 0,
@@ -76,7 +77,7 @@ export const tierDefault: TierItem = {
 
 const tiers: TierItem[] = [
   {
-    id: 1,
+    id: 0,
     title: "Basic",
     badge: "",
     description: "For small teams or office",
@@ -90,18 +91,18 @@ const tiers: TierItem[] = [
     ],
     priceType: "recurring",
     features: [
-      { name: "2 team members", included: true },
-      { name: "20GB Cloud storage", included: true },
-      { name: "Integration help", included: true },
-      { name: "Sketch Files", included: false },
-      { name: "API Access", included: false },
-      { name: "Complete documentation", included: false },
-      { name: "24×7 phone & email support", included: false },
+      { id: 0, name: "2 team members", included: true },
+      { id: 1, name: "20GB Cloud storage", included: true },
+      { id: 2, name: "Integration help", included: true },
+      { id: 3, name: "Sketch Files", included: false },
+      { id: 4, name: "API Access", included: false },
+      { id: 5, name: "Complete documentation", included: false },
+      { id: 6, name: "24×7 phone & email support", included: false },
     ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
-    id: 2,
+    id: 1,
     title: "Pro",
     badge: "Popular",
     description: "For professional teams",
@@ -115,18 +116,18 @@ const tiers: TierItem[] = [
     ],
     priceType: "recurring",
     features: [
-      { name: "2 team members", included: true },
-      { name: "20GB Cloud storage", included: true },
-      { name: "Integration help", included: true },
-      { name: "Sketch Files", included: true },
-      { name: "API Access", included: true },
-      { name: "Complete documentation", included: false },
-      { name: "24×7 phone & email support", included: false },
+      { id: 0, name: "2 team members", included: true },
+      { id: 1, name: "20GB Cloud storage", included: true },
+      { id: 2, name: "Integration help", included: true },
+      { id: 3, name: "Sketch Files", included: true },
+      { id: 4, name: "API Access", included: true },
+      { id: 5, name: "Complete documentation", included: false },
+      { id: 6, name: "24×7 phone & email support", included: false },
     ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
-    id: 3,
+    id: 2,
     title: "Enterprise",
     badge: "",
     description: "For enterprise business",
@@ -134,13 +135,13 @@ const tiers: TierItem[] = [
     priceType: "plain text",
     showPriceAsText: true,
     features: [
-      { name: "2 team members", included: true },
-      { name: "20GB Cloud storage", included: true },
-      { name: "Integration help", included: true },
-      { name: "Sketch Files", included: true },
-      { name: "API Access", included: true },
-      { name: "Complete documentation", included: true },
-      { name: "24×7 phone & email support", included: true },
+      { id: 0, name: "2 team members", included: true },
+      { id: 1, name: "20GB Cloud storage", included: true },
+      { id: 2, name: "Integration help", included: true },
+      { id: 3, name: "Sketch Files", included: true },
+      { id: 4, name: "API Access", included: true },
+      { id: 5, name: "Complete documentation", included: true },
+      { id: 6, name: "24×7 phone & email support", included: true },
     ],
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
@@ -161,7 +162,13 @@ export const usePricingStore = create<PricingState>((set, get) => ({
   setCurrency: (val) => set({ currency: val }),
   setShowBillingCycle: (val) => set({ showBillingCycle: val }),
   setTiers: (newTiers) => {
-    set({ tiers: newTiers.map((t, index) => ({ ...t, id: index })) });
+    set({
+      tiers: newTiers.map((t, index) => ({
+        ...t,
+        id: index,
+        features: t.features.map((i, index) => ({ ...i, id: index })),
+      })),
+    });
     return get().tiers;
   },
   setTierFeatures: (tier, features) => {

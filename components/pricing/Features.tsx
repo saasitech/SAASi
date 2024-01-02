@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 import { CheckCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
 import { Marker } from "../Marker";
 
-export const Features = (item: TierItem) => {
+export const Features = (tier: TierItem) => {
   return (
     <ul role="list" className="space-y-4">
-      {item.features.map((feature) => {
+      {tier.features.map((feature) => {
         return (
-          <li className="flex items-center" key={feature.name}>
+          <li className="flex items-center" key={feature.id}>
             <Marker
               muted={
                 feature.included === undefined || feature.included === false
