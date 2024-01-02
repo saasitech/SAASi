@@ -31,7 +31,7 @@ const pricingServerActions = (client: DbClientType) => {
       const result = await client
         .from("pricing")
         .select()
-        .eq("is_default", true)
+        .eq("isDefault", true)
         .single();
       if (result.error) throw result.error;
       return result.data;

@@ -1,3 +1,5 @@
+import { TierItem } from "@/lib/store";
+
 export type Json =
   | string
   | number
@@ -40,7 +42,7 @@ export interface Database {
           id: number;
           settings: Json | null;
           slug: string;
-          tiers: Tier[] | null;
+          tiers: TierItem[] | null;
           title: string | null;
         };
         Insert: {
@@ -48,7 +50,7 @@ export interface Database {
           id?: number;
           settings?: Json | null;
           slug: string;
-          tiers?: Tier[] | null;
+          tiers?: TierItem[] | null;
           title?: string | null;
         };
         Update: {
@@ -56,7 +58,7 @@ export interface Database {
           id?: number;
           settings?: Json | null;
           slug?: string;
-          tiers?: Tier[] | null;
+          tiers?: TierItem[] | null;
           title?: string | null;
         };
         Relationships: [];
