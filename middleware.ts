@@ -23,6 +23,10 @@ export async function middleware(request: NextRequest, response: NextResponse) {
       });
     }
 
+    if (request.nextUrl.pathname.startsWith("/edit") && !session) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
     return response;
   } catch (e) {
     // If you are here, a Supabase client could not be created!
