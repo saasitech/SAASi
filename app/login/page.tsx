@@ -1,67 +1,39 @@
-import { createClient } from "@/utils/supabase/server";
-import { cookies, headers } from "next/headers";
+"use client";
+import { signIn, signUp } from "@/lib/serverActions/auth";
+import { usePricingStore } from "@/lib/store";
+import { getTheme } from "@/lib/themes";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+
+const Toast = ({ children }: { children: string }) => (
+  <div className="toast toast-center toast-top">
+    <div className="alert alert-info">
+      <span> {children}</span>
+    </div>
+  </div>
+);
 
 export default function Login({
   searchParams,
 }: {
-  searchParams: { message: string };
+  searchParams: { message?: string; redirectUrl?: string };
 }) {
-  const signIn = async (formData: FormData) => {
-    "use server";
-
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    return redirect("/");
-  };
-
-  const signUp = async (formData: FormData) => {
-    "use server";
-
-    const origin = headers().get("origin");
-    const email = formData.get("email") as string;
-    const password = formData.get("password") as string;
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
-
-    const defaultUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "http://localhost:3000";
-
-    const { error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${defaultUrl}/auth/callback`,
-      },
-    });
-
-    if (error) {
-      return redirect("/login?message=Could not authenticate user");
-    }
-
-    return redirect("/login?message=Check email to continue sign in process");
-  };
+  const pricingStore = usePricingStore((state) => state);
+  const toastMessage = searchParams?.message;
+  const styleProps = getTheme(pricingStore.theme);
 
   return (
-    <main className="min-h-screen flex flex-col items-center">
+    <main
+      className="min-h-screen flex flex-col items-center bg-base-100"
+      style={styleProps}
+    >
+      {toastMessage &&
+        Toast({
+          children: toastMessage,
+        })}
       <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
         <Link
-          href={headers().get("referer") || "/"}
-          className="absolute left-8 top-8 py-2 px-4 rounded-md no-underline text-foreground bg-btn-background hover:bg-btn-background-hover flex items-center group text-sm"
+          href={"/"}
+          className="absolute left-8 top-8 py-2 px-4 btn btn-outline btn-sm"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -84,39 +56,36 @@ export default function Login({
           className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground"
           action={signIn}
         >
-          <label className="text-md" htmlFor="email">
+          <input
+            type="hidden"
+            name="redirectUrl"
+            value={searchParams.redirectUrl}
+          />
+          <label className="label-text" htmlFor="email">
             Email
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="input input-saasi "
             name="email"
             placeholder="you@example.com"
             required
           />
-          <label className="text-md" htmlFor="password">
+          <label className="label-text" htmlFor="password">
             Password
           </label>
           <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
+            className="input input-saasi"
             type="password"
             name="password"
             placeholder="••••••••"
             required
           />
-          <button className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2">
+          <button type="submit" className="btn btn-primary">
             Sign In
           </button>
-          <button
-            formAction={signUp}
-            className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          >
+          <button formAction={signUp} className="btn btn-secondary">
             Sign Up
           </button>
-          {searchParams?.message && (
-            <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
-              {searchParams.message}
-            </p>
-          )}
         </form>
       </div>
     </main>

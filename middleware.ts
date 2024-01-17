@@ -24,7 +24,9 @@ export async function middleware(request: NextRequest, response: NextResponse) {
     }
 
     if (request.nextUrl.pathname.startsWith("/edit") && !session) {
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(
+        new URL("/login?redirectUrl=/edit", request.url)
+      );
     }
 
     return response;
