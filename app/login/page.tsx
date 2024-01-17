@@ -1,5 +1,5 @@
 "use client";
-import { signIn, signUp } from "@/lib/serverActions/auth";
+import { signIn, signUp } from "@/lib/serverActions/authActions";
 import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import Link from "next/link";

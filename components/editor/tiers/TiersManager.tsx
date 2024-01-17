@@ -1,4 +1,5 @@
-import { TierItem, tierDefault, usePricingStore } from "@/lib/store";
+import { tierDefault, usePricingStore } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {
   DocumentDuplicateIcon,
@@ -45,29 +46,13 @@ export const TiersManager = () => {
                 <div className="collapse-title font-bold text-lg text-white flex justify-between items-center">
                   <span>{tier.title}</span>
                 </div>
-                <div className="collapse-content space-y-2 overflow-visible">
+                <div className="collapse-content space-y-4 overflow-visible">
                   <TitleInput tier={tier} />
                   <DescriptionInput tier={tier} />
                   <BadgeInput tier={tier} />
                   <PriceTypeSelect tier={tier} />
                   <PricingInput tier={tier} />
                   <Features tier={tier} />
-                  <button
-                    className="btn btn-ghost w-full text-primary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const newFeature = {
-                        name: "",
-                        included: false,
-                      };
-                      tier.features = [...tier.features, newFeature].map(
-                        (f, index) => ({ ...f, id: index })
-                      );
-                      setTiers([...tiers]);
-                    }}
-                  >
-                    Add feature <PlusCircleIcon className="h-6 w-6" />
-                  </button>
                   {tiers.length > 1 && (
                     <div className="flex justify-between">
                       <button

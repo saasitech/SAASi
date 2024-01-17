@@ -1,4 +1,4 @@
-import { TierItem } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export const Actions = (item: TierItem) => {

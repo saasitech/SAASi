@@ -1,4 +1,5 @@
-import { TierItem, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 
 export const BadgeInput = ({ tier }: { tier: TierItem }) => {
   const pricingStore = usePricingStore((state) => state);

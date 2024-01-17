@@ -3,6 +3,7 @@ import Default from "@/components/pricing/PricingDefault";
 import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
+import Toast from "./Toast";
 
 const pricingStyles = {
   default: Default,
@@ -18,10 +19,11 @@ export const PricingPage = () => {
       style={styleProps}
       className={cn(
         styleProps["colorScheme"],
-        "bg-base-300 flex-1 h-screen overflow-y-auto"
+        "bg-base-300 flex-1 h-screen overflow-y-auto relative"
       )}
       data-theme={pricingStore.theme}
     >
+      <Toast />
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
         <nav className="w-full flex justify-center h-16">
           <div className="w-full max-w-6xl flex justify-between items-center p-3 text-sm">

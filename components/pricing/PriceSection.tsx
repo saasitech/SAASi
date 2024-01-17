@@ -1,10 +1,5 @@
-import {
-  PriceOneOff,
-  PriceRecurring,
-  PriceText,
-  TierItem,
-  usePricingStore,
-} from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { PriceOneOff, PriceRecurring, PriceText, TierItem } from "@/lib/types";
 import { formattedPrice } from "@/lib/utils";
 import { useMemo } from "react";
 
@@ -18,21 +13,30 @@ export const PriceSection = ({
   const pricingStore = usePricingStore((state) => state);
   const priceText = item.price as PriceText;
   const priceOneOff = item.price as PriceOneOff;
-  const priceRecurring = useMemo(
-    () => item.price[0] as PriceRecurring,
-    [pricingStore]
-  ); //TODO: handle multiple recurring prices
+  const priceRecurring = useMemo(() => {
+    const prices = item.price as PriceRecurring[];
+    let price = prices[0];
+    if (Array.isArray(prices)) {
+      const foundPrice = (item.price as PriceRecurring[]).find(
+        (p) => p.billingPeriod === pricingStore.billingOptions.selected
+      );
+      if (foundPrice) {
+        price = foundPrice;
+      }
+    }
+    return price;
+  }, [pricingStore]);
 
   return (
     <div className="flex items-center text-black/80 dark:text-white/80 min-h-[50px]">
       {item.priceType === "plain text" && (
-        <span className="text-3xl font-extrabold tracking-tight">
+        <span className="text-4xl font-extrabold tracking-tight">
           {priceText}
         </span>
       )}
       {item.priceType === "one-off" && (
         <div className="flex flex-wrap items-end">
-          <span className="text-5xl font-extrabold tracking-tight">
+          <span className="text-4xl font-extrabold tracking-tight">
             {formattedPrice(priceOneOff?.value, currency)}
           </span>
           <span className="ms-1 text-xl font-normal text-secondary">
@@ -42,7 +46,7 @@ export const PriceSection = ({
       )}
       {item.priceType === "recurring" && (
         <div className="flex flex-wrap items-end">
-          <span className="text-5xl font-extrabold tracking-tight">
+          <span className="text-4xl font-extrabold tracking-tight">
             {formattedPrice(priceRecurring?.value, currency)}
           </span>
           <span className="ms-1 text-xl font-normal text-secondary">

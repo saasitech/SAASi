@@ -1,4 +1,5 @@
-import { TierItem, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 import { OneOffPrice } from "./OneOffPrice";
 import { PlainTextPrice } from "./PlainTextPrice";
 import { RecurringPrice } from "./RecurringPrice";

@@ -5,8 +5,8 @@ CREATE TABLE "pricing" (
     "description" TEXT,
     "currency" TEXT,
     "theme" TEXT,
-    "showBillingCycle" BOOLEAN DEFAULT false,
     "isDefault" BOOLEAN DEFAULT false,
-    "settings" JSONB,
+    "billingOptions" JSONB,
+    "metadata" JSONB,
     "tiers" JSONB []
 );

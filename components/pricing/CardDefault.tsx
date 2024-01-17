@@ -1,5 +1,6 @@
 "use client";
-import { TierItem, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 import { Actions } from "./Actions";
 import { Description } from "./Description";
 import { Features } from "./Features";

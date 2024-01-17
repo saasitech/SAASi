@@ -1,4 +1,5 @@
-import { PriceOneOff, TierItem, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { PriceOneOff, TierItem } from "@/lib/types";
 
 export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
   const pricingStore = usePricingStore((state) => state);

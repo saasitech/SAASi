@@ -1,5 +1,6 @@
-import { TierItem, usePricingStore } from "@/lib/store";
-import { MinusCircleIcon } from "@heroicons/react/24/outline";
+import { usePricingStore } from "@/lib/store";
+import { TierItem } from "@/lib/types";
+import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/24/outline";
 import { ReactSortable } from "react-sortablejs";
 
 export default function Features({ tier }: { tier: TierItem }) {
@@ -17,7 +18,7 @@ export default function Features({ tier }: { tier: TierItem }) {
   };
 
   return (
-    <div>
+    <div className="space-y-2">
       <label htmlFor="description" className="label-text">
         Features
       </label>
@@ -71,6 +72,23 @@ export default function Features({ tier }: { tier: TierItem }) {
           );
         })}
       </ReactSortable>
+      <button
+        className="btn btn-ghost w-full text-primary"
+        onClick={(e) => {
+          e.preventDefault();
+          const newFeature = {
+            name: "",
+            included: false,
+          };
+          tier.features = [...tier.features, newFeature].map((f, index) => ({
+            ...f,
+            id: index,
+          }));
+          setTiers([...tiers]);
+        }}
+      >
+        Add feature <PlusCircleIcon className="h-6 w-6" />
+      </button>
     </div>
   );
 }

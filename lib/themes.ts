@@ -479,9 +479,8 @@ export const themes = {
   },
   halloween: {
     "colorScheme": "dark",
-    "primary": "oklch(77.48% 0.204 60.62)",
-    "primary-content": "#131616",
-    "secondary": "oklch(45.98% 0.248 305.03)",
+    "primary": "oklch(45.98% 0.248 305.03)",
+    "secondary": "oklch(77.48% 0.204 60.62)",
     "accent": "oklch(64.8% 0.223 136.07347934356451)",
     "accent-content": "#000000",
     "neutral": "#2F1B05",
@@ -596,8 +595,8 @@ export const themes = {
   },
   pastel: {
     "colorScheme": "light",
-    "primary": "#d1c1d7",
-    "secondary": "#b4e9d6",
+    "primary": "#b4e9d6",
+    "secondary": "#987ba2",
     "accent": "#f6cbd1",
     "neutral": "#70acc7",
     "base-100": "#fff",

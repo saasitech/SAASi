@@ -1,4 +1,4 @@
-import { TierItem } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 
 export const Title = (item: TierItem) => {
   return (

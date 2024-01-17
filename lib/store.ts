@@ -1,52 +1,22 @@
 import { create } from "zustand";
 import { defaultTheme } from "./themes";
-
-export type TierFeature = {
-  id: number;
-  name: string;
-  included: boolean;
-};
-export type BillingPeriod = "week" | "month" | "year";
-export type PriceType = "recurring" | "one-off" | "plain text";
-export interface BillingCycle {
-  period: BillingPeriod;
-  value: number | string;
-}
-export type PriceRecurring = {
-  value: number | string;
-  billingCycle: number;
-  billingPeriod: BillingPeriod;
-};
-export type PriceText = string;
-export type PriceOneOff = { text: string; value: number };
-export type TierPrice = PriceRecurring[] | PriceText | PriceOneOff;
-
-export interface TierItem {
-  id: number;
-  title: string;
-  badge: string;
-  description: string;
-  price: PriceRecurring[] | PriceText | PriceOneOff;
-  priceType: PriceType;
-  showPriceAsText?: boolean;
-  features: TierFeature[];
-  buttons: { type: "button" | "link"; name: string; href?: string }[];
-}
-
-export interface Pricing {
-  title: string;
-  description: string;
-  slug?: string;
-  showBillingCycle: boolean;
-  currency: string;
-  theme: string;
-  tiers: TierItem[];
-}
+import {
+  BillingPeriod,
+  PriceRecurring,
+  PriceType,
+  Pricing,
+  TierFeature,
+  TierItem,
+  TierPrice,
+  Toast,
+} from "./types";
 
 interface PricingState extends Pricing {
   setDescription: (val: string) => void;
   setTitle: (val: string) => void;
-  setShowBillingCycle: (val: boolean) => void;
+  setShowBillingPeriod: (val: boolean) => void;
+  setBillingOptionLabel: (key: BillingPeriod, val: string) => void;
+  setBillingPeriod: (val: BillingPeriod) => void;
   setCurrency: (val: string) => void;
   setTheme: (val: string) => void;
   setTiers: (val: TierItem[]) => TierItem[];
@@ -148,19 +118,40 @@ const tiers: TierItem[] = [
 ];
 
 export const usePricingStore = create<PricingState>((set, get) => ({
+  id: 0,
   title: "Pricing",
   description: `Create and test
     multiple strategies to unlock the most optimal pricing for
     your SaaS startup`,
-  showBillingCycle: true,
+
   currency: "USD",
   theme: defaultTheme,
+  metadata: {},
+  billingOptions: {
+    show: true,
+    selected: "month",
+    labels: {
+      week: "Weekly",
+      month: "Monthly",
+      year: "Yearly",
+    },
+  },
   tiers,
   setTitle: (val) => set({ title: val }),
   setDescription: (val) => set({ description: val }),
   setTheme: (val) => set({ theme: val }),
   setCurrency: (val) => set({ currency: val }),
-  setShowBillingCycle: (val) => set({ showBillingCycle: val }),
+  setShowBillingPeriod: (val) =>
+    set({ billingOptions: { ...get().billingOptions, show: val } }),
+  setBillingPeriod: (val) =>
+    set({ billingOptions: { ...get().billingOptions, selected: val } }),
+  setBillingOptionLabel: (key, value) =>
+    set({
+      billingOptions: {
+        ...get().billingOptions,
+        labels: { ...get().billingOptions.labels, [key]: value },
+      },
+    }),
   setTiers: (newTiers) => {
     set({
       tiers: newTiers.map((t, index) => ({
@@ -188,3 +179,22 @@ export const usePricingStore = create<PricingState>((set, get) => ({
     set({ tiers });
   },
 }));
+
+interface AppState {
+  toast: Toast | null;
+  setToast: (toast: Toast | null, duration?: number) => void;
+}
+
+export const useAppStore = create<AppState>((set, get) => ({
+  toast: null,
+  setToast: (toast, duration = 3000) => {
+    set({ toast });
+    setTimeout(() => set({ toast: null }), duration);
+  },
+}));
+
+export const availableBillingPeriods = [
+  "week",
+  "month",
+  "year",
+] as BillingPeriod[];

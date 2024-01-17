@@ -1,9 +1,5 @@
-import {
-  PriceRecurring,
-  PriceType,
-  TierItem,
-  usePricingStore,
-} from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { PriceRecurring, PriceType, TierItem } from "@/lib/types";
 
 export const PriceTypeSelect = ({ tier }: { tier: TierItem }) => {
   const pricingStore = usePricingStore((state) => state);

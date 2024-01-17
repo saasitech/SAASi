@@ -1,6 +1,7 @@
 "use client";
 import { usePricingStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
+import BillingPeriodSwitch from "./BillingPeriodSwitch";
 import { CardDefault } from "./CardDefault";
 import Header from "./Header";
 
@@ -11,7 +12,13 @@ export default function PricingDefault() {
   return (
     <div className="flex-1 flex flex-col space-y-20 max-w-6xl px-3">
       <Header />
-      <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-secondary/20 to-transparent my-8" />
+      {pricingStore.billingOptions.show ? (
+        <div className="m-auto">
+          <BillingPeriodSwitch />
+        </div>
+      ) : (
+        <div className="w-full p-[1px] bg-gradient-to-r from-transparent via-secondary/20 to-transparent my-8" />
+      )}
       <main className="flex-1 flex flex-col gap-6">
         <div
           className={cn(
