@@ -10,16 +10,14 @@ export default async function AuthButton({
 }: {
   className?: string;
 }) {
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient(cookies());
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
   const signOut = async () => {
-    const cookieStore = cookies();
-    const supabase = createClient(cookieStore);
+    const supabase = createClient(cookies());
     await supabase.auth.signOut();
     return redirect("/login");
   };

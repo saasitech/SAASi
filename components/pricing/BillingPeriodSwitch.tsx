@@ -1,4 +1,5 @@
-import { PriceRecurring, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { PriceRecurring } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function BillingPeriodSwitch() {

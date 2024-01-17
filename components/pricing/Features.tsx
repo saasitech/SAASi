@@ -1,4 +1,4 @@
-import { TierItem } from "@/lib/store";
+import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CheckCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
 import { Marker } from "../Marker";

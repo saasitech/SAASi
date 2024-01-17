@@ -2,20 +2,20 @@
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 
-const cookieStore = cookies();
-const client = createClient(cookieStore);
-
 export async function readPricing() {
+  const client = createClient(cookies());
   const result = await client.from("pricing").select();
   if (result.error) throw result.error;
   return result.data;
 }
 export async function readPricingById(id: number) {
+  const client = createClient(cookies());
   const result = await client.from("pricing").select().eq("id", id).single();
   if (result.error) throw result.error;
   return result.data;
 }
 export async function readPricingBySlug(slug: string) {
+  const client = createClient(cookies());
   const result = await client
     .from("pricing")
     .select()
@@ -25,6 +25,7 @@ export async function readPricingBySlug(slug: string) {
   return result.data;
 }
 export async function readDefaultPricing() {
+  const client = createClient(cookies());
   const result = await client
     .from("pricing")
     .select()
@@ -34,11 +35,13 @@ export async function readDefaultPricing() {
   return result.data;
 }
 export async function createPricing(id: number, input: any) {
+  const client = createClient(cookies());
   const result = await client.from("pricing").insert(input).select();
   if (result.error) throw result.error;
   return result.data;
 }
 export async function updatePricing(pricingData: any) {
+  const client = createClient(cookies());
   const result = await client
     .from("pricing")
     .update(pricingData)
@@ -48,6 +51,7 @@ export async function updatePricing(pricingData: any) {
   return result.data;
 }
 export async function deletePricing(pricingData: any) {
+  const client = createClient(cookies());
   const result = await client
     .from("pricing")
     .update(pricingData)

@@ -8,8 +8,7 @@ export const signIn = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const redirectUrl = formData.get("redirectUrl") as string;
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient(cookies());
   const url = new URL(`${origin}/login` || "");
 
   const { error } = await supabase.auth.signInWithPassword({
