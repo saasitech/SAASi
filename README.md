@@ -33,19 +33,10 @@ This is a work in progress and is not yet ready for production use.
   - Choose a pricing theme 🟢
   - Set branding colors and logo
   - Attach terms summary
-  - Manage tiers & features
-  - Create pricing strategies
+  - Manage tiers & features 🟢
+  - Create and manage pricing
 - Stripe integration (coming soon):
   - Connect your stripe account
-  - Create products & plans
-  - Manage subscriptions
-  - Manage customers
-  - Manage invoices
-  - Manage payments
-  - Manage coupons
-- AI ChatGPT integration (coming soon):
-  - Pricing strategy recommendations
-  - Pricing testing summaries
 
 ## Demo
 
