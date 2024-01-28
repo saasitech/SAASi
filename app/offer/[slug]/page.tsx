@@ -1,16 +1,29 @@
 import { PricingPage } from "@/components/PricingPage";
+import { ToastTrigger } from "@/components/Toast";
 import SyncStore from "@/components/pricing/SyncStore";
-import { readPricingBySlug } from "@/lib/serverActions/pricingActions";
+import {
+  readDefaultPricing,
+  readPricingBySlug,
+} from "@/lib/serverActions/pricingActions";
 export default async function Index({ params }: { params: { slug: string } }) {
   try {
-    const defaultPricing = await readPricingBySlug(params.slug);
+    const pricingBySlug = await readPricingBySlug(params.slug);
     return (
       <div className="flex">
-        <SyncStore state={defaultPricing} />
+        <SyncStore state={pricingBySlug} />
         <PricingPage />
       </div>
     );
   } catch (e) {
-    return <div className="p-4 m-auto text-center">Not found</div>;
+    const defaultPricing = await readDefaultPricing();
+    return (
+      <div>
+        <div className="flex">
+          <ToastTrigger message="Pricing not found" type="error" />
+          <SyncStore state={defaultPricing} />
+          <PricingPage />
+        </div>
+      </div>
+    );
   }
 }

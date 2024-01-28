@@ -3,7 +3,7 @@ import Default from "@/components/pricing/PricingDefault";
 import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
-import Toast from "./Toast";
+import { Toast } from "./Toast";
 
 const pricingStyles = {
   default: Default,
