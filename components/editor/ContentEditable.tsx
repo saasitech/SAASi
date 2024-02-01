@@ -18,7 +18,7 @@ export default function ContentEditableInput({ value, onChange }) {
         "span",
         "u",
       ],
-      allowedAttributes: { a: ["href"] },
+      allowedAttributes: { a: ["href", "target"] },
     };
     const newValue = sanitizeHtml(evt.target.value, sanitizeConf);
     text.current = newValue;
