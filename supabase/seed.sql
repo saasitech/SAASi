@@ -3,6 +3,7 @@ INSERT INTO
 		"slug",
 		"title",
 		"description",
+		"termsUrl",
 		"currency",
 		"theme",
 		"isDefault",
@@ -12,9 +13,10 @@ INSERT INTO
 	)
 VALUES
 	(
-		'test_pricing',
-		'Test Pricing',
+		'sample-pricing',
+		'Sample Pricing',
 		'Create and test multiple strategies to unlock the most optimal pricing for your SaaS startup',
+		"https://saasi.vercel.app/terms",
 		'USD',
 		'dim',
 		true,
@@ -85,6 +87,7 @@ VALUES
 						"included": false
 					}
 				],
+				"terms": "- No lock-in contracts<br />- Your subscription will auto-renew at the end of the billing cycle<br />- Cancel anytime<br />",
 				"buttons": [
 					{
 						"type": "link",
@@ -147,6 +150,7 @@ VALUES
 						"included": false
 					}
 				],
+				"terms": "- No lock-in contracts<br />- Your subscription will auto-renew at the end of the billing cycle<br />- Cancel anytime<br />",
 				"buttons": [
 					{
 						"type": "link",
@@ -199,6 +203,7 @@ VALUES
 						"included": true
 					}
 				],
+				"terms": "",
 				"buttons": [
 					{
 						"type": "link",

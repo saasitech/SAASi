@@ -12,6 +12,7 @@ import Features from "./Features";
 import { Header } from "./Header";
 import { PriceTypeSelect } from "./PriceTypeSelect";
 import { PricingInput } from "./PricingInput";
+import { TermsDescriptionInput } from "./TermsIDescriptionnput";
 import { TitleInput } from "./TileInput";
 
 export const TiersManager = () => {
@@ -53,6 +54,7 @@ export const TiersManager = () => {
                   <PriceTypeSelect tier={tier} />
                   <PricingInput tier={tier} />
                   <Features tier={tier} />
+                  <TermsDescriptionInput tier={tier} />
                   {tiers.length > 1 && (
                     <div className="flex justify-between">
                       <button
