@@ -1,9 +1,18 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
-export const EditorHeader = ({ onClose }) => {
+import React from "react";
+export const EditorHeader = ({
+  title,
+  description,
+  onClose,
+}: {
+  title: string | React.ReactNode;
+  description?: string;
+  onClose: () => void;
+}) => {
   return (
-    <div className="px-4 py-6 sm:px-6 bg-base-100 text-base-content">
-      <div className="flex items-center justify-between ">
-        <div className="font-semibold leading-6">Edit Pricing</div>
+    <div className="px-4 py-4 bg-base-100 text-base-content">
+      <div className="flex items-center justify-between">
+        <div className="font-semibold leading-6">{title}</div>
         <div className="ml-3 flex h-7 items-center">
           <button
             type="button"
@@ -17,9 +26,7 @@ export const EditorHeader = ({ onClose }) => {
         </div>
       </div>
       <div className="mt-1">
-        <p className="text-base-content/70">
-          Update or create new pricing from the current template.
-        </p>
+        <p className="text-base-content/70">{description}</p>
       </div>
     </div>
   );

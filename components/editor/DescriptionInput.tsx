@@ -1,11 +1,13 @@
 import { usePricingStore } from "@/lib/store";
-import { ContentEditButton } from "../ContentEditableButton";
+import { ContentEditButton } from "../common/ContentEditableButton";
 import ContentEditableInput from "./ContentEditable";
 
 export const DescriptionInput = () => {
-  const pricingStore = usePricingStore((state) => state);
+  const description = usePricingStore((state) => state.description);
+  const setDescription = usePricingStore((state) => state.setDescription);
+
   const handleChange = (value) => {
-    pricingStore.setDescription(value);
+    setDescription(value);
   };
   return (
     <div className="space-y-2">
@@ -24,10 +26,7 @@ export const DescriptionInput = () => {
           />
         </div>
       </div>
-      <ContentEditableInput
-        value={pricingStore.description}
-        onChange={handleChange}
-      />
+      <ContentEditableInput value={description} onChange={handleChange} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 "use client";
 import { updatePricing } from "@/lib/serverActions/pricingActions";
-import { useAppStore, usePricingListStore, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import {
   ArchiveBoxXMarkIcon,
@@ -23,15 +23,41 @@ import { TiersManager } from "./tiers/TiersManager";
 
 const themeStyle = getTheme("dim");
 
-export const PriceEditor = () => {
+export const PriceEditorPage = () => {
+  const params = useParams<{ slug: string }>();
   const router = useRouter();
   const closePanel = () => {
     router.push("/");
   };
-  const pricingStore = usePricingStore((state) => state);
-  const pricingList = usePricingListStore((state) => state.pricingList);
-  const setToast = useAppStore((state) => state.setToast);
-  const params = useParams<{ slug: string }>();
+  const id = usePricingStore((state) => state.id);
+  const title = usePricingStore((state) => state.title);
+  const description = usePricingStore((state) => state.description);
+  const theme = usePricingStore((state) => state.theme);
+  const currency = usePricingStore((state) => state.currency);
+  const tiers = usePricingStore((state) => state.tiers);
+  const billingOptions = usePricingStore((state) => state.billingOptions);
+  const pricingList = usePricingStore((state) => state.pricingList);
+  const setToast = usePricingStore((state) => state.setToast);
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    const data = {
+      id: id,
+      title: title,
+      description: description,
+      theme: theme,
+      currency: currency,
+      tiers: tiers as any,
+      billingOptions: billingOptions as any,
+    };
+    try {
+      await updatePricing(data);
+      setToast({ message: "Pricing updated", type: "success" });
+    } catch (error) {
+      setToast({ message: "Error updating pricing", type: "error" });
+      return;
+    }
+  };
 
   return (
     <div
@@ -41,26 +67,20 @@ export const PriceEditor = () => {
       {params?.slug ? (
         <form
           className="flex h-full flex-col bg-slate-700 shadow-xl"
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await updatePricing({
-              id: pricingStore.id,
-              title: pricingStore.title,
-              description: pricingStore.description,
-              theme: pricingStore.theme,
-              currency: pricingStore.currency,
-              tiers: pricingStore.tiers as any,
-              billingOptions: pricingStore.billingOptions as any,
-            });
-            setToast({ message: "Pricing updated", type: "success" });
-          }}
+          onSubmit={submitForm}
         >
           <EditorHeader
-            title="Edit Pricing"
-            description="Add tiers and features, manage prices, choose style and more."
+            title={
+              <span>
+                <Link className="hover:underline" href="/admin">
+                  Pricing
+                </Link>
+                <span className="mx-2">{">"}</span>
+                <span className="font-normal">{params.slug}</span>
+              </span>
+            }
             onClose={closePanel}
           />
-          <TopMenu />
           <div className="space-y-4 my-2 px-4 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto">
             <PriceTitleInput />
             <DescriptionInput />
@@ -74,63 +94,41 @@ export const PriceEditor = () => {
         </form>
       ) : (
         <div className="flex h-full flex-col bg-slate-700 shadow-xl">
-          <EditorHeader
-            title="My Pricing List"
-            description={"ddd"}
-            onClose={closePanel}
-          />
-          {/* <TopMenu /> */}
-          <ul className="bg-base-200/25 menu-horizontal w-full p-4 space-x-2">
-            <li>
-              <a className="btn btn-sm btn-primary btn-outline font-normal">
-                Active
-                <span className="badge badge-sm badge-primary">99+</span>
-              </a>
-            </li>
-            <li>
-              <a className="btn btn-sm btn-ghost font-normal">
-                Archived
-                <span className="badge badge-sm">99+</span>
-              </a>
-            </li>
-          </ul>
+          <EditorHeader title="My Pricing List" onClose={closePanel} />
+          <TopMenu />
           {pricingList.map((pricingItem) => (
             <div
               key={pricingItem.slug}
               className="space-y-4 my-4 px-4 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto"
             >
               <div className="bg-base-100 shadow-xl rounded-lg p-4 space-y-4">
-                {/* <IFrame>
-                  <html style={{ fontSize: "4px" }}>
-                    <PricingPage />
-                  </html>
-                </IFrame> */}
-                {/* <div
-                  style={getTheme(item.theme)}
-                  className="flex m-4 space-x-1 text-xs"
-                >
-                  <div className="w-[50px] h-full p-1 bg-slate-500">$9.99</div>
-                  <div className="w-[50px] h-full p-1 bg-slate-500">$199</div>
-                  <div className="w-[50px] h-full p-1 bg-slate-500">
-                    Contact us
-                  </div>
-                </div> */}
-
                 <div className="flex justify-between items-center ">
                   <h2 className="flex font-semibold items-center space-x-2">
-                    <span>{pricingItem.title}</span>
+                    <Link
+                      className="hover:underline"
+                      href={`
+                     /admin/${pricingItem.slug}
+                    `}
+                    >
+                      {pricingItem.title}
+                    </Link>
                     <span className="badge badge-sm badge-secondary">
                       Default
                     </span>
                   </h2>
                   <div className="card-actions justify-end">
+                    <div className="tooltip tooltip-bottom" data-tip="Archive">
+                      <div className="btn btn-sm btn-circle hover:text-warning">
+                        <ArchiveBoxXMarkIcon className="w-4 h-4" />
+                      </div>
+                    </div>
                     <div
                       className="tooltip tooltip-bottom"
                       data-tip="View/Edit"
                     >
                       <Link
                         href={`/admin/${pricingItem.slug}`}
-                        className="btn btn-sm btn-circle"
+                        className="btn btn-sm btn-circle hover:text-primary"
                       >
                         <EyeIcon className="w-4 h-4" />
                       </Link>
@@ -139,13 +137,8 @@ export const PriceEditor = () => {
                       className="tooltip tooltip-bottom"
                       data-tip="Duplicate"
                     >
-                      <div className="btn btn-sm btn-circle">
+                      <div className="btn btn-sm btn-circle hover:text-primary">
                         <DocumentDuplicateIcon className="w-4 h-4" />
-                      </div>
-                    </div>
-                    <div className="tooltip tooltip-bottom" data-tip="Archive">
-                      <div className="btn btn-sm btn-circle">
-                        <ArchiveBoxXMarkIcon className="w-4 h-4 text-warning" />
                       </div>
                     </div>
                   </div>

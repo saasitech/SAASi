@@ -1,13 +1,14 @@
 import { usePricingStore } from "@/lib/store";
 import { TierItem } from "@/lib/types";
-import { ContentEditButton } from "../../ContentEditableButton";
+import { ContentEditButton } from "../../common/ContentEditableButton";
 import ContentEditableInput from "../ContentEditable";
 
 export const TermsDescriptionInput = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const tiers = usePricingStore((state) => state.tiers);
+  const setTiers = usePricingStore((state) => state.setTiers);
   const handleChange = (value) => {
     tier.terms = value;
-    pricingStore.setTiers(pricingStore.tiers);
+    setTiers(tiers);
   };
   return (
     <div className="space-y-2">

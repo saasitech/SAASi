@@ -2,7 +2,8 @@ import { usePricingStore } from "@/lib/store";
 import { TierItem } from "@/lib/types";
 
 export const DescriptionInput = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const tiers = usePricingStore((state) => state.tiers);
+  const setTiers = usePricingStore((state) => state.setTiers);
   return (
     <div>
       <label htmlFor="description" className="label-text ">
@@ -16,7 +17,7 @@ export const DescriptionInput = ({ tier }: { tier: TierItem }) => {
           value={tier.description}
           onChange={(e) => {
             tier.description = e.target.value;
-            pricingStore.setTiers(pricingStore.tiers);
+            setTiers(tiers);
           }}
         />
       </div>

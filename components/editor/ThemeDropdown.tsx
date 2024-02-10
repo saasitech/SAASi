@@ -36,7 +36,8 @@ export const ThemeCard = ({ theme }) => {
 };
 
 export const ThemeDropdown = () => {
-  const pricingStore = usePricingStore((state) => state);
+  const theme = usePricingStore((state) => state.theme);
+  const setTheme = usePricingStore((state) => state.setTheme);
   return (
     <div>
       <div className="flex justify-between items-center">
@@ -62,7 +63,7 @@ export const ThemeDropdown = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       e.preventDefault();
-                      pricingStore.setTheme(theme);
+                      setTheme(theme);
                     }}
                     key={theme}
                     className=""
@@ -76,7 +77,7 @@ export const ThemeDropdown = () => {
         </div>
       </div>
       <div className="">
-        <ThemeCard theme={pricingStore.theme} />
+        <ThemeCard theme={theme} />
       </div>
     </div>
   );

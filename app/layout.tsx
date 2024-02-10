@@ -1,3 +1,4 @@
+import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
@@ -26,7 +27,9 @@ export default function RootLayout({
         <meta name="description" content={metadata.description} />
         <title>{metadata.title}</title>
       </head>
-      <body>{children}</body>
+      <ErrorBoundary>
+        <body>{children}</body>
+      </ErrorBoundary>
     </html>
   );
 }

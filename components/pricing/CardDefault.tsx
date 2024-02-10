@@ -8,11 +8,11 @@ import { PriceSection } from "./PriceSection";
 import { Title } from "./Title";
 
 export const CardDefault = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const currency = usePricingStore((state) => state.currency);
   const template = [
     <Title {...tier} key="title" />,
     <Description {...tier} key="desc" />,
-    <PriceSection key="price" item={tier} currency={pricingStore.currency} />,
+    <PriceSection key="price" tier={tier} currency={currency} />,
     <div key="features" className="flex-1">
       <Features {...tier} />
     </div>,

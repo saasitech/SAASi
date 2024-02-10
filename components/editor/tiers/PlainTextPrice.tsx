@@ -2,7 +2,8 @@ import { usePricingStore } from "@/lib/store";
 import { TierItem } from "@/lib/types";
 
 export const PlainTextPrice = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const tiers = usePricingStore((state) => state.tiers);
+  const setTiers = usePricingStore((state) => state.setTiers);
   return (
     <div className="flex flex-col space-y-2">
       <label htmlFor="description" className="label-text ">
@@ -16,7 +17,7 @@ export const PlainTextPrice = ({ tier }: { tier: TierItem }) => {
         placeholder="Contact us"
         onChange={(e) => {
           tier.price = e.target.value as string;
-          pricingStore.setTiers(pricingStore.tiers);
+          setTiers(tiers);
         }}
       />
     </div>

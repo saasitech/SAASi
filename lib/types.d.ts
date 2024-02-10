@@ -40,20 +40,6 @@ export interface TierItem {
   buttons: { type: "button" | "link"; name: string; href?: string }[];
 }
 
-export interface Pricing {
-  isSynced: boolean;
-  id: number;
-  title: string;
-  description: string;
-  slug?: string;
-  currency: string;
-  theme: string;
-  metadata: object;
-  billingOptions: BillingOptions;
-  termsUrl?: string;
-  tiers: TierItem[];
-}
-
 export type ToastType = "success" | "error" | "warning" | "info";
 export interface Toast {
   type: ToastType;
@@ -65,4 +51,17 @@ export interface Dialog {
   message?: React.ReactNode | string;
   body?: React.ReactNode | string;
   actions?: React.ReactNode | string;
+}
+
+export interface Pricing {
+  id: number;
+  title: string;
+  description: string;
+  slug?: string;
+  currency: string;
+  theme: string;
+  metadata: object;
+  billingOptions: BillingOptions;
+  termsUrl?: string;
+  tiers: TierItem[];
 }

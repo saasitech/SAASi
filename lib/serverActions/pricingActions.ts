@@ -1,6 +1,7 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import { BillingOptions, TierItem } from "../types";
 
 export async function readPricing() {
   const client = createClient(cookies());
@@ -59,4 +60,17 @@ export async function deletePricing(pricingData: any) {
     .select();
   if (result.error) throw result.error;
   return result.data;
+}
+export async function createSession(
+  tier: TierItem,
+  billingOptions: BillingOptions
+) {
+  const client = createClient(cookies());
+  // const result = await client
+  //   .from("pricing")
+  //   .update(pricingData)
+  //   .eq("id", pricingData.id)
+  //   .select();
+  // if (result.error) throw result.error;
+  return { tier, billingOptions };
 }

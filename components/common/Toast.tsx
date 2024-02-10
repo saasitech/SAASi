@@ -1,5 +1,5 @@
 "use client";
-import { useAppStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
 import { Toast } from "@/lib/types";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
@@ -7,7 +7,7 @@ import { useEffect } from "react";
 // use it anywhere in the app to trigger a toast
 // useful in server rendered pages
 export function ToastTrigger(toastParam: Toast) {
-  const setToast = useAppStore((state) => state.setToast);
+  const setToast = usePricingStore((state) => state.setToast);
   useEffect(() => {
     if (toastParam) {
       setToast(toastParam);
@@ -17,8 +17,8 @@ export function ToastTrigger(toastParam: Toast) {
 }
 
 export function Toast() {
-  const toast = useAppStore((state) => state.toast);
-  const setToast = useAppStore((state) => state.setToast);
+  const toast = usePricingStore((state) => state.toast);
+  const setToast = usePricingStore((state) => state.setToast);
 
   if (!toast) return null;
   return (

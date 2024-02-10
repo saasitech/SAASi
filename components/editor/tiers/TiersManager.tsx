@@ -1,4 +1,5 @@
-import { tierDefault, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
+import { tierDefault } from "@/lib/store/pricingSlice";
 import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import {

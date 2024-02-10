@@ -1,6 +1,5 @@
 "use client";
 import { signIn, signUp } from "@/lib/serverActions/authActions";
-import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import Link from "next/link";
 
@@ -17,9 +16,8 @@ export default function Login({
 }: {
   searchParams: { message?: string; redirectUrl?: string };
 }) {
-  const pricingStore = usePricingStore((state) => state);
   const toastMessage = searchParams?.message;
-  const styleProps = getTheme(pricingStore.theme);
+  const styleProps = getTheme("dim");
 
   return (
     <main

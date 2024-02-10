@@ -4,37 +4,38 @@ import { formattedPrice } from "@/lib/utils";
 import { useMemo } from "react";
 
 export const PriceSection = ({
-  item,
+  tier,
   currency,
 }: {
-  item: TierItem;
+  tier: TierItem;
   currency: string;
 }) => {
-  const pricingStore = usePricingStore((state) => state);
-  const priceText = item.price as PriceText;
-  const priceOneOff = item.price as PriceOneOff;
+  const tiers = usePricingStore((state) => state.tiers);
+  const billingOptions = usePricingStore((state) => state.billingOptions);
+  const priceText = tier.price as PriceText;
+  const priceOneOff = tier.price as PriceOneOff;
   const priceRecurring = useMemo(() => {
-    const prices = item.price as PriceRecurring[];
+    const prices = tier.price as PriceRecurring[];
     let price = prices[0];
     if (Array.isArray(prices)) {
-      const foundPrice = (item.price as PriceRecurring[]).find(
-        (p) => p.billingPeriod === pricingStore.billingOptions.selected
+      const foundPrice = (tier.price as PriceRecurring[]).find(
+        (p) => p.billingPeriod === billingOptions.selected
       );
       if (foundPrice) {
         price = foundPrice;
       }
     }
     return price;
-  }, [pricingStore]);
+  }, [tier.price, billingOptions.selected, tier.priceType]);
 
   return (
     <div className="flex items-center text-black/80 dark:text-white/80 min-h-[50px]">
-      {item.priceType === "plain text" && (
+      {tier.priceType === "plain text" && (
         <span className="text-4xl font-extrabold tracking-tight">
           {priceText}
         </span>
       )}
-      {item.priceType === "one-off" && (
+      {tier.priceType === "one-off" && (
         <div className="flex flex-wrap items-end">
           <span className="text-4xl font-extrabold tracking-tight">
             {formattedPrice(priceOneOff?.value, currency)}
@@ -44,7 +45,7 @@ export const PriceSection = ({
           </span>
         </div>
       )}
-      {item.priceType === "recurring" && (
+      {tier.priceType === "recurring" && (
         <div className="flex flex-wrap items-end">
           <span className="text-4xl font-extrabold tracking-tight">
             {formattedPrice(priceRecurring?.value, currency)}

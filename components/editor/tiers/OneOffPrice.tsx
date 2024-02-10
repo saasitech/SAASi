@@ -2,7 +2,8 @@ import { usePricingStore } from "@/lib/store";
 import { PriceOneOff, TierItem } from "@/lib/types";
 
 export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const tiers = usePricingStore((state) => state.tiers);
+  const setTiers = usePricingStore((state) => state.setTiers);
   let price: PriceOneOff = {
     text: tier.price?.["text"] || "",
     value: tier.price?.["value"] || "",
@@ -20,7 +21,7 @@ export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
         placeholder="0"
         onChange={(e) => {
           (price.value = Number(e.target.value)), (tier.price = price);
-          pricingStore.setTiers(pricingStore.tiers);
+          setTiers(tiers);
         }}
       />
       <label htmlFor="description" className="label-text ">
@@ -34,7 +35,7 @@ export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
         placeholder="/seat"
         onChange={(e) => {
           (price.text = e.target.value), (tier.price = price);
-          pricingStore.setTiers(pricingStore.tiers);
+          setTiers(tiers);
         }}
       />
     </div>

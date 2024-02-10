@@ -1,16 +1,31 @@
-import { availableBillingPeriods, usePricingStore } from "@/lib/store";
+import { availableBillingPeriods } from "@/lib/constants";
+import { usePricingStore } from "@/lib/store";
+
 import { BillingPeriod } from "@/lib/types";
+import { useMemo } from "react";
 
 export const BillingPeriodSwitch = () => {
-  const pricingStore = usePricingStore((state) => state);
+  const setShowBillingPeriod = usePricingStore(
+    (state) => state.setShowBillingPeriod
+  );
+  const setBillingPeriod = usePricingStore((state) => state.setBillingPeriod);
+  const setBillingOptionLabel = usePricingStore(
+    (state) => state.setBillingOptionLabel
+  );
+  const billingOptions = usePricingStore((state) => state.billingOptions);
   const periodOrder = {
     week: 0,
     month: 1,
     year: 2,
   };
-  const sortedBillingPeriods = Object.keys(periodOrder).sort(
-    (a, b) => periodOrder[a as BillingPeriod] - periodOrder[b as BillingPeriod]
-  ) as BillingPeriod[];
+  const sortedBillingPeriods = useMemo(
+    () =>
+      Object.keys(periodOrder).sort(
+        (a, b) =>
+          periodOrder[a as BillingPeriod] - periodOrder[b as BillingPeriod]
+      ) as BillingPeriod[],
+    [billingOptions]
+  );
 
   return (
     <div className="space-y-2">
@@ -26,9 +41,9 @@ export const BillingPeriodSwitch = () => {
             type="checkbox"
             className="toggle toggle-primary"
             onChange={(e) => {
-              pricingStore.setShowBillingPeriod(e.target.checked);
+              setShowBillingPeriod(e.target.checked);
             }}
-            checked={pricingStore.billingOptions.show}
+            checked={billingOptions.show}
           />
         </div>
         <div className="flex items-center">
@@ -37,9 +52,9 @@ export const BillingPeriodSwitch = () => {
           </label>
           <select
             className="select select-sm max-w-xs"
-            defaultValue={pricingStore.billingOptions.selected}
+            defaultValue={billingOptions.selected}
             onChange={(e) => {
-              pricingStore.setBillingPeriod(e.target.value as any);
+              setBillingPeriod(e.target.value as any);
             }}
           >
             {availableBillingPeriods.map((i, index) => {
@@ -66,9 +81,9 @@ export const BillingPeriodSwitch = () => {
                     type="text"
                     className="input input-sm w-[160px]"
                     placeholder={key}
-                    value={pricingStore.billingOptions.labels[key]}
+                    value={billingOptions.labels[key]}
                     onChange={(e) => {
-                      pricingStore.setBillingOptionLabel(key, e.target.value);
+                      setBillingOptionLabel(key, e.target.value);
                     }}
                   />
                 </div>

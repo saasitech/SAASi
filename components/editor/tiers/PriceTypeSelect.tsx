@@ -2,7 +2,8 @@ import { usePricingStore } from "@/lib/store";
 import { PriceRecurring, PriceType, TierItem } from "@/lib/types";
 
 export const PriceTypeSelect = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
+  const tiers = usePricingStore((state) => state.tiers);
+  const setTiers = usePricingStore((state) => state.setTiers);
   return (
     <div>
       <div className="form-control">
@@ -29,7 +30,7 @@ export const PriceTypeSelect = ({ tier }: { tier: TierItem }) => {
               } else {
                 tier.price = "Contact us";
               }
-              pricingStore.setTiers(pricingStore.tiers);
+              setTiers(tiers);
             }}
           >
             {["recurring", "one-off", "plain text"].map((i) => (

@@ -1,5 +1,5 @@
+import Logo from "@/components/common/Logo";
 import { usePricingStore } from "@/lib/store";
-import Logo from "../Logo";
 
 export default function Header() {
   const description = usePricingStore((state) => state.description);

@@ -1,4 +1,5 @@
-import { availableBillingPeriods, usePricingStore } from "@/lib/store";
+import { availableBillingPeriods } from "@/lib/constants";
+import { usePricingStore } from "@/lib/store";
 import { BillingPeriod, PriceRecurring, TierItem } from "@/lib/types";
 import {
   ExclamationTriangleIcon,
@@ -7,10 +8,9 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
-  const pricingStore = usePricingStore((state) => state);
   const tiers = usePricingStore((state) => state.tiers);
-  const price = tier.price as PriceRecurring[];
   const setTiers = usePricingStore((state) => state.setTiers);
+  const price = tier.price as PriceRecurring[];
 
   const selectedBillingPeriods = price.map((i) => i.billingPeriod);
   const reducedBillingPeriods = availableBillingPeriods.filter(
@@ -44,7 +44,7 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
                   value={priceItem.value}
                   onChange={(e) => {
                     priceItem.value = e.target.value;
-                    pricingStore.setTiers(pricingStore.tiers);
+                    setTiers(tiers);
                   }}
                 />
                 <div className="absolute right-1 space-x-1">
@@ -53,7 +53,7 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
                     value={priceItem?.billingPeriod}
                     onChange={(e) => {
                       priceItem.billingPeriod = e.target.value as BillingPeriod;
-                      pricingStore.setTiers(pricingStore.tiers);
+                      setTiers(tiers);
                     }}
                   >
                     {availableBillingPeriods.map((i) => (

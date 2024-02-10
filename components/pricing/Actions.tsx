@@ -1,11 +1,12 @@
 import { createSession } from "@/lib/serverActions/pricingActions";
-import { useAppStore, usePricingStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
 import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export const Actions = (tier: TierItem) => {
-  const setDialog = useAppStore((state) => state.setDialog);
-  const pricingStore = usePricingStore((state) => state);
+  const billingOptions = usePricingStore((state) => state.billingOptions);
+  const termsUrl = usePricingStore((state) => state.termsUrl);
+  const setDialog = usePricingStore((state) => state.setDialog);
   return (
     <div
       className={cn(
@@ -28,12 +29,8 @@ export const Actions = (tier: TierItem) => {
                     id="terms-form"
                     className=""
                     action={async () => {
-                      const result = await createSession(
-                        tier,
-                        pricingStore.billingOptions
-                      );
+                      const result = await createSession(tier, billingOptions);
                       // setDialog(null);
-                      console.log("Confirm", result);
                     }}
                   >
                     <div className="flex items-center">
@@ -50,7 +47,7 @@ export const Actions = (tier: TierItem) => {
                         I agree to the{" "}
                         <a
                           className="link"
-                          href={pricingStore.termsUrl}
+                          href={termsUrl}
                           target="_blank"
                           rel="
                         noopener noreferrer"

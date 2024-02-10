@@ -1,7 +1,7 @@
+import { Marker } from "@/components/common/Marker";
 import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { CheckCircleIcon, MinusCircleIcon } from "@heroicons/react/24/outline";
-import { Marker } from "../Marker";
 
 export const Features = (tier: TierItem) => {
   return (

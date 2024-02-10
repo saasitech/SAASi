@@ -1,7 +1,7 @@
-import { useAppStore } from "@/lib/store";
+import { usePricingStore } from "@/lib/store";
 
 export function Dialog({ id }: { id: string }) {
-  const dialog = useAppStore((state) => state.dialog);
+  const dialog = usePricingStore((state) => state.dialog);
   return (
     <div>
       <dialog id={id} className="modal">

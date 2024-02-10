@@ -1,7 +1,8 @@
 import { usePricingStore } from "@/lib/store";
 
 export const TermsUrlInput = () => {
-  const pricingStore = usePricingStore((state) => state);
+  const termsUrl = usePricingStore((state) => state.termsUrl);
+  const setTermsUrl = usePricingStore((state) => state.setTermsUrl);
   return (
     <div>
       <label htmlFor="project-name" className="label-text">
@@ -13,9 +14,9 @@ export const TermsUrlInput = () => {
           name="project-name"
           id="project-name"
           className="input input-bordered input-saasi"
-          value={pricingStore.termsUrl}
+          value={termsUrl}
           onChange={(e) => {
-            pricingStore.setTermsUrl(e.target.value);
+            setTermsUrl(e.target.value);
           }}
         />
       </div>

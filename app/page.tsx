@@ -1,13 +1,19 @@
-import { PricingPage } from "@/components/PricingPage";
-import SyncStore from "@/components/pricing/SyncStore";
+import { PricingPage } from "@/components/pricing/PricingPage";
 import { readDefaultPricing } from "@/lib/serverActions/pricingActions";
-export default async function Index() {
-  const defaultPricing = await readDefaultPricing();
+import { StoreProvider } from "@/lib/store/StoreProvider";
+import NotFound from "./not-found";
 
-  return (
-    <div className="flex">
-      <SyncStore state={defaultPricing} />
-      <PricingPage />
-    </div>
-  );
+export default async function Index() {
+  try {
+    const defaultPricing: any = await readDefaultPricing();
+    return (
+      <StoreProvider {...defaultPricing}>
+        <div className="flex">
+          <PricingPage />
+        </div>
+      </StoreProvider>
+    );
+  } catch (e) {
+    return <NotFound />;
+  }
 }

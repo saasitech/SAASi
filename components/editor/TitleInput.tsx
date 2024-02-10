@@ -1,7 +1,8 @@
 import { usePricingStore } from "@/lib/store";
 
 export const PriceTitleInput = () => {
-  const pricingStore = usePricingStore((state) => state);
+  const title = usePricingStore((state) => state.title);
+  const setTitle = usePricingStore((state) => state.setTitle);
   return (
     <div>
       <label htmlFor="project-name" className="label-text">
@@ -13,9 +14,9 @@ export const PriceTitleInput = () => {
           name="project-name"
           id="project-name"
           className="input input-bordered input-saasi"
-          value={pricingStore.title}
+          value={title}
           onChange={(e) => {
-            pricingStore.setTitle(e.target.value);
+            setTitle(e.target.value);
           }}
         />
       </div>

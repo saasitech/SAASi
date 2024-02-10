@@ -3,7 +3,8 @@ import Default from "@/components/pricing/PricingDefault";
 import { usePricingStore } from "@/lib/store";
 import { getTheme } from "@/lib/themes";
 import { cn } from "@/lib/utils";
-import { Toast } from "./Toast";
+import { Dialog } from "../common/Dialog";
+import { Toast } from "../common/Toast";
 
 const pricingStyles = {
   default: Default,
@@ -12,8 +13,8 @@ const pricingStyles = {
 const Pricing = pricingStyles.default;
 
 export const PricingPage = () => {
-  const pricingStore = usePricingStore((state) => state);
-  const styleProps = getTheme(pricingStore.theme);
+  const theme = usePricingStore((state) => state.theme);
+  const styleProps = getTheme(theme);
   return (
     <div
       style={styleProps}
@@ -21,9 +22,10 @@ export const PricingPage = () => {
         styleProps["colorScheme"],
         "bg-base-300 flex-1 h-screen overflow-y-auto relative"
       )}
-      data-theme={pricingStore.theme}
+      data-theme={theme}
     >
       <Toast />
+      <Dialog id="appDialog" />
       <div className="flex-1 w-full flex flex-col gap-20 items-center">
         <nav className="w-full flex justify-center h-16">
           <div className="w-full max-w-6xl flex justify-between items-center p-3 text-sm">

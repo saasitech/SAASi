@@ -3,10 +3,12 @@ import { PriceRecurring } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export default function BillingPeriodSwitch() {
-  const pricingStore = usePricingStore((state) => state);
-  const selected = pricingStore.billingOptions.selected;
+  const tiers = usePricingStore((state) => state.tiers);
+  const billingOptions = usePricingStore((state) => state.billingOptions);
+  const setBillingPeriod = usePricingStore((state) => state.setBillingPeriod);
+  const selected = billingOptions.selected;
   const recurringPricing =
-    pricingStore.tiers
+    tiers
       .filter((tier) => tier.priceType === "recurring")
       .map((tier) =>
         (tier.price as PriceRecurring[]).map((price) => price.billingPeriod)
@@ -58,11 +60,9 @@ export default function BillingPeriodSwitch() {
             selected === period && "text-secondary"
           )}
           id="grid"
-          onClick={() => pricingStore.setBillingPeriod(period)}
+          onClick={() => setBillingPeriod(period)}
         >
-          <span className="flex-1">
-            {pricingStore.billingOptions.labels[period]}
-          </span>
+          <span className="flex-1">{billingOptions.labels[period]}</span>
         </button>
       ))}
     </div>
