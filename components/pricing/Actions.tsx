@@ -62,7 +62,7 @@ export const Actions = (tier: TierItem) => {
                   <button
                     type="submit"
                     form="terms-form"
-                    className="btn btn-primary btn-sm min-w-[80px]"
+                    className="btn btn-primary btn-md min-w-[80px]"
                   >
                     Subscribe
                   </button>
