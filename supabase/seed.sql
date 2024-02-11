@@ -16,7 +16,7 @@ VALUES
 		'sample-pricing',
 		'Sample Pricing',
 		'Create and test multiple strategies to unlock the most optimal pricing for your SaaS startup',
-		"https://saasi.vercel.app/terms",
+		'https://saasi.vercel.app/terms',
 		'USD',
 		'dim',
 		true,

@@ -3,6 +3,7 @@ CREATE TABLE "pricing" (
     "slug" TEXT NOT NULL,
     "title" TEXT,
     "description" TEXT,
+    "termsUrl" TEXT,
     "currency" TEXT,
     "theme" TEXT,
     "isDefault" BOOLEAN DEFAULT false,
