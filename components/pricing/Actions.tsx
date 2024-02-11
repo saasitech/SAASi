@@ -20,7 +20,9 @@ export const Actions = (tier: TierItem) => {
           <button
             onClick={(e) => {
               e.preventDefault();
-              // window.location.href = button.href?.toString() || "";
+              if (button.href) {
+                return (window.location.href = button.href);
+              }
               setDialog({
                 title: "Subscription Terms",
                 message: tier.terms,

@@ -64,4 +64,8 @@ export interface Pricing {
   billingOptions: BillingOptions;
   termsUrl?: string;
   tiers: TierItem[];
+  isDefault?: boolean;
+  createdAt: string | Date | null;
+  updatedAt: string | Date | null;
+  archivedAt: string | Date | null;
 }

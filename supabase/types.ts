@@ -36,40 +36,52 @@ export interface Database {
     Tables: {
       pricing: {
         Row: {
+          archivedAt: string | null
           billingOptions: Json | null
+          createdAt: string | null
           currency: string | null
           description: string | null
           id: number
           isDefault: boolean | null
           metadata: Json | null
           slug: string
+          termsUrl: string | null
           theme: string | null
           tiers: Json[] | null
           title: string | null
+          updatedAt: string | null
         }
         Insert: {
+          archivedAt?: string | null
           billingOptions?: Json | null
+          createdAt?: string | null
           currency?: string | null
           description?: string | null
           id?: number
           isDefault?: boolean | null
           metadata?: Json | null
           slug: string
+          termsUrl?: string | null
           theme?: string | null
           tiers?: Json[] | null
           title?: string | null
+          updatedAt?: string | null
         }
         Update: {
+          archivedAt?: string | null
           billingOptions?: Json | null
+          createdAt?: string | null
           currency?: string | null
           description?: string | null
           id?: number
           isDefault?: boolean | null
           metadata?: Json | null
           slug?: string
+          termsUrl?: string | null
           theme?: string | null
           tiers?: Json[] | null
           title?: string | null
+          updatedAt?: string | null
         }
         Relationships: []
       }

@@ -5,7 +5,7 @@ import { Pricing } from "../types";
 
 export interface PricingListSlice {
   pricingList: Pricing[];
-  setList: (val: Pricing[]) => void;
+  setPricingList: (val: Pricing[]) => void;
 }
 
 export const createPricingListSlice: StateCreator<
@@ -15,5 +15,5 @@ export const createPricingListSlice: StateCreator<
   PricingListSlice
 > = (set) => ({
   pricingList: [],
-  setList: (val) => set({ pricingList: val }),
+  setPricingList: (val) => set({ pricingList: val }),
 });

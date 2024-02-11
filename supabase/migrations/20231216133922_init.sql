@@ -9,5 +9,8 @@ CREATE TABLE "pricing" (
     "isDefault" BOOLEAN DEFAULT false,
     "billingOptions" JSONB,
     "metadata" JSONB,
-    "tiers" JSONB []
+    "tiers" JSONB [],
+    "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    "archivedAt" TIMESTAMP WITH TIME ZONE DEFAULT NULL
 );

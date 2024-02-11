@@ -7,13 +7,13 @@ export async function readPricing() {
   const client = createClient(cookies());
   const result = await client.from("pricing").select();
   if (result.error) throw result.error;
-  return result.data;
+  return result.data || [];
 }
 export async function readPricingById(id: number) {
   const client = createClient(cookies());
   const result = await client.from("pricing").select().eq("id", id).single();
   if (result.error) throw result.error;
-  return result.data;
+  return result.data || [];
 }
 export async function readPricingBySlug(slug: string) {
   const client = createClient(cookies());
@@ -23,7 +23,7 @@ export async function readPricingBySlug(slug: string) {
     .eq("slug", slug)
     .single();
   if (result.error) throw result.error;
-  return result.data;
+  return result.data || [];
 }
 export async function readDefaultPricing() {
   const client = createClient(cookies());
@@ -46,8 +46,7 @@ export async function updatePricing(pricingData: any) {
   const result = await client
     .from("pricing")
     .update(pricingData)
-    .eq("id", pricingData.id)
-    .select();
+    .eq("id", pricingData.id);
   if (result.error) throw result.error;
   return result.data;
 }
