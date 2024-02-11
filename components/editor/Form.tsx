@@ -16,6 +16,7 @@ import { TiersManager } from "./tiers/TiersManager";
 export default function Form() {
   const router = useRouter();
   const id = usePricingStore((state) => state.id);
+  const slug = usePricingStore((state) => state.slug);
   const title = usePricingStore((state) => state.title);
   const description = usePricingStore((state) => state.description);
   const theme = usePricingStore((state) => state.theme);
@@ -35,6 +36,7 @@ export default function Form() {
     e.preventDefault();
     const pricingItem = {
       id,
+      slug,
       title,
       description,
       theme,

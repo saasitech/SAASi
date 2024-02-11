@@ -42,6 +42,7 @@ export async function createPricing(id: number, input: any) {
   return result.data;
 }
 export async function updatePricing(pricingData: any) {
+  pricingData.updatedAt = new Date();
   const client = createClient(cookies());
   const result = await client
     .from("pricing")

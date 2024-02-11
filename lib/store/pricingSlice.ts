@@ -7,6 +7,7 @@ import {
   TierFeature,
   TierItem,
 } from "../types";
+import { slugify } from "../utils";
 
 export const defaultTheme = "dim";
 
@@ -105,6 +106,7 @@ export const tiers: TierItem[] = [
 export const defaultPricingState: Pricing = {
   id: 0,
   title: "Test Pricing",
+  slug: "test-pricing",
   description: `Create and test
   multiple strategies to unlock the most optimal pricing for
   your SaaS startup`,
@@ -123,10 +125,14 @@ export const defaultPricingState: Pricing = {
   },
   tiers,
   termsUrl: "https://saasi.vercel.app/terms",
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  archivedAt: null,
 };
 
 export interface PricingSlice extends Pricing {
   setDescription: (val: string) => void;
+  setSlug: (val: string) => void;
   setTitle: (val: string) => void;
   setTermsUrl: (val: string) => void;
   setShowBillingPeriod: (val: boolean) => void;
@@ -135,6 +141,7 @@ export interface PricingSlice extends Pricing {
   setCurrency: (val: string) => void;
   setTheme: (val: string) => void;
   setTiers: (val: TierItem[]) => void;
+  setPricing: (val: Pricing) => void;
 }
 
 export const createPricingSlice: StateCreator<
@@ -144,7 +151,11 @@ export const createPricingSlice: StateCreator<
   PricingSlice
 > = (set) => ({
   ...defaultPricingState,
-  setTitle: (val) => set((state) => ({ ...state, title: val })),
+  setSlug: (val) => {
+    set((state) => ({ ...state, slug: slugify(val || state.title) }));
+  },
+  setTitle: (val) =>
+    set((state) => ({ ...state, title: val, slug: slugify(val) })),
   setTermsUrl: (val) => set({ termsUrl: val }),
   setDescription: (val) => set({ description: val }),
   setTheme: (val) => set({ theme: val }),
@@ -172,5 +183,8 @@ export const createPricingSlice: StateCreator<
         features: t.features.map((i, index) => ({ ...i, id: index })),
       })),
     });
+  },
+  setPricing: (newPricing) => {
+    set((state) => ({ ...state, ...newPricing }));
   },
 });
