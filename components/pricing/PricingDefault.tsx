@@ -7,8 +7,6 @@ import Header from "./Header";
 
 export default function PricingDefault() {
   const billingOptions = usePricingStore((state) => state.billingOptions);
-  console.log(billingOptions);
-
   const tiers = usePricingStore((state) => state.tiers);
   return (
     <div className="flex-1 flex flex-col space-y-20 max-w-6xl px-3">
