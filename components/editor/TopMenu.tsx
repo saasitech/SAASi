@@ -12,7 +12,7 @@ export function TopMenu({
   archivedCount: number;
 }) {
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
+  const status = searchParams.get("status") || "active";
 
   return (
     <ul className="bg-base-200/25 menu-horizontal w-full p-4 space-x-2">

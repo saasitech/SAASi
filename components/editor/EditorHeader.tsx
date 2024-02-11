@@ -10,7 +10,7 @@ export const EditorHeader = ({
   onClose: () => void;
 }) => {
   return (
-    <div className="px-4 py-4 bg-base-100 text-base-content">
+    <div className="px-4 py-2 bg-base-100 text-base-content">
       <div className="flex items-center justify-between">
         <div className="font-semibold leading-6">{title}</div>
         <div className="ml-3 flex h-7 items-center">

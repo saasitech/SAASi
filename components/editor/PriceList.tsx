@@ -9,13 +9,13 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import PricingCardItem from "../pricing/PricingCardItem";
 import { EditorHeader } from "./EditorHeader";
+import PricingCardItem from "./PricingCardItem";
 import { TopMenu } from "./TopMenu";
 
 export default function PriceList() {
   const searchParams = useSearchParams();
-  const status = searchParams.get("status");
+  const status = searchParams.get("status") || "active";
   const router = useRouter();
   const pricingList = usePricingStore((state) => state.pricingList);
   const setPricingList = usePricingStore((state) => state.setPricingList);
