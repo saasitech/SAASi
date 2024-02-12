@@ -2,10 +2,7 @@ import { usePricingStore } from "@/lib/store";
 import { tierDefault } from "@/lib/store/pricingSlice";
 import { TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import {
-  DocumentDuplicateIcon,
-  PlusCircleIcon,
-} from "@heroicons/react/24/outline";
+import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { BadgeInput } from "./BadgeInput";
 import { DescriptionInput } from "./DescriptionInput";
@@ -14,6 +11,7 @@ import { Header } from "./Header";
 import { PriceTypeSelect } from "./PriceTypeSelect";
 import { PricingInput } from "./PricingInput";
 import { TermsDescriptionInput } from "./TermsIDescriptionnput";
+import { TierActions } from "./TierActions";
 import { TitleInput } from "./TileInput";
 
 export const TiersManager = () => {
@@ -56,41 +54,11 @@ export const TiersManager = () => {
                   <PricingInput tier={tier} />
                   <Features tier={tier} />
                   <TermsDescriptionInput tier={tier} />
-                  {tiers.length > 1 && (
-                    <div className="flex justify-between">
-                      <button
-                        className="hover:link link-error"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          const newTiers = [
-                            ...tiers.filter((t) => t.id !== tier.id),
-                          ];
-                          setTiers(newTiers);
-                          setSelectedPricing(newTiers[0].id);
-                        }}
-                      >
-                        Delete {tier.title}
-                      </button>
-                      {tiers.length < 4 && (
-                        <button
-                          className="hover:link flex items-center space-x-2"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            const newTier: TierItem = {
-                              ...tier,
-                              id: tiers.length,
-                              title: `${tier.title} copy`,
-                            };
-                            setTiers([...tiers, newTier]);
-                            setSelectedPricing(newTier.id);
-                          }}
-                        >
-                          <DocumentDuplicateIcon className="h-5 w-5" />
-                          Duplicate
-                        </button>
-                      )}
-                    </div>
-                  )}
+                  <TierActions
+                    tier={tier}
+                    selectedPricing={selectedPricing}
+                    setSelectedPricing={setSelectedPricing}
+                  />
                 </div>
               </div>
             );
