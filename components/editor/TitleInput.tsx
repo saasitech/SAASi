@@ -4,21 +4,25 @@ import { useEffect, useState } from "react";
 
 export const PriceTitleInput = () => {
   const title = usePricingStore((state) => state.title);
-  const slug = usePricingStore((state) => state.slug);
+  // const slug = usePricingStore((state) => state.slug);
   const setTitle = usePricingStore((state) => state.setTitle);
   const [error, setError] = useState("");
   const pricingList = usePricingStore((state) => state.pricingList);
-  useEffect(() => {
+  const checkTitle = (newTitle) => {
     if (
       pricingList.some((pricing) => {
-        return pricing.title.toLowerCase() === title.toLowerCase();
+        return pricing.title.toLowerCase() === newTitle.toLowerCase().trim();
       })
     ) {
       setError("Pricing name already exists");
     } else {
       error && setError("");
     }
-  }, [title, pricingList]);
+  };
+
+  useEffect(() => {
+    checkTitle(title);
+  }, []);
   return (
     <div>
       <label htmlFor="project-name" className="label-text space-x-2">
@@ -28,7 +32,7 @@ export const PriceTitleInput = () => {
             className="tooltip tooltip-bottom tooltip-warning"
             data-tip={error}
           >
-            <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 inline" />
+            <ExclamationTriangleIcon className="h-4 w-4 text-yellow-500 inline" />
           </div>
         )}
       </label>
@@ -41,12 +45,13 @@ export const PriceTitleInput = () => {
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);
+            checkTitle(e.target.value);
           }}
         />
 
-        <div className="text-xs mt-1">
+        {/* <div className="text-xs mt-1">
           Slug: <span>{slug}</span>
-        </div>
+        </div> */}
       </div>
     </div>
   );

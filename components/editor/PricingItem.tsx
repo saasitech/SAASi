@@ -4,7 +4,7 @@ import { formattedPrice, shortenBillingPeriod } from "@/lib/utils";
 import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import { CreditCardIcon, HashtagIcon } from "@heroicons/react/24/outline";
 
-export default function PricingCardItem({ tier }: { tier: TierItem }) {
+export function PricingItem({ tier }: { tier: TierItem }) {
   const currency = usePricingStore((state) => state.currency);
   return (
     <div className="isolate inline-flex rounded-md shadow-sm w-full bg-base-300/50">

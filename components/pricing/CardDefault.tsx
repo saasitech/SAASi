@@ -26,7 +26,7 @@ export const CardDefault = ({ tier }: { tier: TierItem }) => {
           {tier.badge}
         </span>
       )}
-      <div className="flex flex-col w-full max-w-sm px-6 py-6 space-y-5 bg-base-100 border border-black/10 dark:border-white/10 rounded-lg shadow mx-auto">
+      <div className="flex flex-col w-full max-w-sm px-6 py-6 space-y-5 bg-base-100 border border-black/10 dark:border-white/10 rounded-lg shadow mx-auto min-w-[300px]">
         {template.map((Component: any, index) => Component)}
       </div>
     </div>

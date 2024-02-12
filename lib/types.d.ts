@@ -65,7 +65,7 @@ export interface Pricing {
   termsUrl?: string;
   tiers: TierItem[];
   isDefault?: boolean;
-  createdAt: string | Date | null;
+  createdAt: string | Date;
   updatedAt: string | Date | null;
   archivedAt: string | Date | null;
 }

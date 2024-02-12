@@ -69,7 +69,7 @@ export const TiersManager = () => {
                           setSelectedPricing(newTiers[0].id);
                         }}
                       >
-                        Delete
+                        Delete {tier.title}
                       </button>
                       {tiers.length < 4 && (
                         <button

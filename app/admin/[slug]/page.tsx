@@ -1,14 +1,23 @@
 import NotFound from "@/app/not-found";
 import { PriceEditorPage } from "@/components/editor/PriceEditorPage";
 import { PricingPage } from "@/components/pricing/PricingPage";
-import { readPricingBySlug } from "@/lib/serverActions/pricingActions";
+import {
+  readPricing,
+  readPricingBySlug,
+} from "@/lib/serverActions/pricingActions";
 import { StoreProvider } from "@/lib/store/StoreProvider";
+import { defaultPricingState } from "@/lib/store/pricingSlice";
 
 export default async function Index({ params }: { params: { slug: string } }) {
+  const pricingList = await readPricing();
   try {
-    const pricing: any = await readPricingBySlug(params.slug);
+    const pricing: any =
+      params.slug === "new"
+        ? defaultPricingState
+        : await readPricingBySlug(params.slug);
+
     return (
-      <StoreProvider {...pricing}>
+      <StoreProvider {...pricing} pricingList={pricingList}>
         <div className="flex">
           <PricingPage />
           <div className="relative h-screen flex">

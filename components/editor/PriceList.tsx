@@ -1,6 +1,7 @@
 "use client";
 import { updatePricing } from "@/lib/serverActions/pricingActions";
 import { usePricingStore } from "@/lib/store";
+import { Pricing } from "@/lib/types";
 import {
   ArchiveBoxXMarkIcon,
   ArrowUturnLeftIcon,
@@ -8,24 +9,18 @@ import {
   EyeIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import { EditorHeader } from "./EditorHeader";
-import PricingCardItem from "./PricingCardItem";
+import { PricingItem } from "./PricingItem";
 import { TopMenu } from "./TopMenu";
 
 export default function PriceList() {
   const searchParams = useSearchParams();
   const status = searchParams.get("status") || "active";
-  const router = useRouter();
   const pricingList = usePricingStore((state) => state.pricingList);
   const setPricingList = usePricingStore((state) => state.setPricingList);
   const setToast = usePricingStore((state) => state.setToast);
-
-  const filteredList = pricingList.filter((pricing) =>
-    status === "active"
-      ? pricing.archivedAt === null
-      : pricing.archivedAt !== null
-  );
 
   const activeCount = pricingList.filter(
     (pricing) => pricing.archivedAt === null
@@ -34,20 +29,37 @@ export default function PriceList() {
     (pricing) => pricing.archivedAt !== null
   ).length;
 
-  const closePanel = () => {
-    router.push("/");
+  const sortPricingWithStickyDefault = (a: Pricing, b: Pricing) => {
+    if (a.isDefault) {
+      return -1;
+    } else if (b.isDefault) {
+      return 1;
+    }
+    return a.id < b.id ? 1 : -1;
   };
+
+  const filteredList = useMemo(
+    () =>
+      pricingList
+        .filter((pricing) =>
+          status === "active"
+            ? pricing.archivedAt === null
+            : pricing.archivedAt !== null
+        )
+        .sort(sortPricingWithStickyDefault),
+    [status, pricingList]
+  );
 
   return (
     <div className="flex h-full flex-col bg-slate-700 shadow-xl">
-      <EditorHeader title="Pricing" onClose={closePanel} />
+      <EditorHeader title="Pricing" />
       <TopMenu activeCount={activeCount} archivedCount={archivedCount} />
-      {filteredList.map((pricingItem) => (
-        <div
-          key={pricingItem.slug}
-          className="space-y-4 my-4 px-4 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto"
-        >
-          <div className="bg-base-100 shadow-xl rounded-lg p-4 space-y-4">
+      <div className="space-y-4 my-4 px-4 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto">
+        {filteredList.map((pricingItem) => (
+          <div
+            key={pricingItem.slug}
+            className="bg-base-100 shadow-xl rounded-lg p-4 space-y-4"
+          >
             <div className="flex justify-between items-center ">
               <h2 className="flex font-semibold items-center space-x-2">
                 <Link
@@ -58,7 +70,11 @@ export default function PriceList() {
                 >
                   {pricingItem.title}
                 </Link>
-                <span className="badge badge-sm badge-secondary">Default</span>
+                {pricingItem.isDefault && (
+                  <span className="badge badge-sm badge-secondary">
+                    Default
+                  </span>
+                )}
               </h2>
               <div className="card-actions justify-end">
                 <div className="tooltip tooltip-bottom" data-tip="Archive">
@@ -117,12 +133,12 @@ export default function PriceList() {
             </div>
             <div className="space-y-1">
               {pricingItem.tiers.map((tier) => (
-                <PricingCardItem key={tier.id} tier={tier} />
+                <PricingItem key={tier.id} tier={tier} />
               ))}
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

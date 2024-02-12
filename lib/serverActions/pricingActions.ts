@@ -1,7 +1,11 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
+import ShortUniqueId from "short-unique-id";
 import { BillingOptions, TierItem } from "../types";
+
+const uid = new ShortUniqueId({ length: 10 });
 
 export async function readPricing() {
   const client = createClient(cookies());
@@ -9,7 +13,7 @@ export async function readPricing() {
   if (result.error) throw result.error;
   return result.data || [];
 }
-export async function readPricingById(id: number) {
+export async function readPricingById(id) {
   const client = createClient(cookies());
   const result = await client.from("pricing").select().eq("id", id).single();
   if (result.error) throw result.error;
@@ -35,9 +39,16 @@ export async function readDefaultPricing() {
   if (result.error) throw result.error;
   return result.data;
 }
-export async function createPricing(id: number, input: any) {
+export async function createPricing(pricingData: any) {
+  delete pricingData.id;
+  pricingData.slug = uid.rnd();
   const client = createClient(cookies());
-  const result = await client.from("pricing").insert(input).select();
+  const result = await client
+    .from("pricing")
+    .insert(pricingData)
+    .select()
+    .single();
+  revalidatePath("/admin");
   if (result.error) throw result.error;
   return result.data;
 }
@@ -47,7 +58,10 @@ export async function updatePricing(pricingData: any) {
   const result = await client
     .from("pricing")
     .update(pricingData)
-    .eq("id", pricingData.id);
+    .eq("id", pricingData.id)
+    .select()
+    .single();
+  revalidatePath("/admin");
   if (result.error) throw result.error;
   return result.data;
 }
@@ -58,6 +72,7 @@ export async function deletePricing(pricingData: any) {
     .update(pricingData)
     .eq("id", pricingData.id)
     .select();
+  revalidatePath("/admin");
   if (result.error) throw result.error;
   return result.data;
 }

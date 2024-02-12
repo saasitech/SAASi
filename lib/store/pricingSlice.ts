@@ -11,25 +11,10 @@ import { slugify } from "../utils";
 
 export const defaultTheme = "dim";
 
-export const featuresDefault: TierFeature[] = [
-  { id: 0, name: "feature 1", included: true },
-  { id: 1, name: "feature 2", included: false },
-];
 export const priceDefault: PriceRecurring = {
   value: 0,
   billingCycle: 1,
   billingPeriod: "month",
-};
-export const tierDefault: TierItem = {
-  id: 1,
-  title: "New Tier",
-  badge: "",
-  description: "Example description",
-  priceType: "plain text",
-  price: "Contact us",
-  features: featuresDefault,
-  terms: "",
-  buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
 };
 export const tiers: TierItem[] = [
   {
@@ -47,14 +32,11 @@ export const tiers: TierItem[] = [
     ],
     priceType: "recurring",
     features: [
-      { id: 0, name: "2 team members", included: true },
-      { id: 1, name: "20GB Cloud storage", included: true },
-      { id: 2, name: "Integration help", included: true },
-      { id: 3, name: "Sketch Files", included: false },
-      { id: 4, name: "API Access", included: false },
-      { id: 5, name: "Complete documentation", included: false },
-      { id: 6, name: "24×7 phone & email support", included: false },
+      { id: 0, name: "Basic feature", included: true },
+      { id: 1, name: "Pro feature", included: false },
+      { id: 2, name: "Premium feature", included: false },
     ],
+    terms: "",
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
@@ -72,14 +54,11 @@ export const tiers: TierItem[] = [
     ],
     priceType: "recurring",
     features: [
-      { id: 0, name: "2 team members", included: true },
-      { id: 1, name: "20GB Cloud storage", included: true },
-      { id: 2, name: "Integration help", included: true },
-      { id: 3, name: "Sketch Files", included: true },
-      { id: 4, name: "API Access", included: true },
-      { id: 5, name: "Complete documentation", included: false },
-      { id: 6, name: "24×7 phone & email support", included: false },
+      { id: 0, name: "Basic feature", included: true },
+      { id: 1, name: "Pro feature", included: true },
+      { id: 2, name: "Premium feature", included: false },
     ],
+    terms: "",
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
   {
@@ -91,26 +70,22 @@ export const tiers: TierItem[] = [
     priceType: "plain text",
     showPriceAsText: true,
     features: [
-      { id: 0, name: "2 team members", included: true },
-      { id: 1, name: "20GB Cloud storage", included: true },
-      { id: 2, name: "Integration help", included: true },
-      { id: 3, name: "Sketch Files", included: true },
-      { id: 4, name: "API Access", included: true },
-      { id: 5, name: "Complete documentation", included: true },
-      { id: 6, name: "24×7 phone & email support", included: true },
+      { id: 0, name: "Basic feature", included: true },
+      { id: 1, name: "Pro feature", included: true },
+      { id: 2, name: "Premium feature", included: true },
     ],
+    terms: "",
     buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
   },
 ];
+export const tierDefault: TierItem = tiers[0];
+export const featuresDefault: TierFeature[] = tierDefault.features;
 
 export const defaultPricingState: Pricing = {
   id: 0,
-  title: "Test Pricing",
-  slug: "test-pricing",
-  description: `Create and test
-  multiple strategies to unlock the most optimal pricing for
-  your SaaS startup`,
-
+  title: "New Pricing",
+  slug: "new",
+  description: `Sample Pricing description`,
   currency: "USD",
   theme: defaultTheme,
   metadata: {},
@@ -125,8 +100,8 @@ export const defaultPricingState: Pricing = {
   },
   tiers,
   termsUrl: "https://saasi.vercel.app/terms",
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
+  createdAt: new Date(),
+  updatedAt: null,
   archivedAt: null,
 };
 
@@ -152,10 +127,9 @@ export const createPricingSlice: StateCreator<
 > = (set) => ({
   ...defaultPricingState,
   setSlug: (val) => {
-    set((state) => ({ ...state, slug: slugify(val || state.title) }));
+    set((state) => ({ slug: slugify(val || state.title) }));
   },
-  setTitle: (val) =>
-    set((state) => ({ ...state, title: val, slug: slugify(val) })),
+  setTitle: (val) => set({ title: val }),
   setTermsUrl: (val) => set({ termsUrl: val }),
   setDescription: (val) => set({ description: val }),
   setTheme: (val) => set({ theme: val }),

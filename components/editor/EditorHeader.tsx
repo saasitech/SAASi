@@ -1,23 +1,26 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 import React from "react";
 export const EditorHeader = ({
   title,
   description,
-  onClose,
 }: {
   title: string | React.ReactNode;
   description?: string;
-  onClose: () => void;
 }) => {
+  const router = useRouter();
+  const closePanel = () => {
+    router.push("/");
+  };
   return (
-    <div className="px-4 py-2 bg-base-100 text-base-content">
+    <div className="px-4 py-4 bg-base-100 text-base-content">
       <div className="flex items-center justify-between">
         <div className="font-semibold leading-6">{title}</div>
         <div className="ml-3 flex h-7 items-center">
           <button
             type="button"
             className="relative rounded-md hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
-            onClick={onClose}
+            onClick={closePanel}
           >
             <span className="absolute -inset-2.5" />
             <span className="sr-only">Close panel</span>

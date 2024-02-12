@@ -1,8 +1,10 @@
 "use client";
-import { updatePricing } from "@/lib/serverActions/pricingActions";
+import {
+  createPricing,
+  updatePricing,
+} from "@/lib/serverActions/pricingActions";
 import { usePricingStore } from "@/lib/store";
-import { useRouter } from "next/navigation";
-import LinkBack from "../common/LinkBack";
+import { LinkBack } from "../common/LinkBack";
 import { ActionButtons } from "./ActionButtons";
 import { BillingPeriodSwitch } from "./BillingPeriodSwitch";
 import { CurrencySelect } from "./CurrencySelect";
@@ -14,13 +16,13 @@ import { PriceTitleInput } from "./TitleInput";
 import { TiersManager } from "./tiers/TiersManager";
 
 export default function Form() {
-  const router = useRouter();
   const id = usePricingStore((state) => state.id);
   const slug = usePricingStore((state) => state.slug);
   const title = usePricingStore((state) => state.title);
   const description = usePricingStore((state) => state.description);
   const theme = usePricingStore((state) => state.theme);
   const currency = usePricingStore((state) => state.currency);
+  const termsUrl = usePricingStore((state) => state.termsUrl);
   const metadata = usePricingStore((state) => state.metadata);
   const createdAt = usePricingStore((state) => state.createdAt);
   const updatedAt = usePricingStore((state) => state.updatedAt);
@@ -44,37 +46,48 @@ export default function Form() {
       tiers,
       billingOptions,
       metadata,
+      termsUrl,
       createdAt,
       updatedAt,
       archivedAt,
     };
     try {
-      await updatePricing(pricingItem);
-      setToast({ message: "Pricing updated", type: "success" });
-      pricingList[
-        pricingList.findIndex(
-          (pricingList) => pricingList.id === pricingItem.id
-        )
-      ] = pricingItem;
-      setPricing(pricingItem);
-      setPricingList(pricingList);
+      let result;
+      if (slug === "new") {
+        result = await createPricing(pricingItem);
+        setPricingList([...pricingList, result]);
+      } else {
+        result = await updatePricing(pricingItem);
+        pricingList[
+          pricingList.findIndex(
+            (pricingList) => pricingList.id === pricingItem.id
+          )
+        ] = pricingItem;
+        setPricingList([...pricingList]);
+      }
+      setPricing(result as any);
+      setToast({
+        message: slug === "new" ? "Pricing created" : "Pricing updated",
+        type: "success",
+      });
     } catch (error) {
-      setToast({ message: "Error updating pricing", type: "error" });
+      setToast({
+        message:
+          slug === "new"
+            ? "Error creating new pricing"
+            : "Error updating pricing",
+        type: "error",
+      });
       return;
     }
   };
-  const closePanel = () => {
-    router.push("/");
-  };
+
   return (
     <form
       className="flex h-full flex-col bg-slate-700 shadow-xl"
       onSubmit={submitForm}
     >
-      <EditorHeader
-        title={<LinkBack href="/admin">{title}</LinkBack>}
-        onClose={closePanel}
-      />
+      <EditorHeader title={<LinkBack href="/admin">{title}</LinkBack>} />
       <div className="space-y-4 my-2 px-4 scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto">
         <PriceTitleInput />
         <DescriptionInput />
@@ -84,7 +97,7 @@ export default function Form() {
         <CurrencySelect />
         <TiersManager />
       </div>
-      <ActionButtons onClose={closePanel} />
+      <ActionButtons />
     </form>
   );
 }
