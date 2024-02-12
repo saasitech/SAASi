@@ -86,7 +86,7 @@ export default function PriceList() {
             <div className="flex justify-between items-center ">
               <h2 className="flex font-semibold items-center space-x-2">
                 <Link
-                  className="hover:underline"
+                  className="hover:underline truncate max-w-[200px]"
                   href={`
              /admin/${pricingItem.slug}
             `}
@@ -143,20 +143,22 @@ export default function PriceList() {
                   className="tooltip tooltip-bottom"
                   data-tip="Copy to clipboard"
                 >
-                  <button
-                    className="btn btn-sm btn-circle hover:text-primary"
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        `${window.location.origin}/${pricingItem.slug}`
-                      );
-                      setToast({
-                        message: "Pricing url copied to clipboard",
-                        type: "success",
-                      });
-                    }}
-                  >
-                    <ShareIcon className="w-4 h-4" />
-                  </button>
+                  {!pricingItem.isDefault && (
+                    <button
+                      className="btn btn-sm btn-circle hover:text-primary"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `${window.location.origin}/${pricingItem.slug}`
+                        );
+                        setToast({
+                          message: "Pricing url copied to clipboard",
+                          type: "success",
+                        });
+                      }}
+                    >
+                      <ShareIcon className="w-4 h-4" />
+                    </button>
+                  )}
                 </div>
                 <div className="tooltip tooltip-bottom" data-tip="Duplicate">
                   <button
