@@ -48,6 +48,7 @@ export async function createPricing(pricingData: any) {
     .insert(pricingData)
     .select()
     .single();
+  await handleDefaultPricing(pricingData);
   revalidatePath("/admin");
   if (result.error) throw result.error;
   return result.data;
@@ -61,6 +62,7 @@ export async function updatePricing(pricingData: any) {
     .eq("id", pricingData.id)
     .select()
     .single();
+  await handleDefaultPricing(pricingData);
   revalidatePath("/admin");
   if (result.error) throw result.error;
   return result.data;
@@ -89,3 +91,13 @@ export async function createSession(
   // if (result.error) throw result.error;
   return { tier, billingOptions };
 }
+const handleDefaultPricing = async (pricingData: any) => {
+  if (pricingData.isDefault) {
+    const client = createClient(cookies());
+    const result = await client
+      .from("pricing")
+      .update({ isDefault: false })
+      .neq("id", pricingData.id);
+    if (result.error) throw result.error;
+  }
+};

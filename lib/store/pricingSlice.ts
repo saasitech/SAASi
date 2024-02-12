@@ -117,6 +117,7 @@ export interface PricingSlice extends Pricing {
   setTheme: (val: string) => void;
   setTiers: (val: TierItem[]) => void;
   setPricing: (val: Pricing) => void;
+  setDefault: (val: boolean) => void;
 }
 
 export const createPricingSlice: StateCreator<
@@ -161,4 +162,5 @@ export const createPricingSlice: StateCreator<
   setPricing: (newPricing) => {
     set((state) => ({ ...state, ...newPricing }));
   },
+  setDefault: (val) => set({ isDefault: val }),
 });

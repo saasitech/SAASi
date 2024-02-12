@@ -8,6 +8,7 @@ import { LinkBack } from "../common/LinkBack";
 import { ActionButtons } from "./ActionButtons";
 import { BillingPeriodSwitch } from "./BillingPeriodSwitch";
 import { CurrencySelect } from "./CurrencySelect";
+import { DefaultPricingToggle } from "./DefaultPricingToggle";
 import { DescriptionInput } from "./DescriptionInput";
 import { EditorHeader } from "./EditorHeader";
 import { TermsUrlInput } from "./TermsUrlInput";
@@ -29,7 +30,7 @@ export default function Form() {
   const archivedAt = usePricingStore((state) => state.archivedAt);
   const tiers = usePricingStore((state) => state.tiers);
   const billingOptions = usePricingStore((state) => state.billingOptions);
-  const pricingList = usePricingStore((state) => state.pricingList);
+  const isDefault = usePricingStore((state) => state.isDefault);
   const setPricing = usePricingStore((state) => state.setPricing);
   const setToast = usePricingStore((state) => state.setToast);
 
@@ -40,6 +41,7 @@ export default function Form() {
       slug,
       title,
       description,
+      isDefault,
       theme,
       currency,
       tiers,
@@ -82,6 +84,7 @@ export default function Form() {
         <PriceTitleInput />
         <DescriptionInput />
         <TermsUrlInput />
+        <DefaultPricingToggle />
         <ThemeDropdown />
         <BillingPeriodSwitch />
         <CurrencySelect />
