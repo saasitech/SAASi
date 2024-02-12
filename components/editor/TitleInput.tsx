@@ -3,6 +3,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
 export const PriceTitleInput = () => {
+  const id = usePricingStore((state) => state.id);
   const title = usePricingStore((state) => state.title);
   // const slug = usePricingStore((state) => state.slug);
   const setTitle = usePricingStore((state) => state.setTitle);
@@ -10,9 +11,11 @@ export const PriceTitleInput = () => {
   const pricingList = usePricingStore((state) => state.pricingList);
   const checkTitle = (newTitle) => {
     if (
-      pricingList.some((pricing) => {
-        return pricing.title.toLowerCase() === newTitle.toLowerCase().trim();
-      })
+      pricingList
+        .filter((p) => p.id !== id)
+        .some((pricing) => {
+          return pricing.title.toLowerCase() === newTitle.toLowerCase().trim();
+        })
     ) {
       setError("Pricing name already exists");
     } else {

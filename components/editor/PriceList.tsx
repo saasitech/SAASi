@@ -1,5 +1,8 @@
 "use client";
-import { updatePricing } from "@/lib/serverActions/pricingActions";
+import {
+  createPricing,
+  updatePricing,
+} from "@/lib/serverActions/pricingActions";
 import { usePricingStore } from "@/lib/store";
 import { Pricing } from "@/lib/types";
 import {
@@ -7,6 +10,7 @@ import {
   ArrowUturnLeftIcon,
   DocumentDuplicateIcon,
   EyeIcon,
+  ShareIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -49,6 +53,25 @@ export default function PriceList() {
         .sort(sortPricingWithStickyDefault),
     [status, pricingList]
   );
+
+  const duplicatePricing = async (pricingItem: Pricing) => {
+    const newPricingItem = { ...pricingItem };
+    newPricingItem.title = `${pricingItem.title} - copy`;
+    newPricingItem.isDefault = false;
+    try {
+      const result: any = await createPricing(newPricingItem);
+      setPricingList([...pricingList, result]);
+      setToast({
+        message: `Pricing ${newPricingItem.title} duplicated`,
+        type: "success",
+      });
+    } catch (error) {
+      setToast({
+        message: `Could not duplicate Pricing ${newPricingItem.title}`,
+        type: "error",
+      });
+    }
+  };
 
   return (
     <div className="flex h-full flex-col bg-slate-700 shadow-xl">
@@ -116,8 +139,30 @@ export default function PriceList() {
                     </button>
                   )}
                 </div>
+                <div
+                  className="tooltip tooltip-bottom"
+                  data-tip="Copy to clipboard"
+                >
+                  <button
+                    className="btn btn-sm btn-circle hover:text-primary"
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        `${window.location.origin}/${pricingItem.slug}`
+                      );
+                      setToast({
+                        message: "Pricing url copied to clipboard",
+                        type: "success",
+                      });
+                    }}
+                  >
+                    <ShareIcon className="w-4 h-4" />
+                  </button>
+                </div>
                 <div className="tooltip tooltip-bottom" data-tip="Duplicate">
-                  <button className="btn btn-sm btn-circle hover:text-primary">
+                  <button
+                    className="btn btn-sm btn-circle hover:text-primary"
+                    onClick={() => duplicatePricing(pricingItem)}
+                  >
                     <DocumentDuplicateIcon className="w-4 h-4" />
                   </button>
                 </div>

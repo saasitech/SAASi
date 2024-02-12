@@ -50,7 +50,7 @@ export function PricingItem({ tier }: { tier: TierItem }) {
           {(tier.price as PriceRecurring[]).map((price) => (
             <div
               key={price.value}
-              className="relative -ml-px inline-flex items-center justify-end px-3 py-2 text-xs text-white/70 focus:z-10 min-w-[90px]"
+              className="relative -ml-px inline-flex items-center justify-end px-3 py-2 text-xs text-white/70 focus:z-10"
             >
               {formattedPrice(price.value, currency)}
               <span className="ms-1 text-secondary">

@@ -31,7 +31,6 @@ export default function Form() {
   const billingOptions = usePricingStore((state) => state.billingOptions);
   const pricingList = usePricingStore((state) => state.pricingList);
   const setPricing = usePricingStore((state) => state.setPricing);
-  const setPricingList = usePricingStore((state) => state.setPricingList);
   const setToast = usePricingStore((state) => state.setToast);
 
   const submitForm = async (e) => {
@@ -52,19 +51,10 @@ export default function Form() {
       archivedAt,
     };
     try {
-      let result;
-      if (slug === "new") {
-        result = await createPricing(pricingItem);
-        setPricingList([...pricingList, result]);
-      } else {
-        result = await updatePricing(pricingItem);
-        pricingList[
-          pricingList.findIndex(
-            (pricingList) => pricingList.id === pricingItem.id
-          )
-        ] = pricingItem;
-        setPricingList([...pricingList]);
-      }
+      const result =
+        slug === "new"
+          ? await createPricing(pricingItem)
+          : await updatePricing(pricingItem);
       setPricing(result as any);
       setToast({
         message: slug === "new" ? "Pricing created" : "Pricing updated",
