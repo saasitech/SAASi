@@ -49,8 +49,8 @@ export async function createPricing(pricingData: any) {
     .select()
     .single();
   await handleDefaultPricing(pricingData);
-  revalidatePath("/admin");
   if (result.error) throw result.error;
+  revalidatePath("/admin");
   return result.data;
 }
 export async function updatePricing(pricingData: any) {
@@ -63,8 +63,8 @@ export async function updatePricing(pricingData: any) {
     .select()
     .single();
   await handleDefaultPricing(pricingData);
-  revalidatePath("/admin");
   if (result.error) throw result.error;
+  revalidatePath("/admin");
   return result.data;
 }
 export async function deletePricing(pricingData: any) {
