@@ -88,13 +88,13 @@ VALUES
 					}
 				],
 				"terms": "- No lock-in contracts<br />- Your subscription will auto-renew at the end of the billing cycle<br />- Cancel anytime<br />",
-				"buttons": [
+				"cta": 
 					{
-						"type": "link",
-						"name": "Choose plan",
-						"href": "/#"
+						"type": "checkout",
+						"label": "Choose plan",
+						"priceId": "price_xxxxxxxx"
 					}
-			]}'::jsonb,
+			}'::jsonb,
 			'{ 
 				"id": 1,
 				"title": "Pro",
@@ -151,13 +151,13 @@ VALUES
 					}
 				],
 				"terms": "- No lock-in contracts<br />- Your subscription will auto-renew at the end of the billing cycle<br />- Cancel anytime<br />",
-				"buttons": [
+				"cta": 
 					{
-						"type": "link",
-						"name": "Choose plan",
-						"href": "/#"
+						"type": "checkout",
+						"label": "Choose plan",
+						"priceId": "price_xxxxxxxx"
 					}
-			]}'::jsonb,
+			}'::jsonb,
 			'{ 
 				"id": 2,
 				"title": "Enterprise",
@@ -204,12 +204,12 @@ VALUES
 					}
 				],
 				"terms": "",
-				"buttons": [
+				"cta": 
 					{
 						"type": "link",
-						"name": "Choose plan",
+						"label": "Read more",
 						"href": "/#"
 					}
-			]}'::jsonb 
+			}'::jsonb 
 		]
 	);

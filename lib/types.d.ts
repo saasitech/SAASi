@@ -37,7 +37,12 @@ export interface TierItem {
   showPriceAsText?: boolean;
   features: TierFeature[];
   terms?: string;
-  buttons: { type: "button" | "link"; name: string; href?: string }[];
+  cta: {
+    type: "checkout" | "link";
+    label: string;
+    href?: string;
+    priceId?: string;
+  };
 }
 
 export type ToastType = "success" | "error" | "warning" | "info";

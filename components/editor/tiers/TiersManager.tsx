@@ -5,12 +5,13 @@ import { cn } from "@/lib/utils";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { BadgeInput } from "./BadgeInput";
+import { CtaButton } from "./CtaButton";
 import { DescriptionInput } from "./DescriptionInput";
 import Features from "./Features";
 import { Header } from "./Header";
 import { PriceTypeSelect } from "./PriceTypeSelect";
 import { PricingInput } from "./PricingInput";
-import { TermsDescriptionInput } from "./TermsIDescriptionnput";
+import { TermsDescriptionInput } from "./TermsIDescriptionInput";
 import { TierActions } from "./TierActions";
 import { TitleInput } from "./TileInput";
 
@@ -53,6 +54,7 @@ export const TiersManager = () => {
                   <PriceTypeSelect tier={tier} />
                   <PricingInput tier={tier} />
                   <Features tier={tier} />
+                  <CtaButton tier={tier} />
                   <TermsDescriptionInput tier={tier} />
                   <TierActions
                     tier={tier}

@@ -37,7 +37,11 @@ export const tiers: TierItem[] = [
       { id: 2, name: "Premium feature", included: false },
     ],
     terms: "",
-    buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
+    cta: {
+      "type": "checkout",
+      "label": "Choose plan",
+      "priceId": "price_xxxxxxxx",
+    },
   },
   {
     id: 1,
@@ -59,7 +63,11 @@ export const tiers: TierItem[] = [
       { id: 2, name: "Premium feature", included: false },
     ],
     terms: "",
-    buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
+    cta: {
+      "type": "checkout",
+      "label": "Choose plan",
+      "priceId": "price_xxxxxxxx",
+    },
   },
   {
     id: 2,
@@ -75,7 +83,11 @@ export const tiers: TierItem[] = [
       { id: 2, name: "Premium feature", included: true },
     ],
     terms: "",
-    buttons: [{ type: "link", name: "Choose plan", href: "/#" }],
+    cta: {
+      "type": "link",
+      "label": "Choose plan",
+      "href": "/#",
+    },
   },
 ];
 export const tierDefault: TierItem = tiers[0];
