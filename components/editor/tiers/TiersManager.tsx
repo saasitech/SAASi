@@ -36,12 +36,14 @@ export const TiersManager = () => {
                 )}
               >
                 <input
-                  type="radio"
-                  name="my-accordion-4"
+                  type="checkbox"
+                  name="tiers-accordion"
                   checked={selectedPricing === tier.id}
                   onChange={() => {
                     setExpandTiers(false);
-                    setSelectedPricing(tier.id);
+                    setSelectedPricing(
+                      selectedPricing === tier.id ? -1 : tier.id
+                    );
                   }}
                 />
                 <div className="collapse-title font-bold text-lg text-white flex justify-between items-center">
