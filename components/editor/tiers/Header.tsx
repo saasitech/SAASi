@@ -8,7 +8,7 @@ export const Header = (props) => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            props.onExpand(!props.expandTiers);
+            props.onExpandTiers(!props.expandTiers);
           }}
           className="btn btn-link btn-sm p-0 text-primary"
         >

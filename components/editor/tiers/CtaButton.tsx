@@ -10,8 +10,8 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
         <label htmlFor="project-name" className="label-text">
           Call to action button
         </label>
-        <div className="flex items-center space-x-2">
-          <label className="label-text flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
+          <label className="label-text flex items-center space-x-2 cursor-pointer">
             <input
               type="radio"
               value="checkout"
@@ -22,9 +22,9 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
                 setTiers(tiers);
               }}
             />
-            <span>Checkout</span>
+            <span className="label-text">Checkout</span>
           </label>
-          <label className="label-text flex items-center space-x-2">
+          <label className="label-text flex items-center space-x-2 cursor-pointer">
             <input
               type="radio"
               value="link"
@@ -35,7 +35,7 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
                 setTiers(tiers);
               }}
             />
-            <span>Link</span>
+            <span className="label-text">Link</span>
           </label>
         </div>
       </div>
@@ -45,7 +45,6 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
             Stripe priceId
           </label>
           <input
-            required
             type="text"
             name="priceId"
             placeholder="e.g. price_"
@@ -64,7 +63,6 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
             Link URL
           </label>
           <input
-            required
             type="text"
             name="href"
             className="input input-bordered input-saasi"
@@ -81,7 +79,6 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
           Button label
         </label>
         <input
-          required
           type="text"
           name="label"
           className="input input-bordered input-saasi"
