@@ -43,19 +43,12 @@ export const ThemeDropdown = () => {
       <div className="flex justify-between items-center">
         <h3 className="label-text">Color scheme</h3>
 
-        <div className="dropdown dropdown-end">
-          <div
-            tabIndex={0}
-            role="button"
-            className="btn btn-link btn-sm p-0 text-primary"
-          >
+        <details className="dropdown dropdown-end">
+          <summary className="btn btn-link btn-sm p-0 text-primary">
             change
             <ChevronDownIcon className="w-4 h-4" />
-          </div>
-          <div
-            tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box "
-          >
+          </summary>
+          <div className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box ">
             <div className="h-[200px] w-[180px] overflow-y-auto gap-2 scrollbar-thin scrollbar-thumb-primary scrollbar-track-white pr-2 grid grid-cols-1 pb-[30px]">
               {Object.entries(themes).map(([theme]) => {
                 return (
@@ -74,7 +67,7 @@ export const ThemeDropdown = () => {
               })}
             </div>
           </div>
-        </div>
+        </details>
       </div>
       <div className="">
         <ThemeCard theme={theme} />

@@ -1,3 +1,4 @@
+import ClickawayCapture from "@/components/common/ClickawayCapture";
 import ErrorBoundary from "@/components/common/ErrorBoundary";
 import { cn } from "@/lib/utils";
 import { GeistSans } from "geist/font/sans";
@@ -28,6 +29,7 @@ export default function RootLayout({
         <title>{metadata.title}</title>
       </head>
       <ErrorBoundary>
+        <ClickawayCapture />
         <body>{children}</body>
       </ErrorBoundary>
     </html>
