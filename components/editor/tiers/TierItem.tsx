@@ -33,13 +33,16 @@ export const TierItem = ({
 
   const checkTier = (tier: TierItemType) => {
     const errors: string[] = [];
-    if (tier.title === "") {
+    if (!tier.title) {
       errors.push("Title is missing");
     }
-    if (tier.cta.href === "" || tier.cta.priceId === "") {
-      errors.push("Call to action button is missing href or priceId");
+    if (!tier.cta.href && tier.cta.type === "link") {
+      errors.push("Call to action button is missing href");
     }
-    if (tier.cta.label === "") {
+    if (!tier.cta.priceId && tier.cta.type === "checkout") {
+      errors.push("Call to action button is missing priceId");
+    }
+    if (!tier.cta.label) {
       errors.push("Call to action button is missing label");
     }
     errors.length > 0 ? setError(errors) : setError([]);

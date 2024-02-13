@@ -49,7 +49,7 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
             name="priceId"
             placeholder="e.g. price_"
             className="input input-bordered input-saasi"
-            value={tier.cta.priceId}
+            defaultValue={tier.cta.priceId}
             onChange={(e) => {
               tier.cta.priceId = e.target.value;
               setTiers(tiers);
@@ -66,7 +66,7 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
             type="text"
             name="href"
             className="input input-bordered input-saasi"
-            value={tier.cta.href}
+            defaultValue={tier.cta.href}
             onChange={(e) => {
               tier.cta.href = e.target.value;
               setTiers(tiers);
@@ -83,7 +83,7 @@ export const CtaButton = ({ tier }: { tier: TierItem }) => {
           name="label"
           className="input input-bordered input-saasi"
           placeholder="e.g. Subscribe"
-          value={tier.cta.label}
+          defaultValue={tier.cta.label}
           onChange={(e) => {
             tier.cta.label = e.target.value;
             setTiers(tiers);
