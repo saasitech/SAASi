@@ -24,9 +24,9 @@ export async function middleware(request: NextRequest, response: NextResponse) {
     }
 
     if (request.nextUrl.pathname.startsWith("/admin") && !session) {
-      // return NextResponse.redirect(
-      //   new URL("/login?redirectUrl=/admin", request.url)
-      // );
+      return NextResponse.redirect(
+        new URL("/login?redirectUrl=/admin", request.url)
+      );
     }
 
     return response;
