@@ -39,9 +39,6 @@ export const TierItem = ({
     if (!tier.cta.href && tier.cta.type === "link") {
       errors.push("Call to action button is missing href");
     }
-    if (!tier.cta.priceId && tier.cta.type === "checkout") {
-      errors.push("Call to action button is missing priceId");
-    }
     if (!tier.cta.label) {
       errors.push("Call to action button is missing label");
     }

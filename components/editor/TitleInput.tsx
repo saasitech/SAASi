@@ -42,8 +42,6 @@ export const PriceTitleInput = () => {
       <div className="mt-2">
         <input
           type="text"
-          name="project-name"
-          id="project-name"
           className="input input-bordered input-saasi"
           value={title}
           onChange={(e) => {

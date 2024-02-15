@@ -7,6 +7,7 @@ export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
   let price: PriceOneOff = {
     text: tier.price?.["text"] || "",
     value: tier.price?.["value"] || "",
+    priceId: tier.price?.["priceId"] || "",
   };
   return (
     <div className="flex flex-col space-y-2">
@@ -20,7 +21,23 @@ export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
         value={price.value}
         placeholder="0"
         onChange={(e) => {
-          (price.value = Number(e.target.value)), (tier.price = price);
+          price.value = Number(e.target.value);
+          tier.price = price;
+          setTiers(tiers);
+        }}
+      />
+      <label htmlFor="description" className="label-text ">
+        Stripe priceId <span className="text-xs text-white/40">(optional)</span>
+      </label>
+      <input
+        type="text"
+        name="price-text"
+        className="input input-bordered input-saasi"
+        value={price.priceId}
+        placeholder="price_xxxxxxxx"
+        onChange={(e) => {
+          price.priceId = e.target.value;
+          tier.price = price;
           setTiers(tiers);
         }}
       />
@@ -34,7 +51,8 @@ export const OneOffPrice = ({ tier }: { tier: TierItem }) => {
         value={price.text}
         placeholder="/seat"
         onChange={(e) => {
-          (price.text = e.target.value), (tier.price = price);
+          price.text = e.target.value;
+          tier.price = price;
           setTiers(tiers);
         }}
       />

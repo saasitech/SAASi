@@ -5,7 +5,7 @@
       "import { cn } from '@/lib/utils'",
       "",
       "export default function ${TM_FILENAME_BASE}() {",
-      "  return <div className={cn("")}>",
+      "  return <div>",
       "    $1",
       "  </div>;",
       "}"
@@ -22,7 +22,7 @@
       "}: {",
       "  children: React.ReactNode;",
       "}) {",
-      "  return <div className={cn("")}>{children}",
+      "  return <div>",
       "    $2",
       "  </div>;",
       "}"

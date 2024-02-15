@@ -12,8 +12,6 @@ export const TitleInput = ({ tier }: { tier: TierItem }) => {
       <div className="mt-2">
         <input
           type="text"
-          name="project-name"
-          id="project-name"
           className="input input-bordered input-saasi"
           value={tier.title}
           onChange={(e) => {

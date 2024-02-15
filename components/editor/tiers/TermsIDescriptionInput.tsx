@@ -14,7 +14,7 @@ export const TermsDescriptionInput = ({ tier }: { tier: TierItem }) => {
     <div className="space-y-2">
       <div className="flex items-center">
         <label htmlFor="description" className="label-text flex-1">
-          {tier.title} terms
+          Short terms for {tier.title}
         </label>
         <div className="space-x-1">
           <ContentEditButton cmd="italic" name="i" />

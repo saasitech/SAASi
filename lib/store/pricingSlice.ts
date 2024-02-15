@@ -28,8 +28,14 @@ export const tiers: TierItem[] = [
         value: 19.99,
         billingCycle: 1,
         billingPeriod: "month",
+        priceId: "price_xxxxxxxx",
       },
-      { value: 199, billingCycle: 1, billingPeriod: "year" },
+      {
+        value: 199,
+        billingCycle: 1,
+        billingPeriod: "year",
+        priceId: "price_xxxxxxxx",
+      },
     ],
     priceType: "recurring",
     features: [
@@ -41,7 +47,6 @@ export const tiers: TierItem[] = [
     cta: {
       "type": "checkout",
       "label": "Choose plan",
-      "priceId": "price_xxxxxxxx",
     },
   },
   {
@@ -54,8 +59,14 @@ export const tiers: TierItem[] = [
         value: 19,
         billingCycle: 1,
         billingPeriod: "month",
+        priceId: "price_xxxxxxxx",
       },
-      { value: 199, billingCycle: 1, billingPeriod: "year" },
+      {
+        value: 199,
+        billingCycle: 1,
+        billingPeriod: "year",
+        priceId: "price_xxxxxxxx",
+      },
     ],
     priceType: "recurring",
     features: [
@@ -67,7 +78,6 @@ export const tiers: TierItem[] = [
     cta: {
       "type": "checkout",
       "label": "Choose plan",
-      "priceId": "price_xxxxxxxx",
     },
   },
   {

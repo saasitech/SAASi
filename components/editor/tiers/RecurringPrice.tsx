@@ -19,9 +19,9 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
   const hasDuplicateBillingPeriods =
     new Set(selectedBillingPeriods).size !== selectedBillingPeriods.length;
   return (
-    <div className="space-y-2">
+    <div className="space-y-4">
       <label htmlFor="description" className="label-text ">
-        Pricing{" "}
+        Amount and Stripe priceId{" "}
         {hasDuplicateBillingPeriods && (
           <div className="tooltip tooltip-warning" data-tip="Duplicate Pricing">
             <ExclamationTriangleIcon className="h-5 w-5 text-yellow-500 inline" />
@@ -35,31 +35,44 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
               className="mt-2 relative flex items-center space-x-2"
               key={index}
             >
-              <div className="relative flex items-center">
-                <input
-                  type="text"
-                  name="project-name"
-                  id="project-name"
-                  className="input input-bordered input-saasi !pr-[200px]"
-                  value={priceItem.value}
-                  onChange={(e) => {
-                    priceItem.value = e.target.value;
-                    setTiers(tiers);
-                  }}
-                />
-                <div className="absolute right-1 space-x-1">
-                  <select
-                    className="select select-sm max-w-xs"
-                    value={priceItem?.billingPeriod}
+              <div className="relative flex flex-col items-center space-y-0.5">
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    className="input input-bordered input-saasi !pr-[200px]"
+                    value={priceItem.value}
                     onChange={(e) => {
-                      priceItem.billingPeriod = e.target.value as BillingPeriod;
+                      priceItem.value = e.target.value;
                       setTiers(tiers);
                     }}
-                  >
-                    {availableBillingPeriods.map((i) => (
-                      <option key={i}>{i}</option>
-                    ))}
-                  </select>
+                  />
+                  <div className="absolute right-1 space-x-1">
+                    <select
+                      className="select select-sm max-w-xs"
+                      value={priceItem?.billingPeriod}
+                      onChange={(e) => {
+                        priceItem.billingPeriod = e.target
+                          .value as BillingPeriod;
+                        setTiers(tiers);
+                      }}
+                    >
+                      {availableBillingPeriods.map((i) => (
+                        <option key={i}>{i}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    className="input input-bordered input-saasi !pr-[200px]"
+                    value={priceItem.priceId}
+                    placeholder="price_xxxxxxxx"
+                    onChange={(e) => {
+                      priceItem.priceId = e.target.value;
+                      setTiers(tiers);
+                    }}
+                  />
                 </div>
               </div>
               <button

@@ -45,3 +45,6 @@ strong {
   right: 50%;
   bottom: var(--tooltip-tail-offset);
 }
+::placeholder {
+  opacity: 0.3 !important;
+}

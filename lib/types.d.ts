@@ -20,11 +20,12 @@ export interface BillingOptions {
 }
 export type PriceRecurring = {
   value: number | string;
+  priceId?: string;
   billingCycle: number;
   billingPeriod: BillingPeriod;
 };
 export type PriceText = string;
-export type PriceOneOff = { text: string; value: number };
+export type PriceOneOff = { text: string; value: number; priceId: string };
 export type TierPrice = PriceRecurring[] | PriceText | PriceOneOff;
 
 export interface TierItem {
@@ -41,7 +42,6 @@ export interface TierItem {
     type: "checkout" | "link";
     label: string;
     href?: string;
-    priceId?: string;
   };
 }
 
