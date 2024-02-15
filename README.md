@@ -31,12 +31,13 @@ This is a work in progress and is not yet ready for production use.
   - Add authentication 🟢
   - Add server actions 🟢
   - Choose a pricing theme 🟢
-  - Set branding colors and logo
-  - Attach terms summary
+  - Set branding colors and logo 🟢
+  - Attach terms summary 🟢
   - Manage tiers & features 🟢
-  - Create and manage pricing
-- Stripe integration (coming soon):
+  - Create and manage pricing 🟢
+- Stripe integration:
   - Connect your stripe account
+  - Add pricing plans for each recurring/one-time payments
 
 ## Demo
 
