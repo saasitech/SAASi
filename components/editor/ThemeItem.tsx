@@ -68,7 +68,7 @@ export const ThemeItem = ({
             <button
               type="button"
               className={cn(
-                "btn btn-square tooltip tooltip-neutral tooltip-top-left flex items-center p-1 h-auto w-auto rounded-xl max-w-[100px]",
+                "btn btn-square tooltip tooltip-neutral tooltip-top-left flex items-center p-1 h-auto w-auto rounded-xl  min-w-[60px] max-w-[100px]",
                 branding.logoUrl ? "btn-ghost" : ""
               )}
               data-tip="Company logo and details"
@@ -78,7 +78,7 @@ export const ThemeItem = ({
                 <Logo
                   src={branding.logoUrl}
                   alt="logo"
-                  className="w-auto min"
+                  className="w-auto"
                   size="xl"
                 />
               ) : (
