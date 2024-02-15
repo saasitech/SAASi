@@ -26,6 +26,7 @@ export const PriceTypeSelect = ({ tier }: { tier: TierItem }) => {
                 tier.price = {
                   value: 0,
                   text: "/seat",
+                  priceId: "",
                 };
               } else {
                 tier.price = "Contact us";
