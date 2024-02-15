@@ -32,12 +32,12 @@ export const Actions = (tier: TierItem) => {
                   <div className="flex items-center">
                     <input
                       type="checkbox"
-                      className="checkbox"
+                      className="checkbox checkbox-secondary"
                       id="terms"
                       required
                     />
                     <label
-                      className="label-text text-primary ml-2 cursor-pointer select-none"
+                      className="label-text text-base-content ml-2 cursor-pointer select-none"
                       htmlFor="terms"
                     >
                       I agree to the{" "}
@@ -58,7 +58,7 @@ export const Actions = (tier: TierItem) => {
                 <button
                   type="submit"
                   form="terms-form"
-                  className="btn btn-primary btn-md min-w-[80px]"
+                  className="btn btn-secondary btn-md min-w-[80px]"
                 >
                   Subscribe
                 </button>

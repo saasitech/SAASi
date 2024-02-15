@@ -14,7 +14,7 @@ import { EditorHeader } from "./EditorHeader";
 import { TermsUrlInput } from "./TermsUrlInput";
 import { ThemeDropdown } from "./ThemeDropdown";
 import { PriceTitleInput } from "./TitleInput";
-import { TiersManager } from "./tiers/TiersManager";
+import { TierList } from "./tiers/TierList";
 
 export default function Form() {
   const id = usePricingStore((state) => state.id);
@@ -30,6 +30,7 @@ export default function Form() {
   const archivedAt = usePricingStore((state) => state.archivedAt);
   const tiers = usePricingStore((state) => state.tiers);
   const billingOptions = usePricingStore((state) => state.billingOptions);
+  const branding = usePricingStore((state) => state.branding);
   const isDefault = usePricingStore((state) => state.isDefault);
   const setPricing = usePricingStore((state) => state.setPricing);
   const setToast = usePricingStore((state) => state.setToast);
@@ -46,6 +47,7 @@ export default function Form() {
       currency,
       tiers,
       billingOptions,
+      branding,
       metadata,
       termsUrl,
       createdAt,
@@ -88,7 +90,7 @@ export default function Form() {
         <ThemeDropdown />
         <BillingPeriodSwitch />
         <CurrencySelect />
-        <TiersManager />
+        <TierList />
       </div>
       <ActionButtons />
     </form>

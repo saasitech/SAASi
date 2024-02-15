@@ -1,4 +1,5 @@
 import { interpolate, oklch, wcagContrast } from "culori";
+import { Branding } from "./types";
 
 export const defaultTheme = "dim";
 
@@ -49,8 +50,12 @@ const colorUtils = {
   },
 };
 
-export const getTheme = (theme) => {
-  const input = themes[theme];
+export const getTheme = (
+  theme,
+  colorOverrides: Branding["colors"] = undefined
+) => {
+  const input = { ...themes[theme], ...colorOverrides };
+
   let resultObj = {};
 
   Object.entries(input).forEach(([rule, value]: any) => {

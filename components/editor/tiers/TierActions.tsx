@@ -17,6 +17,7 @@ export function TierActions({
     tiers.length > 1 && (
       <div className="flex justify-between">
         <button
+          type="button"
           className="hover:link link-error"
           onClick={(e) => {
             e.preventDefault();
@@ -29,6 +30,7 @@ export function TierActions({
         </button>
         {tiers.length < 4 && (
           <button
+            type="button"
             className="hover:link flex items-center space-x-2"
             onClick={(e) => {
               e.preventDefault();

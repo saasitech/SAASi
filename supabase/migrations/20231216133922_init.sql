@@ -8,6 +8,7 @@ CREATE TABLE "pricing" (
     "theme" TEXT,
     "isDefault" BOOLEAN DEFAULT false,
     "billingOptions" JSONB,
+    "branding" JSONB,
     "metadata" JSONB,
     "tiers" JSONB [],
     "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,

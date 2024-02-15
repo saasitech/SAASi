@@ -58,6 +58,18 @@ export interface Dialog {
   actions?: React.ReactNode | string;
 }
 
+export interface Branding {
+  logoUrl: string;
+  logoSize?: LogoKey;
+  companyName: string;
+  websiteUrl: string;
+  colors?: {
+    primary?: string;
+    secondary?: string;
+    accent?: string;
+    neutral?: string;
+  };
+}
 export interface Pricing {
   id: number;
   title: string;
@@ -67,6 +79,7 @@ export interface Pricing {
   theme: string;
   metadata: object;
   billingOptions: BillingOptions;
+  branding: Branding;
   termsUrl?: string;
   tiers: TierItem[];
   isDefault?: boolean;
@@ -74,3 +87,8 @@ export interface Pricing {
   updatedAt: string | Date | null;
   archivedAt: string | Date | null;
 }
+
+type LogoKey = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+export type LogoSizes = {
+  [key in LogoKey]: string;
+};

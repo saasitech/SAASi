@@ -60,6 +60,7 @@ export default function Features({ tier }: { tier: TierItem }) {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   tier.features.splice(feature.id, 1);
@@ -73,6 +74,7 @@ export default function Features({ tier }: { tier: TierItem }) {
         })}
       </ReactSortable>
       <button
+        type="button"
         className="btn btn-ghost w-full text-primary"
         onClick={(e) => {
           e.preventDefault();

@@ -6,6 +6,7 @@ export const Header = (props) => {
       <legend className="text-label">Tiers</legend>
       <div className="dropdown dropdown-end">
         <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             props.onExpandTiers(!props.expandTiers);

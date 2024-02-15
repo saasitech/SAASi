@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import ContentEditable from "react-contenteditable";
-import sanitizeHtml from "sanitize-html";
 
 export default function ContentEditableInput({ value, onChange }) {
   const text = useRef(value);
@@ -20,7 +19,8 @@ export default function ContentEditableInput({ value, onChange }) {
       ],
       allowedAttributes: { a: ["href", "target"] },
     };
-    const newValue = sanitizeHtml(evt.target.value, sanitizeConf);
+    // const newValue = sanitizeHtml(evt.target.value, sanitizeConf);
+    const newValue = evt.target.value;
     text.current = newValue;
     onChange(newValue);
   };

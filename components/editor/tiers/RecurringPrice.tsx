@@ -63,6 +63,7 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
                 </div>
               </div>
               <button
+                type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   tier.price = price.filter(
@@ -78,6 +79,7 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
         })}
       {availableBillingPeriods.length !== selectedBillingPeriods.length && (
         <button
+          type="button"
           className="btn btn-ghost w-full text-primary"
           onClick={(e) => {
             e.preventDefault();

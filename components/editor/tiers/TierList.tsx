@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Header } from "./Header";
 import { TierItem } from "./TierItem";
 
-export const TiersManager = () => {
+export const TierList = () => {
   const tiers = usePricingStore((state) => state.tiers);
   const setTiers = usePricingStore((state) => state.setTiers);
   const [expandTiers, setExpandTiers] = useState(false);
@@ -42,6 +42,7 @@ export const TiersManager = () => {
       )}
       {tiers.length < 4 && (
         <button
+          type="button"
           className="btn btn-ghost w-full text-primary"
           onClick={(e) => {
             e.preventDefault();

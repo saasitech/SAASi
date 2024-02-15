@@ -2,6 +2,7 @@
 import { StateCreator } from "zustand";
 import {
   BillingPeriod,
+  Branding,
   PriceRecurring,
   Pricing,
   TierFeature,
@@ -110,6 +111,12 @@ export const defaultPricingState: Pricing = {
       year: "Yearly",
     },
   },
+  branding: {
+    logoUrl: "",
+    logoSize: "md",
+    companyName: "",
+    websiteUrl: "",
+  },
   tiers,
   termsUrl: "https://saasi.vercel.app/terms",
   createdAt: new Date(),
@@ -130,6 +137,7 @@ export interface PricingSlice extends Pricing {
   setTiers: (val: TierItem[]) => void;
   setPricing: (val: Pricing) => void;
   setDefault: (val: boolean) => void;
+  setBranding: (val: Partial<Branding>) => void;
 }
 
 export const createPricingSlice: StateCreator<
@@ -162,6 +170,8 @@ export const createPricingSlice: StateCreator<
         labels: { ...state.billingOptions.labels, [key]: value },
       },
     })),
+  setBranding: (val) =>
+    set((state) => ({ branding: { ...state.branding, ...val } })),
   setTiers: (newTiers) => {
     set({
       tiers: newTiers.map((t, index) => ({

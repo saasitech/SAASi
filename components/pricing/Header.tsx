@@ -3,15 +3,17 @@ import { usePricingStore } from "@/lib/store";
 
 export default function Header() {
   const description = usePricingStore((state) => state.description);
+  const branding = usePricingStore((state) => state.branding);
   return (
     <div className="flex flex-col gap-16 items-center">
       <div className="flex gap-8 justify-center items-center">
-        <a
-          href="https://github.com/saasitech/saasi"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <Logo className="w-[100px] h-[50px] light:text-black dark:text-white" />
+        <a href={branding.websiteUrl} target="_blank" rel="noreferrer">
+          <Logo
+            className="light:text-black dark:text-white w-auto"
+            src={branding.logoUrl}
+            alt={branding.companyName || "logo"}
+            size={branding.logoSize || "md"}
+          />
         </a>
       </div>
       <h1

@@ -14,7 +14,8 @@ const Pricing = pricingStyles.default;
 
 export const PricingPage = () => {
   const theme = usePricingStore((state) => state.theme);
-  const styleProps = getTheme(theme);
+  const branding = usePricingStore((state) => state.branding);
+  const styleProps = getTheme(theme, branding.colors);
   return (
     <div
       style={styleProps}

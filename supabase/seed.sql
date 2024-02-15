@@ -9,6 +9,7 @@ INSERT INTO
 		"isDefault",
 		"metadata",
 		"billingOptions",
+		"branding",
 		"tiers"
 	)
 VALUES
@@ -30,7 +31,13 @@ VALUES
 					"month": "Monthly",
 					"year": "Yearly (17% off)"
 				}
-		}',
+		}'::jsonb,
+		'{
+			"logoUrl": "",
+			"logoSize": "",
+			"companyName": "",
+			"websiteUrl": ""
+		}'::jsonb,
 		array [
 			'{
 				"id": 0,
