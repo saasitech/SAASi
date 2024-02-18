@@ -92,3 +92,16 @@ type LogoKey = "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 export type LogoSizes = {
   [key in LogoKey]: string;
 };
+
+export namespace StripeClient {
+  export interface StripeConfig {
+    defaultSuccessUrl: string;
+    defaultCancelUrl: string;
+  }
+  export interface CreateSessionParams {
+    priceId: string;
+    customerId: string;
+    successUrl?: string;
+    cancelUrl?: string;
+  }
+}
