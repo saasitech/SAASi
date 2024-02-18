@@ -62,10 +62,10 @@ export const RecurringPrice = ({ tier }: { tier: TierItem }) => {
                     </select>
                   </div>
                 </div>
-                <div className="relative flex items-center">
+                <div className="relative flex items-center w-full">
                   <input
                     type="text"
-                    className="input input-bordered input-saasi !pr-[200px]"
+                    className="input input-bordered input-saasi"
                     value={priceItem.priceId}
                     placeholder="price_xxxxxxxx"
                     onChange={(e) => {

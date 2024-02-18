@@ -1,10 +1,12 @@
-import { createSession } from "@/lib/serverActions/pricingActions";
+import { createPaymentSession } from "@/lib/serverActions/stripeActions";
 import { usePricingStore } from "@/lib/store";
-import { TierItem } from "@/lib/types";
+import { PriceOneOff, PriceRecurring, TierItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export const Actions = (tier: TierItem) => {
   const billingOptions = usePricingStore((state) => state.billingOptions);
+  const pricingId = usePricingStore((state) => state.id);
+  const pricingSlug = usePricingStore((state) => state.slug);
   const termsUrl = usePricingStore((state) => state.termsUrl);
   const button = tier.cta;
   const setDialog = usePricingStore((state) => state.setDialog);
@@ -25,8 +27,32 @@ export const Actions = (tier: TierItem) => {
                   id="terms-form"
                   className=""
                   action={async () => {
-                    const result = await createSession(tier, billingOptions);
-                    // setDialog(null);
+                    let priceId: string | undefined = "";
+                    switch (tier.priceType) {
+                      case "one-off":
+                        const oneOff = tier.price as PriceOneOff;
+                        priceId = oneOff.priceId;
+                        break;
+                      case "recurring":
+                        const recurring = tier.price as PriceRecurring[];
+                        priceId = recurring.find(
+                          (price) =>
+                            price.billingPeriod === billingOptions.selected
+                        )?.priceId;
+                        break;
+
+                      default:
+                        break;
+                    }
+                    if (!priceId) return;
+
+                    console.log("tirer", tier, "tieroptions", billingOptions);
+                    const result = await createPaymentSession(
+                      { priceId },
+                      { pricingId, pricingSlug }
+                    );
+                    if (result.url) window.location.href = result.url;
+                    setDialog(null);
                   }}
                 >
                   <div className="flex items-center">

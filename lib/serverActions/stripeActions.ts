@@ -1,15 +1,16 @@
 "use server";
-import { stripeClient } from "@/utils/stripeClient";
+import { stripeClient, config } from "@/utils/stripeClient";
 import Stripe from "stripe";
 import { StripeClient } from "../types";
 
-const createPaymentSession = async (
+export const createPaymentSession = async (
   params: StripeClient.CreateSessionParams,
   meta?: any
 ) => {
   const items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
     { price: params.priceId, quantity: 1 },
   ];
+
   const sessionCreateParams = {
     customer: params.customerId,
     mode: "subscription",
@@ -19,12 +20,13 @@ const createPaymentSession = async (
     tax_id_collection: { enabled: true },
 
     line_items: items,
-    success_url: params.successUrl,
-    cancel_url: params.cancelUrl,
+    success_url: params.successUrl || config.defaultSuccessUrl,
+    cancel_url: params.cancelUrl || config.defaultCancelUrl,
   } as Stripe.Checkout.SessionCreateParams;
 
   const session = await stripeClient.checkout.sessions.create(
     sessionCreateParams
   );
-  return session;
+
+  return { url: session.url, id: session.id };
 };

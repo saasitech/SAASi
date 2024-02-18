@@ -78,19 +78,7 @@ export async function deletePricing(pricingData: any) {
   if (result.error) throw result.error;
   return result.data;
 }
-export async function createSession(
-  tier: TierItem,
-  billingOptions: BillingOptions
-) {
-  const client = createClient(cookies());
-  // const result = await client
-  //   .from("pricing")
-  //   .update(pricingData)
-  //   .eq("id", pricingData.id)
-  //   .select();
-  // if (result.error) throw result.error;
-  return { tier, billingOptions };
-}
+
 const handleDefaultPricing = async (pricingData: any) => {
   if (pricingData.isDefault) {
     const client = createClient(cookies());

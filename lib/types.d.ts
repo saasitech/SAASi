@@ -100,7 +100,7 @@ export namespace StripeClient {
   }
   export interface CreateSessionParams {
     priceId: string;
-    customerId: string;
+    customerId?: string;
     successUrl?: string;
     cancelUrl?: string;
   }
