@@ -1,6 +1,6 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
-import { cookies, headers } from "next/headers";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 export const signIn = async (formData: FormData) => {
@@ -8,7 +8,7 @@ export const signIn = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const redirectUrl = formData.get("redirectUrl") as string;
-  const supabase = createClient(cookies());
+  const supabase = createClient();
   const url = new URL(`${origin}/login` || "");
 
   const { error } = await supabase.auth.signInWithPassword({
@@ -31,8 +31,7 @@ export const signUp = async (formData: FormData) => {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const redirectUrl = formData.get("redirectUrl") as string;
-  const cookieStore = cookies();
-  const supabase = createClient(cookieStore);
+  const supabase = createClient();
   const url = new URL(`${origin}/login` || "");
 
   const { error } = await supabase.auth.signUp({

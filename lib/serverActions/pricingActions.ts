@@ -1,26 +1,24 @@
 "use server";
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
-import { cookies } from "next/headers";
 import ShortUniqueId from "short-unique-id";
-import { BillingOptions, TierItem } from "../types";
 
 const uid = new ShortUniqueId({ length: 10 });
 
 export async function readPricing() {
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client.from("pricing").select();
   if (result.error) throw result.error;
   return result.data || [];
 }
 export async function readPricingById(id) {
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client.from("pricing").select().eq("id", id).single();
   if (result.error) throw result.error;
   return result.data || [];
 }
 export async function readPricingBySlug(slug: string) {
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client
     .from("pricing")
     .select()
@@ -30,7 +28,7 @@ export async function readPricingBySlug(slug: string) {
   return result.data || [];
 }
 export async function readDefaultPricing() {
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client
     .from("pricing")
     .select()
@@ -42,7 +40,7 @@ export async function readDefaultPricing() {
 export async function createPricing(pricingData: any) {
   delete pricingData.id;
   pricingData.slug = uid.rnd();
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client
     .from("pricing")
     .insert(pricingData)
@@ -55,7 +53,7 @@ export async function createPricing(pricingData: any) {
 }
 export async function updatePricing(pricingData: any) {
   pricingData.updatedAt = new Date();
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client
     .from("pricing")
     .update(pricingData)
@@ -68,7 +66,7 @@ export async function updatePricing(pricingData: any) {
   return result.data;
 }
 export async function deletePricing(pricingData: any) {
-  const client = createClient(cookies());
+  const client = createClient();
   const result = await client
     .from("pricing")
     .update(pricingData)
@@ -78,10 +76,9 @@ export async function deletePricing(pricingData: any) {
   if (result.error) throw result.error;
   return result.data;
 }
-
 const handleDefaultPricing = async (pricingData: any) => {
   if (pricingData.isDefault) {
-    const client = createClient(cookies());
+    const client = createClient();
     const result = await client
       .from("pricing")
       .update({ isDefault: false })

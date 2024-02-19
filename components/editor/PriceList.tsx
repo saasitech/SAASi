@@ -80,7 +80,7 @@ export default function PriceList() {
       <TopMenu activeCount={activeCount} archivedCount={archivedCount} />
       <div className="scrollbar-thin scrollbar-thumb-base-300 scrollbar-track-slate-700 overflow-y-auto">
         {filteredList.map((pricingItem) => (
-          <div className="indicator w-full mt-6  px-4">
+          <div className="indicator w-full mt-6 px-4" key={pricingItem.id}>
             {pricingItem.isDefault && (
               <div className="flex justify-center absolute left-[0px] -top-[8px] w-full">
                 <span className="badge badge-secondary">Default</span>
@@ -93,6 +93,7 @@ export default function PriceList() {
               <div className="flex justify-between items-center">
                 <h2 className="flex font-semibold items-center space-x-2">
                   <Link
+                    prefetch
                     className="hover:underline truncate max-w-[200px]"
                     href={`
              /admin/${pricingItem.slug}
@@ -181,6 +182,7 @@ export default function PriceList() {
                   </div>
                   <div className="tooltip tooltip-bottom" data-tip="View/Edit">
                     <Link
+                      prefetch
                       href={`/admin/${pricingItem.slug}`}
                       className="btn btn-sm btn-circle hover:text-primary"
                     >

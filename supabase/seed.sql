@@ -19,7 +19,7 @@ VALUES
 		'Create and test multiple strategies to unlock the most optimal pricing for your SaaS startup',
 		'https://saasi.vercel.app/terms',
 		'USD',
-		'dim',
+		'retro',
 		true,
 		NULL,
 		'{
@@ -33,10 +33,10 @@ VALUES
 				}
 		}'::jsonb,
 		'{
-			"logoUrl": "",
-			"logoSize": "",
-			"companyName": "",
-			"websiteUrl": ""
+			"logoUrl": "/logo.svg",
+			"logoSize": "lg",
+			"companyName": "Saasi",
+			"websiteUrl": "https://saasi.vercel.app"
 		}'::jsonb,
 		array [
 			'{

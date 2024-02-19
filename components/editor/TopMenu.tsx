@@ -20,6 +20,7 @@ export function TopMenu({
       <ul className="menu-horizontal w-full space-x-2">
         <li>
           <Link
+            prefetch
             href="/admin?status=active"
             className={cn(
               "btn btn-sm btn-ghost font-normal",
@@ -32,6 +33,7 @@ export function TopMenu({
         </li>
         <li>
           <Link
+            prefetch
             href="/admin?status=archived"
             className={cn(
               "btn btn-sm btn-ghost font-normal",
@@ -44,6 +46,7 @@ export function TopMenu({
         </li>
       </ul>
       <Link
+        prefetch
         className="rounded-full hover:bg-base-100 p-1 btn-smt"
         href={"/admin/new"}
       >
